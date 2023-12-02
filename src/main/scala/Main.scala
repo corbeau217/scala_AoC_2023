@@ -17,10 +17,10 @@ object Main{
     */
   def main(args:Array[String]):Unit={
     // just match the arg thing of the choice
-    args match {
+    args.toList match {
       // ........................................
       // ........................................
-      case Array(singleArg) => {
+      case _  :: singleArg :: Nil => {
         // the arg we want
         singleArg match {
           // ........................................
@@ -30,19 +30,19 @@ object Main{
           }
           // ........................................
           // ........................................
-          case _ => failingMessage()
+          case semivaluableSting => failingMessage(semivaluableSting)
         }
       }
       // ........................................
       // ........................................
-      case _ => failingMessage()
+      case _ => failingMessage(args.mkString(","))
     }
   }
 
   // ###############################################################
 
-  def failingMessage() : Unit = {
-    println("non argumentative input, leaving you bye")
+  def failingMessage(semivaluableSting:String) : Unit = {
+    println("non argumentative input, leaving you bye\n\n"+semivaluableSting)
   }
 
   // ###############################################################
@@ -59,17 +59,28 @@ object Main{
   }
   // ###############################################################
 
-  def getLinesFromFile(filePather:String):List[String]={
+  def readLinesFromFile(filePather:String):Unit={
     
-    val bufferableSource = Source.fromFile(filePather)
 
-    val linesFromBufferableSource = bufferableSource.getLines()
+    // over thinking the stick
 
-    // cleanup with it
-    bufferableSource.close()
+
+    var linesFromBufferableSource = Iterator("")
+    try {
+      var bufferableSource = Source.fromFile(filePather)
+      for(line <- bufferableSource.getLines()){
+        println(line)
+      }
+      bufferableSource.close()
+    }
+    catch {
+      case errory : Throwable => failingMessage("input error of a kind\n\n"+errory.toString())
+    }
+
+    
 
     // deal with them to list
-    iteratorToList(linesFromBufferableSource,Nil)
+    // iteratorToList(linesFromBufferableSource,Nil)
 
   }
 
@@ -89,11 +100,7 @@ object Main{
   // ###############################################################
 
   def week1part1():Unit={
-    // grabem
-    var linesToWorkWith = getLinesFromFile("inputs/wk1_pt1.txt")
-
-    // TODO : deal with them
-    println( linesToWorkWith.toString() )
+    readLinesFromFile("src/main/scala/inputs/wk1_pt1.txt")
 
   }
 
