@@ -51,16 +51,37 @@ object Main{
   // -----------------------------------------------------------------
   // -----------------------------------------------------------------
 
+  // recursively grab the things as list till none left
+  def iteratorToList(iteratorToMakeAsList:Iterator[String],listAsWeGo:List[String]):List[String]={
+    if(!iteratorToMakeAsList.hasNext) return listAsWeGo
+
+    iteratorToList(iteratorToMakeAsList,listAsWeGo:+iteratorToMakeAsList.next())
+  }
   // ###############################################################
 
   def getLinesFromFile(filePather:String):List[String]={
-    // TODO
+    
+    val bufferableSource = Source.fromFile(filePather)
 
+    val linesFromBufferableSource = bufferableSource.getLines()
 
+    // cleanup with it
+    bufferableSource.close()
 
-    // ..default outputter
-    List()
+    // deal with them to list
+    iteratorToList(linesFromBufferableSource,Nil)
+
   }
+
+  // ###############################################################
+
+  // -----------------------------------------------------------------
+  // -----------------------------------------------------------------
+  // -----------------------------------------------------------------
+
+  // ###############################################################
+
+  def handleLines(linesInput:List[String], linesAsWeGo:List[String])
 
   // ###############################################################
 
@@ -69,6 +90,7 @@ object Main{
     var linesToWorkWith = getLinesFromFile("inputs/wk1_pt1.txt")
 
     // TODO : deal with them
+
   }
 
   // ###############################################################
