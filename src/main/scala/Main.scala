@@ -81,7 +81,10 @@ object Main{
 
   // ###############################################################
 
-  def handleLines(linesInput:List[String], linesAsWeGo:List[String])
+  def handleLines(linesInput:List[String], linesAsWeGo:List[String]): Unit={
+    // TODO: aaa
+    println("")
+  }
 
   // ###############################################################
 
@@ -90,6 +93,7 @@ object Main{
     var linesToWorkWith = getLinesFromFile("inputs/wk1_pt1.txt")
 
     // TODO : deal with them
+    println( linesToWorkWith.toString() )
 
   }
 
