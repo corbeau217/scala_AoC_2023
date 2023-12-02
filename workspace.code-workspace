@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "./"
+		}
+	],
+	"settings": {
+		"terminal.integrated.env.windows": {
+			"JAVA_HOME": "C:\\Progra~1\\Eclips~1\\jdk-8.0.352.8-hotspot"
+		},
+		// For macOS, make sure you run "brew install openjdk@11"
+		// And to follow the instructions in: "brew info openjdk@11"
+		"terminal.integrated.env.osx": {
+			"JAVA_HOME": "/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home"
+		},
+		"files.watcherExclude": {
+			"**/target": true
+		}
+	}
+}

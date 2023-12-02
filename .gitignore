@@ -1,0 +1,9 @@
+# macOS got me like
+.DS_Store
+**/.DS_Store
+
+# ignore the ignorables
+.bsp
+.metals
+project/*/
+target
