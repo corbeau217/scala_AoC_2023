@@ -1039,6 +1039,83 @@ object Day1 {
     */
   def handleDay(partNumber:Int):Unit={
     partNumber match {
+      // testing addition
+      case 99 => {
+        // var inputLines = day1InputAsStringList
+        var inputLines = day1TestInput2AsStringList
+
+        // printf(
+        //   "line count: %d\nresult: %d\n",
+        //   inputLines.length,
+        //   day1AccumulateList(
+        //     inputLines,
+        //     0,
+        //     ( // function to process with, could simplify to Int
+        //       (s:String)=>{}
+        //     )
+        //   )
+        // )
+
+        // ============================================================
+        // ============================================================
+        // ============================================================
+        // ===== part 1
+        // handleDay(1)
+        // ============================================================
+        
+        // ============================================================
+        // ============================================================
+        // ============================================================
+        // ===== part 2
+        // ============================================================
+
+        inputLines.map((singleLine)=>{
+          var lineLengthable = singleLine.length()
+          // tbh just assume that it's always got the thing in it to find
+          var digitsListForward = (
+            Numbers.refinedDigitAndNameMatcher
+          ).findAllIn(singleLine).toList
+
+          var digitsListReverse = (
+            Numbers.refinedDigitAndNameMatcherReversed
+          ).findAllIn(singleLine.reverse).toList
+
+          // println("=====================================================")
+          printf("LINE[%s]: %s",lineLengthable.toString(),singleLine)
+          // print("LR--> ")
+          // digitsListForward.map( (str) => printf( "[ %5s ]",str ))
+          printf("\nLR[%3s]--> ",digitsListForward.length.toString())
+          digitsListForward.map( (str) => printf( "[ %s ]",(
+            if( str.matches(Numbers.digitMatcher) ) str
+            else Numbers.lazyDigitNameAsInt(str).toString()
+          )) )
+          // print("\nRL--> ")
+          // digitsListReverse.reverse.map( (str) => printf( "[ %5s ]",str.reverse ))
+          printf("\nRL[%3s]--> ",digitsListReverse.length.toString())
+          digitsListReverse.map( (str) => printf( "[ %s ]",(
+            if( str.matches(Numbers.digitMatcher) ) str
+            else Numbers.lazyDigitNameAsInt(str.reverse).toString()
+          )) )
+          println("")
+        })
+        // ============================================================
+        printf(
+          "line count: %d\nresult: %d\n",
+          inputLines.length,
+          day1AccumulateList(
+            inputLines,
+            0,
+            ( // function to process with, could simplify to Int
+              (s:String)=>{handleInputSingleLine(partNumber,s)}
+            )
+          )
+        )
+
+        
+        // ============================================================
+        
+      }
+      // aaaaa the parts
       case 1|2 => { //if(partNumber.==(1).||(partNumber.==(2)))
         // var theTestable = "eightwothree"
         // var theMoreTested = lazyDigitAndNameMatcher.findAllIn(theTestable).toList
@@ -1112,8 +1189,8 @@ object Day1 {
 
     var convertedTotal = (convertedHead*10)+convertedLast
 
-    // .. debugging out the output
-    printf("[h: %5s ][l: %5s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
+    // // .. debugging out the output
+    // printf("[h: %5s ][l: %5s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
 
     // returning:
     convertedTotal

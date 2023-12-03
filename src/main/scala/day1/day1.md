@@ -28,6 +28,9 @@
 7. need table for the data info
 8. made table in this file
 9. cleaned up `Main.scala`
+10. *something something*
+11. forgor `ruof`/`four`
+12. omg we done it
 
 
 ### char acceptance state diagrams
