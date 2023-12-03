@@ -41,7 +41,6 @@
   <!-- ======================================================= -->
   <!-- ======================================================= -->
   <li><h4>left-to-right alphabetical character acceptance</h4><details><summary><i>[show / hide]</i></summary>
-<!-- BIGTODO: REVERSED ACCEPTANCE STATE DIAGRAM -->
 
 ```mermaid
 stateDiagram-v2
@@ -124,6 +123,51 @@ stateDiagram-v2
     %% ...
     s33 --> [*]: ε
     %% ...
+```
+
+  </details></li>
+  <!-- ======================================================= -->
+  <!-- ======================================================= -->
+  <li><h4>left-to-right alphabetical character acceptance 2</h4><details><summary><i>[show / hide]</i></summary>
+
+```mermaid
+
+stateDiagram-v2
+  direction LR
+    %% ------------------
+    s1 --> [*]: o
+    s2 --> [*]: e
+    s3 --> [*]: n
+    s4 --> [*]: r
+    s5 --> [*]: x
+    s6 --> [*]: t
+
+    s7 --> s2: e
+    s8 --> s2: n
+    s9 --> s2: v
+    s10 --> s3: e
+    s11 --> s4: u
+    s12 --> s6: h
+
+    s13 --> s7: r
+    s14 --> s10: v
+    s15 --> s12: g
+
+    s16 --> s1: w
+    s17 --> s8: i
+    s16 --> s13: h
+    s18 --> s9: i
+    s18 --> s11: o
+    s19 --> s5: i
+    s19 --> s14: e
+    s20 --> s15: i
+
+    [*] --> s8: o
+    [*] --> s16: t
+    [*] --> s17: n
+    [*] --> s18: f
+    [*] --> s19: s
+    [*] --> s20: e
 ```
 
   </details></li>
