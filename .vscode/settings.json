@@ -1,5 +1,127 @@
 {
+  // ============================================================
+  // ==== GENERIC ===============================================
+  // ============================================================
   "files.watcherExclude": {
     "**/target": true
-  }
+  },
+  // ============================================================
+  // ============================================================
+  // ============================================================
+  
+  // ...
+
+  // ============================================================
+  // ==== TODO-TREE =============================================
+  // ============================================================
+  "todo-tree.highlights.useColourScheme": true,
+  "todo-tree.general.tags": [
+      "BUG",
+      "HACK",
+      "FIXME",
+      "TODO",
+      "XXX",
+      "[ ]",
+      "[x]",
+      "IDEA",
+      "ISSUE",
+      "NOTICE",
+      "WARN",
+      "WARNING",
+      "NOTE",
+      // ------------------------------------------
+      // ------------------------------------------
+      // -- stuff my preference -------------------
+      // ------------------------------------------
+      "BIGTODO",
+      
+      "PRE",
+      "PRECOND",
+
+      "POST",
+      "POSTCOND",
+      
+      "SECTION",
+      // ------------------------------------------
+
+  ],
+  "todo-tree.highlights.customHighlight": {
+  
+      // ------------------------------------------
+      // ------------------------------------------
+      "SECTION": {
+          "type": "text-and-comment",
+          "icon": "beaker",
+          "background": "#0059a6",
+          "iconColour": "#0059a6",
+          "foreground": "#eeeeee"
+      },
+      "BIGTODO": {
+          "type": "text-and-comment",
+          "icon": "flame",
+          "background": "#ff6a00",
+          "iconColour": "#ff6a00",
+          "foreground": "#2a2849"
+      },
+      // ------------------------------------------
+
+      // ------------------------------------------
+      // ------------------------------------------
+      "TODO_GRADED": {
+          "type": "tag-and-comment",
+          "icon": "beaker",
+          "background": "#1c67ad",
+          "iconColour": "#1c67ad",
+          "foreground": "#ffffff"
+      },
+      "Precondition": {
+          "type": "tag",
+          "icon": "hourglass",
+          "background": "#1cad75",
+          "iconColour": "#1cad75",
+          "foreground": "#000000"
+      },
+      "Postcondition": {
+          "type": "tag",
+          "icon": "hourglass",
+          "background": "#1cad92",
+          "iconColour": "#1cad92",
+          "foreground": "#000000"
+      },
+      // ------------------------------------------
+
+      "TODO": {
+          "icon": "question",
+          "background": "#FF6347",
+          "iconColour": "#FF6347"
+      },
+      "IDEA": {
+          "icon": "hourglass",
+          "background": "#87CEFA",
+          "iconColour": "#87CEFA"
+      },
+      "NOTICE": {
+          "icon": "info",
+          "background": "#2E8B57",
+          "iconColour": "#2E8B57"
+      },
+      "BUG": {
+          "icon": "bug"
+      },
+      "HACK": {
+          "icon": "tools"
+      },
+      "FIXME": {
+          "icon": "flame"
+      },
+      "XXX": {
+          "icon": "$(close)"
+      }
+  },
+  "todo-tree.filtering.excludeGlobs": []
+  // ============================================================
+  // ============================================================
+  // ============================================================
+
+  // ...
 }
