@@ -1039,8 +1039,30 @@ object Day1 {
     */
   def handleDay(partNumber:Int):Unit={
     partNumber match {
-      case 1 => handlePart1()
-      case 2 => handlePart2()
+      case 1|2 => { //if(partNumber.==(1).||(partNumber.==(2)))
+        // var theTestable = "eightwothree"
+        // var theMoreTested = digitAndNameMatcher.findAllIn(theTestable).toList
+
+        // println(theMoreTested.toString())
+
+        // printf("the thing: %d\n",handleInputSingleLinePart2(theTestable))
+
+        // hand off to function
+        // var inputLines = day1TestInput2AsStringList
+        var inputLines = day1InputAsStringList
+        // printf("line count: %d\nresult: %d\n",inputLines.length,day1AccumulateList(inputLines,0,handleInputSingleLinePart2))
+        printf(
+          "line count: %d\nresult: %d\n",
+          inputLines.length,
+          day1AccumulateList(
+            inputLines,
+            0,
+            ( // function to process with, could simplify to Int
+              (s:String)=>{handleInputSingleLine(partNumber,s)}
+            )
+          )
+        )
+      }
       case numberInput => {
         Main.failingMessage("DAY 1 INVALID PART NUMBER: "+numberInput)
       }
@@ -1049,89 +1071,66 @@ object Day1 {
   // ========================================
   // ========================================
 
-  def handleInputSingleLinePart1(lineToHandle:String):Int={
+  def handleInputSingleLine(partNumber:Int,lineToHandle:String):Int={
 
     // tbh just assume that it's always got the thing in it to find
-    var digitsList = Numbers.digitMatcher.r.findAllIn(lineToHandle).toList
+    var digitsList = (
+      partNumber match {
+        case 1 => Numbers.digitMatcher.r
+        case two => Numbers.digitAndNameMatcher
+      }
+    ).findAllIn(lineToHandle).toList
+    // TODO: HANDLE REVERSED
+    var digitsListReversed = (
+      partNumber match {
+        case 1 => Numbers.digitMatcher.r
+        case two => Numbers.digitAndNameMatcher
+      }
+    ).findAllIn(lineToHandle).toList
 
     var headDigit = digitsList.head
+    // var lastDigit = digitsListReversed.head
     var lastDigit = digitsList.last
-    var convertedHead = headDigit.toInt
-    var convertedLast = lastDigit.toInt
-    // var convertedTotal = convertedHead+convertedLast
-    // forgor to *10 the first one
+
+    // handle converting based on part
+    var convertedHead = {
+      // fail early into part one parseables
+      if( ( partNumber.==(1) ).||( headDigit.matches(Numbers.digitMatcher) ) ) {
+        headDigit.toInt
+      }
+      else {
+        Numbers.lazyDigitNameAsInt(headDigit)
+      }
+    }
+    var convertedLast = {
+      // fail early into part one parseables
+      if( ( partNumber.==(1) ).||( lastDigit.matches(Numbers.digitMatcher) ) ) {
+        lastDigit.toInt
+      }
+      else {
+        Numbers.lazyDigitNameAsInt(lastDigit)
+      }
+    }
+
     var convertedTotal = (convertedHead*10)+convertedLast
-    // .. testing
+
+    // .. debugging out the output
     printf("[h: %s ][l: %s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
+
     // returning:
     convertedTotal
   }
 
-  def handleInputSingleLinePart2(lineToHandle:String):Int={
 
-    // tbh just assume that it's always got the thing in it to find
-    var digitsList = Numbers.digitAndNameMatcher.findAllIn(lineToHandle).toList
 
-    var headDigit = digitsList.head
-    var lastDigit = digitsList.last
-
-    var convertedHead = if(headDigit.matches(Numbers.digitMatcher)) headDigit.toInt else Numbers.lazyDigitNameAsInt(headDigit)
-    var convertedLast = if(lastDigit.matches(Numbers.digitMatcher)) lastDigit.toInt else Numbers.lazyDigitNameAsInt(lastDigit)
-    // var convertedTotal = convertedHead+convertedLast
-    // forgor to *10 the first one
-    var convertedTotal = (convertedHead*10)+convertedLast
-    // .. testing
-    // printf("[h: %s ][l: %s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
-    printf("[h: %d ][l: %d ][t: %d ]\n",convertedHead,convertedLast,convertedTotal)
-    // returning:
-    convertedTotal
-  }
-
-  // ========================================
-  // ========================================
-  def handlePart1(){
-    def day1AccumulateList(listToProcess:List[String],valueSoFar:Int):Int={
-
-      listToProcess match {
-        case Nil => valueSoFar
-        case head :: rest => day1AccumulateList(rest,( valueSoFar + handleInputSingleLinePart1(head) ))
+  def day1AccumulateList(listToProcess:List[String],valueSoFar:Int, lineHandleFunction:String => Int):Int={
+    listToProcess match {
+      case Nil => valueSoFar
+      case head +: rest => {
+        day1AccumulateList( rest, ( valueSoFar + lineHandleFunction(head) ), lineHandleFunction )
       }
     }
-
-    // TODO: use input from file
-    // Main.readLinesFromFile("src/main/scala/inputs/day1_pt1.txt")
-    // Main.readLinesFromFile("src/main/scala/day1/input1.txt")
-
-
-    
-    // grab the input lines
-    var inputLines = day1InputAsStringList
-    // var inputLines = day1TestInput1AsStringList
-    
-    printf("line count: %d\nresult: %d\n",inputLines.length,day1AccumulateList(inputLines,0))
   }
   // ========================================
   // ========================================
-  def handlePart2(){
-
-    def day1AccumulateListPart2(listToProcess:List[String],valueSoFar:Int):Int={
-      listToProcess match {
-        case Nil => {valueSoFar}
-        case head +: rest => {day1AccumulateListPart2( rest, ( valueSoFar + handleInputSingleLinePart2(head) ) )}
-      }
-    }
-    
-    // var theTestable = "eightwothree"
-    // var theMoreTested = digitAndNameMatcher.findAllIn(theTestable).toList
-
-    // println(theMoreTested.toString())
-
-    // printf("the thing: %d\n",handleInputSingleLinePart2(theTestable))
-
-    // hand off to function
-    // var inputLines = day1TestInput2AsStringList
-    var inputLines = day1InputAsStringList
-    printf("line count: %d\nresult: %d\n",inputLines.length,day1AccumulateListPart2(inputLines,0))
-
-  }
 }
