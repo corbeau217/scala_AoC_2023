@@ -26,12 +26,22 @@
 5. started reformatting file structure so i could include mermaid charts for each day
 6. reformatted into new structure but still have some to do
 7. need table for the data info
+8. made table in this file
+9. cleaned up `Main.scala`
+
 
 ### char acceptance state diagrams
 * references:
   - https://github.com/JakeSteam/Mermaid/blob/main/state.md
   - https://mermaid.live/
   - https://blog.jakelee.co.uk/using-mermaid-for-diagrams-on-github/
+
+<!-- ######################################################### -->
+<ul>
+  <!-- ======================================================= -->
+  <!-- ======================================================= -->
+  <li><h4>left-to-right alphabetical character acceptance</h4><details><summary><i>[show / hide]</i></summary>
+<!-- BIGTODO: REVERSED ACCEPTANCE STATE DIAGRAM -->
 
 ```mermaid
 stateDiagram-v2
@@ -115,6 +125,78 @@ stateDiagram-v2
     s33 --> [*]: ε
     %% ...
 ```
+
+  </details></li>
+  <!-- ======================================================= -->
+  <!-- ======================================================= -->
+  <li><h4>right-to-left alphabetical character acceptance</h4><details><summary><i>[show / hide]</i></summary>
+
+```mermaid
+stateDiagram-v2
+  direction RL
+    %% ------------------
+    %% transition 1
+    [*] --> [*]: ε
+    %% ...
+```
+  </details></li>
+  <!-- ======================================================= -->
+  <!-- ======================================================= -->
+</ul>
+<!-- ######################################################### -->
+
 ### char details table
 
-<!-- TODO -->
+<table>
+  <!-- ------ ------ ------ ------ ------ -->
+  <!-- ------ ------ ------ ------ ------ -->
+  <tr>
+    <!-- ------ ------ ------ ------ -->
+    <td>thinger</td>
+    <!-- ------ ------ ------ ------ -->
+    <td>aaaa</td>
+    <!-- ------ ------ ------ ------ -->
+  </tr>
+  <!-- ------ ------ ------ ------ ------ -->
+  <!-- ------ ------ ------ ------ ------ -->
+  <tr>
+    <!-- ------ ------ ------ ------ -->
+    <td>possible characters</td>
+    <!-- ------ ------ ------ ------ -->
+    <td>
+      <ul>
+        <!-- List(e, f, g, h, i, n, o, r, s, t, u, v, w, x) -->
+        <!-- (e|f|g|h|i|n|o|r|s|t|u|v|w|x) -->
+        <li><code>e</code></li>
+        <li><code>f</code></li>
+        <li><code>g</code></li>
+        <li><code>h</code></li>
+        <li><code>i</code></li>
+        <li><code>n</code></li>
+        <li><code>o</code></li>
+        <li><code>r</code></li>
+        <li><code>s</code></li>
+        <li><code>t</code></li>
+        <li><code>u</code></li>
+        <li><code>v</code></li>
+        <li><code>w</code></li>
+        <li><code>x</code></li>
+      </ul>
+    </td>
+    <!-- ------ ------ ------ ------ -->
+  </tr>
+  <!-- ------ ------ ------ ------ ------ -->
+  <!-- ------ ------ ------ ------ ------ -->
+  <tr>
+    <!-- ------ ------ ------ ------ -->
+    <td></td>
+    <!-- ------ ------ ------ ------ -->
+    <td></td>
+    <!-- ------ ------ ------ ------ -->
+  </tr>
+  <!-- ------ ------ ------ ------ ------ -->
+  <!-- ------ ------ ------ ------ ------ -->
+</table>
+
+
+

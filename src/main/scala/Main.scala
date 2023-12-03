@@ -18,20 +18,52 @@ object Main{
     * @param args
     */
   def main(args:Array[String]):Unit={
+    val dayMatcher = "day([1-9][0-9]*)\\-pt([1-9][0-9]*)".r
+    
     // just match the arg thing of the choice
     args.toList match {
       // ........................................
       // ........................................
       case _  :: singleArg :: Nil => {
+        var dayNumVal = "spookableSTARTINGstring"
+        var dayPartVal = "spookableSTARTINGstring"
+
+        // try the catchable for the thinger bc idk
+        try {
+          val dayMatcher(dayNumVal,dayPartVal) = singleArg
+        }
+        catch {
+          case e:Exception =>{
+            // try see if playgrounding
+            singleArg match {
+              case "sandbox" => return doingSandbox()
+              case _ => println("!!! FAILURE IN THE GRABBING THE DAY/PART\n"+
+              "args like: day<number>-pt<number>")
+            }
+          }
+        }
+
         // the arg we want
-        singleArg match {
+        dayNumVal match {
           // ........................................
           // ........................................
-          case "day1-pt1" => day1.Day1.handleDay(1)
-          case "day1-pt2" => day1.Day1.handleDay(2)
+
           // ........................................
           // ........................................
-          case semivaluableSting => failingMessage(semivaluableSting)
+          case "1" => {
+            day1.Day1.handleDay(
+              // trying to parse the numbered
+              try{
+                dayPartVal.toInt
+              }
+              catch {
+                case e : Exception => 666
+              }
+            )
+          }
+          // ........................................
+          // ........................................
+          case semivaluableSting => failingMessage("none day: " +semivaluableSting)
         }
       }
       // ........................................
@@ -107,4 +139,43 @@ object Main{
 
   // ###############################################################
 
-}
+  def doingSandbox(){
+
+    val dayDigitList = List(
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9'
+    )
+    val dayCharList = List(
+      'o','n','e',
+      't','w','o',
+      't','h','r','e','e',
+      'f','o','u','r',
+      'f','i','v','e',
+      's','i','x',
+      's','e','v','e','n',
+      'e','i','g','h','t',
+      'n','i','n','e'
+      )  
+      
+      var uniqueCharacterList = List(' ')
+      for( ch <- dayCharList){
+        if(!uniqueCharacterList.contains(ch)) {
+          uniqueCharacterList = uniqueCharacterList:+ch
+        }
+      }
+      
+      println(uniqueCharacterList.tail.sorted.toString())
+
+    }
+    
+    
+    
+  }
+  
