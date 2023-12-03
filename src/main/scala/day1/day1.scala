@@ -1077,14 +1077,14 @@ object Day1 {
     var digitsList = (
       partNumber match {
         case 1 => Numbers.digitMatcher.r
-        case two => Numbers.lazyDigitAndNameMatcher
+        case two => Numbers.refinedDigitAndNameMatcher
       }
     ).findAllIn(lineToHandle).toList
     // TODO: HANDLE REVERSED
     var digitsListReversed = (
       partNumber match {
         case 1 => Numbers.digitMatcher.r
-        case two => Numbers.lazyDigitAndNameMatcherReversed
+        case two => Numbers.refinedDigitAndNameMatcherReversed
       }
     ).findAllIn(lineToHandle).toList
 

@@ -8,7 +8,9 @@ object Numbers{
   val digitNameMatcher = "(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)"
   val lazyDigitAndNameMatcher = "[1-9]|(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)".r
   val lazyDigitAndNameMatcherReversed = "[1-9]|(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)".r
-
+  
+  val refinedDigitAndNameMatcher = "t(wo|hree)|(ni|o)ne|s(even|ix)|f(ive|our)|eight|[1-9]".r
+  val refinedDigitAndNameMatcherReversed = "owt|e(erht|n(in|o))|vif|(neve|xi)s|thgie|[1-9]".r
   // ========================================
   // ========================================
   
