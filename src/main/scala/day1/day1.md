@@ -30,3 +30,4 @@
 ```
 // BIGTODO: add them here
 ```
+### char details table
