@@ -8,3 +8,17 @@
   * that's lazy, we should parser
   * syntax analysis ez with packrat parser
   * or we match case but that kinda weird
+2. packrat parser solution
+```
+var number = "[0-9]+"
+// bluerdgn 
+var colourName = "blue|red|green"
+
+gameNumber:  ("Game " ~> number <~ ": ")
+numOfColour: number ~ colourName
+
+drawingIter: numOfColour ~ (", "~> numOfColour)*
+
+gameData:    gameNumber ~ drawingIter ~ ("; " ~> drawingIter)*
+
+```

@@ -52,6 +52,19 @@ object Main{
             }
             // ........................................
             // ........................................
+            case "2" => {
+              day2.Day2.handleDay(
+                // trying to parse the numbered
+                try{
+                  dayPartVal.toInt
+                }
+                catch {
+                  case e : Exception => 666
+                }
+              )
+            }
+            // ........................................
+            // ........................................
             case semivaluableSting => failingMessage("none day: " +semivaluableSting)
           }
         }
