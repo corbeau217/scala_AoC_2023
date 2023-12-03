@@ -2220,7 +2220,8 @@ object Main{
     // forgor to *10 the first one
     var convertedTotal = (convertedHead*10)+convertedLast
     // .. testing
-    printf("[h: %s ][l: %s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
+    // printf("[h: %s ][l: %s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
+    printf("[h: %d ][l: %d ][t: %d ]\n",convertedHead,convertedLast,convertedTotal)
     // returning:
     convertedTotal
   }
@@ -2233,16 +2234,16 @@ object Main{
   }
 
   def day1part2():Unit={
-    var theTestable = "eightwothree"
-    var theMoreTested = digitAndNameMatcher.findAllIn(theTestable).toList
+    // var theTestable = "eightwothree"
+    // var theMoreTested = digitAndNameMatcher.findAllIn(theTestable).toList
 
-    println(theMoreTested.toString())
+    // println(theMoreTested.toString())
 
-    printf("the thing: %d\n",handleInputSingleLinePart2(theTestable))
+    // printf("the thing: %d\n",handleInputSingleLinePart2(theTestable))
 
     // hand off to function
     // var inputLines = getDay1TestInputPart2()
-    var inputLines = getDay1InputStringListPart2()
+    var inputLines = getDay1InputStringList()
     printf("line count: %d\nresult: %d\n",inputLines.length,day1AccumulateListPart2(inputLines,0))
 
   }
