@@ -47,7 +47,17 @@ object Day2 {
 
         // println(inputLines.toString())
 
-        
+        for(game <- inputLines){
+          // ...
+          println(game)
+          // ...
+          // // ("Game \\d: ([a-zA-Z0-9]+)".r)(gameNumber,gameDetails)
+          // game match {
+          //   case "Game "+gameNumber+": "+gameDetails => printf("have the: %s\nwith: %s",gameNumber,gameDetails)
+          // }
+          
+          // ...
+        }
       }
       case numberInput => {
         Main.failingMessage("DAY 2 INVALID PART NUMBER: "+numberInput)
