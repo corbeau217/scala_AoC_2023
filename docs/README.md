@@ -40,4 +40,4 @@
 | [day 4 scala](../src/main/scala/day4/day4.md) | ⬛ | ⬛ |
 | [day 3 scala](../src/main/scala/day3/day3.md) |     |     |
 | [day 2 scala](../src/main/scala/day2/day2.md) |     |     |
-| [day 1 scala](../src/main/scala/day1/day1.md) | ⭐ | ??? |
+| [day 1 scala](../src/main/scala/day1/day1.md) | ⭐ | ⭐ |
