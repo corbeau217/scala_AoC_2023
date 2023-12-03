@@ -1075,22 +1075,16 @@ object Day1 {
 
     // tbh just assume that it's always got the thing in it to find
     var digitsList = (
-      partNumber match {
-        case 1 => Numbers.digitMatcher.r
-        case two => Numbers.refinedDigitAndNameMatcher
-      }
-    ).findAllIn(lineToHandle).toList
-    // TODO: HANDLE REVERSED
-    var digitsListReversed = (
-      partNumber match {
-        case 1 => Numbers.digitMatcher.r
-        case two => Numbers.refinedDigitAndNameMatcherReversed
-      }
+      if(partNumber==1) Numbers.digitMatcher.r else Numbers.refinedDigitAndNameMatcher
     ).findAllIn(lineToHandle).toList
 
+    var digitsListReversed = (
+      if(partNumber==1) Numbers.digitMatcher.r else Numbers.refinedDigitAndNameMatcherReversed
+    ).findAllIn(lineToHandle.reverse).toList
+
     var headDigit = digitsList.head
-    // var lastDigit = digitsListReversed.head
-    var lastDigit = digitsList.last
+    var lastDigit = digitsListReversed.head
+    // var lastDigit = digitsList.last
 
     // handle converting based on part
     var convertedHead = {

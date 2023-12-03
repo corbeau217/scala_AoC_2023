@@ -31,39 +31,41 @@ object Main{
         // try the catchable for the thinger bc idk
         try {
           val dayMatcher(dayNumVal,dayPartVal) = singleArg
+
+          // the arg we want
+          dayNumVal match {
+            // ........................................
+            // ........................................
+
+            // ........................................
+            // ........................................
+            case "1" => {
+              day1.Day1.handleDay(
+                // trying to parse the numbered
+                try{
+                  dayPartVal.toInt
+                }
+                catch {
+                  case e : Exception => 666
+                }
+              )
+            }
+            // ........................................
+            // ........................................
+            case semivaluableSting => failingMessage("none day: " +semivaluableSting)
+          }
         }
         catch {
           case e:Exception =>{
             // try see if playgrounding
             singleArg match {
-              case "sandbox" => return doingSandbox()
-              case _ => println("!!! FAILURE IN THE GRABBING THE DAY/PART\n"+
-              "args like: day<number>-pt<number>")
+              case "sandbox" => {doingSandbox()}
+              case _ => {
+                println("!!! FAILURE IN THE GRABBING THE DAY/PART\n"+
+                "args like: day<number>-pt<number>")
+              }
             }
           }
-        }
-
-        // the arg we want
-        dayNumVal match {
-          // ........................................
-          // ........................................
-
-          // ........................................
-          // ........................................
-          case "1" => {
-            day1.Day1.handleDay(
-              // trying to parse the numbered
-              try{
-                dayPartVal.toInt
-              }
-              catch {
-                case e : Exception => 666
-              }
-            )
-          }
-          // ........................................
-          // ........................................
-          case semivaluableSting => failingMessage("none day: " +semivaluableSting)
         }
       }
       // ........................................
