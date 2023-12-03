@@ -22,3 +22,4 @@ drawingIter: numOfColour ~ (", "~> numOfColour)*
 gameData:    gameNumber ~ drawingIter ~ ("; " ~> drawingIter)*
 
 ```
+3. figured out file handling
