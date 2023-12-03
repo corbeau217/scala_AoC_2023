@@ -132,12 +132,43 @@ stateDiagram-v2
   <li><h4>right-to-left alphabetical character acceptance</h4><details><summary><i>[show / hide]</i></summary>
 
 ```mermaid
+
 stateDiagram-v2
   direction RL
     %% ------------------
-    %% transition 1
-    [*] --> [*]: ε
-    %% ...
+    [*] --> s1: o
+    [*] --> s2: e
+    [*] --> s3: n
+    [*] --> s4: r
+    [*] --> s5: x
+    [*] --> s6: t
+
+    s2 --> s7: e
+    s2 --> s8: n
+    s2 --> s9: v
+    s3 --> s10: e
+    s4 --> s11: u
+    s6 --> s12: h
+
+    s7 --> s13: r
+    s10 --> s14: v
+    s12 --> s15: g
+
+    s1 --> s16: w
+    s8 --> s17: i
+    s13 --> s16: h
+    s9 --> s18: i
+    s11 --> s18: o
+    s5 --> s19: i
+    s14 --> s19: e
+    s15 --> s20: i
+
+    s8 --> [*]: o
+    s16 --> [*]: t
+    s17 --> [*]: n
+    s18 --> [*]: f
+    s19 --> [*]: s
+    s20 --> [*]: e
 ```
   </details></li>
   <!-- ======================================================= -->
@@ -158,6 +189,7 @@ stateDiagram-v2
     <td>bbbb</td>
     <td>cccc</td>
     <td>dddd</td>
+    <td>eeee</td>
     <!-- ------ ------ ------ ------ -->
   </tr>
   <!-- ------ ------ ------ ------ ------ -->
@@ -245,6 +277,136 @@ stateDiagram-v2
 
 </details>
     </td>
+    <!-- ------ ------ ------ ------ -->
+    <td>
+<details><summary>show/hide e-close??</summary>
+* :derpwut:
+| state | ε-closure |
+| ----- | --------- |
+| start |   start   |
+|    s1 |      s1   |
+|    s2 |      s2   |
+|    s3 |      s3   |
+|    s4 |      s4   |
+|    s5 |      s5   |
+|    s6 |      s6   |
+|    s7 |      s7   |
+|    s8 |      s8   |
+|    s9 |      s9   |
+|   s10 |     s10   |
+|   s11 |     s11   |
+|   s12 |     s12   |
+|   s13 |     s13   |
+|   s14 |     s14   |
+|   s15 |     s15   |
+|   s16 |     s16   |
+|   s17 |     s17   |
+|   s18 |     s18   |
+|   s19 |     s19   |
+|   s20 | s20,finiš |
+|   s21 |     s21   |
+|   s22 | s22,finiš |
+|   s23 |     s23   |
+|   s24 | s24,finiš |
+|   s25 |     s25   |
+|   s26 | s26,finiš |
+|   s27 | s27,finiš |
+|   s28 | s28,finiš |
+|   s29 |     s29   |
+|   s30 |     s30   |
+|   s31 | s31,finiš |
+|   s32 | s32,finiš |
+|   s33 | s33,finiš |
+| finiš |   finiš   |
+
+
+</details>
+    </td>
+    <!-- ------ ------ ------ ------ -->
+  </tr>
+  <!-- ------ ------ ------ ------ ------ -->
+  <!-- ------ ------ ------ ------ ------ -->
+  <tr>
+    <!-- ------ ------ ------ ------ -->
+    <td>character tables</td>
+    <!-- ------ ------ ------ ------ -->
+    <td>
+<details><summary>show/hide character table </summary>
+
+| num | 0 | 1 | 2 | 3 | 4 | size |
+| --- | - | - | - | - | - | ---- |
+|  1  | o | n | e |...|...|   3  |
+|  2  | t | w | o |...|...|   3  |
+|  3  | t | h | r | e | e |   5  |
+|  4  | f | o | u | r |...|   4  |
+|  5  | f | i | v | e |...|   4  |
+|  6  | s | i | x |...|...|   3  |
+|  7  | s | e | v | e | n |   5  |
+|  8  | e | i | g | h | t |   5  |
+|  9  | n | i | n | e |...|   4  |
+
+
+</details>
+    </td>
+    <!-- ------ ------ ------ ------ -->
+    <td>
+<details><summary>show/hide character table </summary>
+
+| num | 0 | 1 | 2 | 3 | 4 | size |
+| --- | - | - | - | - | - | ---- |
+|  1  |...|...| o | n | e |   3  |
+|  2  |...|...| t | w | o |   3  |
+|  3  | t | h | r | e | e |   5  |
+|  4  |...| f | o | u | r |   4  |
+|  5  |...| f | i | v | e |   4  |
+|  6  |...|...| s | i | x |   3  |
+|  7  | s | e | v | e | n |   5  |
+|  8  | e | i | g | h | t |   5  |
+|  9  |...| n | i | n | e |   4  |
+
+
+</details>
+    </td>
+    <!-- ------ ------ ------ ------ -->
+    <td>
+<details><summary>show/hide character table LR-ASC </summary>
+
+| num | 0 | 1 | 2 | 3 | 4 | size |
+| --- | - | - | - | - | - | ---- |
+|  8  | e | i | g | h | t |   5  |
+|  5  | f | i | v | e |...|   4  |
+|  4  | f | o | u | r |...|   4  |
+|  9  | n | i | n | e |...|   4  |
+|  1  | o | n | e |...|...|   3  |
+|  6  | s | i | x |...|...|   3  |
+|  7  | s | e | v | e | n |   5  |
+|  2  | t | w | o |...|...|   3  |
+|  3  | t | h | r | e | e |   5  |
+
+
+</details>
+    </td>
+    <!-- ------ ------ ------ ------ -->
+    <td>
+<details><summary>show/hide character table RL-ASC </summary>
+
+| num | 0 | 1 | 2 | 3 | 4 | size |
+| --- | - | - | - | - | - | ---- |
+|  3  | t | h | r | e | e |   5  |
+|  9  |...| n | i | n | e |   4  |
+|  1  |...|...| o | n | e |   3  |
+|  5  |...| f | i | v | e |   4  |
+|  7  | s | e | v | e | n |   5  |
+|  2  |...|...| t | w | o |   3  |
+|  4  |...| f | o | u | r |   4  |
+|  8  | e | i | g | h | t |   5  |
+|  6  |...|...| s | i | x |   3  |
+
+
+</details>
+    </td>
+    <!-- ------ ------ ------ ------ -->
+    <!-- ------ ------ ------ ------ -->
     <!-- ------ ------ ------ ------ -->
   </tr>
   <!-- ------ ------ ------ ------ ------ -->
