@@ -1,6 +1,9 @@
-# Advent of Code using Scala
+# Corbeau217  - Advent of Code - 2023
+# ![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=for-the-badge&logo=scala&logoColor=white)
 
   took me a bit to remember how to do the initialisation of the project lmao
+
+
 
 
 ## days table

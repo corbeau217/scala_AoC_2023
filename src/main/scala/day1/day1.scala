@@ -1041,7 +1041,7 @@ object Day1 {
     partNumber match {
       case 1|2 => { //if(partNumber.==(1).||(partNumber.==(2)))
         // var theTestable = "eightwothree"
-        // var theMoreTested = digitAndNameMatcher.findAllIn(theTestable).toList
+        // var theMoreTested = lazyDigitAndNameMatcher.findAllIn(theTestable).toList
 
         // println(theMoreTested.toString())
 
@@ -1077,14 +1077,14 @@ object Day1 {
     var digitsList = (
       partNumber match {
         case 1 => Numbers.digitMatcher.r
-        case two => Numbers.digitAndNameMatcher
+        case two => Numbers.lazyDigitAndNameMatcher
       }
     ).findAllIn(lineToHandle).toList
     // TODO: HANDLE REVERSED
     var digitsListReversed = (
       partNumber match {
         case 1 => Numbers.digitMatcher.r
-        case two => Numbers.digitAndNameMatcher
+        case two => Numbers.lazyDigitAndNameMatcherReversed
       }
     ).findAllIn(lineToHandle).toList
 
