@@ -1075,15 +1075,19 @@ object Day1 {
 
     // tbh just assume that it's always got the thing in it to find
     var digitsList = (
-      if(partNumber==1) Numbers.digitMatcher.r else Numbers.refinedDigitAndNameMatcher
+      if(partNumber==1) Numbers.digitMatcher.r
+      else Numbers.refinedDigitAndNameMatcher
     ).findAllIn(lineToHandle).toList
 
     var digitsListReversed = (
-      if(partNumber==1) Numbers.digitMatcher.r else Numbers.refinedDigitAndNameMatcherReversed
-    ).findAllIn(lineToHandle.reverse).toList
+      if(partNumber==1) Numbers.digitMatcher.r
+      else Numbers.refinedDigitAndNameMatcherReversed
+    ).findAllIn(
+      lineToHandle.reverse // need to look in the reversed order
+    ).toList
 
     var headDigit = digitsList.head
-    var lastDigit = digitsListReversed.head
+    var lastDigit = digitsListReversed.head.reverse // reverse the reversed bc then it's a real word
     // var lastDigit = digitsList.last
 
     // handle converting based on part
@@ -1109,7 +1113,7 @@ object Day1 {
     var convertedTotal = (convertedHead*10)+convertedLast
 
     // .. debugging out the output
-    printf("[h: %s ][l: %s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
+    printf("[h: %5s ][l: %5s ][t: %d ]\n",headDigit,lastDigit,convertedTotal)
 
     // returning:
     convertedTotal
