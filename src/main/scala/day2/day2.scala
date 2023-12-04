@@ -213,8 +213,14 @@ object Day2 {
         // grab the iterations
         val gameIterationsList = gameIterMatcher.findAllIn(gameLine)
         
-        // BIGTODO: CHANGE TO NOT THIS FOR FAVOUR OF MAX COLOR SELECTED
-        var colorSafetyIsSafe = true // assume fine, thisisfine.gif
+        // (redMax,greenMax,blueMax)
+        // var maximumSoFar = Map.Map2("bep",5) //????
+        // idk hashmaps in scala??
+        // the using the of the maximum so far
+
+        var redMaxSoFar = 0
+        var greenMaxSoFar = 0
+        var blueMaxSoFar = 0
 
         // == == == == == == == == == == == == == == == == == == == == == == 
         // == == == == == == == == == == == == == == == == == == == == == == 
@@ -224,34 +230,49 @@ object Day2 {
           // println(gameIteration)
           // grab the selectables
           val gameIterationSelections = gameChoiceMatcher.findAllIn(gameIteration)
-          
+
+          // debugging thingy
+          var changedMaxSoFar = false
+
           // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
           // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
           // FUNTODO: THIS COULD BE ANONYMOUS FUNCTION ON COLLECTION
           for(selection <- gameIterationSelections){
+            
             val selectionNumber = getFirstNumberFromString(selection)
+
             if(includeDebuggingInfo) printf("SELECTION: %s, NUMBER: %d",selection,selectionNumber)
+
             // color handle
             val colorExtractedSymbol = gameChoiceColorMatcher.findFirstIn(selection) match {
               case None => "???"
               case Some(thing) => thing
             }
-            // BIGTODO: CHANGE TO NOT THIS FOR FAVOUR OF MAX COLOR SELECTED
-            // P A I N YOU'RE JOKIN???? CRACKED RAW EGG BRAIN HONESTLY
-            val colorWasUnsafe = colorExtractedSymbol match {
-              case "red" => if(selectionNumber>12) true else false
-              case "green" => if(selectionNumber>13) true else false
-              case "blue" => if(selectionNumber>14) true else false
-              case spookyInput => {
-                if(includeDebuggingInfo) println("!!!! SPOOKY COLOUR !!!!: "+spookyInput)
-                true // // do nothing else?? pretend fine?
+
+            // FUNTODO: SHOULD CHANGE TO A LIST OR SOMETHING TO HANDLE FOR NEW COLORS
+            colorExtractedSymbol match {
+              case "red" if(selectionNumber>redMaxSoFar) => redMaxSoFar = {
+                changedMaxSoFar = true
+                selectionNumber
               }
+              case "green" if(selectionNumber>greenMaxSoFar) => greenMaxSoFar = {
+                changedMaxSoFar = true
+                selectionNumber
+              }
+              case "blue" if (selectionNumber>blueMaxSoFar) => blueMaxSoFar =  {
+                changedMaxSoFar = true
+                selectionNumber
+              }
+              case spookyInput => {
+                false // // do nothing else?? pretend fine?
+              }
+            } // done color matched
+
+            if(changedMaxSoFar){
+              if(includeDebuggingInfo) print(" > ")
             }
-            // BIGTODO: CHANGE TO NOT THIS FOR FAVOUR OF MAX COLOR SELECTED
-            if(colorWasUnsafe){
-              if(includeDebuggingInfo) print("!!! UNSAFE !!!")
-              // make the spooky checker
-              colorSafetyIsSafe = false
+            else{
+              if(includeDebuggingInfo) print("<= ")
             }
 
             if(includeDebuggingInfo) printf(", EXTRACTED: %s\n",colorExtractedSymbol)
@@ -262,18 +283,16 @@ object Day2 {
 
         // == == == == == == == == == == == == == == == == == == == == == == 
         // == == == == == == == == == == == == == == == == == == == == == == 
+        // == game's power level
+        var currGamePower = redMaxSoFar * greenMaxSoFar * blueMaxSoFar
+        if(includeDebuggingInfo) printf("")
+        runningGameNumberTotal = runningGameNumberTotal+gameNumber
 
-        // BIGTODO: CHANGE TO NOT THIS FOR FAVOUR OF MAX COLOR SELECTED
-        if(colorSafetyIsSafe) {
-          runningGameNumberTotal = runningGameNumberTotal+gameNumber
-        }
-
-        // BIGTODO: CHANGE TO NOT THIS FOR FAVOUR OF MAX COLOR SELECTED
         if(includeDebuggingInfo) printf(
-          "GAME: %d, TOTAL: %d, SAFETY: %s\n",
+          "GAME: %d, POWER: %d, TOTAL: %d\n",
           gameNumber,
-          runningGameNumberTotal,
-          colorSafetyIsSafe.toString()
+          currGamePower,
+          runningGameNumberTotal
         )
 
         // == == == == == == == == == == == == == == == == == == == == == == 
