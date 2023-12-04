@@ -32,7 +32,8 @@ object Day4 {
           handlePart1("src/main/scala/day4/day4input.txt",false)
         }
         case 2 => {
-          handlePart2("src/main/scala/day4/day4input.txt",true)
+          // handlePart2("src/main/scala/day4/day4input.txt",true)
+          handlePart2("src/main/scala/day4/day4testinput1.txt",true)
         }
         case numberInput => {
           Main.failingMessage("DAY 4 INVALID PART NUMBER: "+numberInput)
@@ -136,8 +137,8 @@ object Day4 {
     // ...
     var inputLines = Main.grabLinesFromFile(inputFilePath)
 
-    var scoresRunningTotal = 0
-
+    var scratchCardMatchesArray:Array[Int] = new Array[Int](inputLines.length)
+    
     for(scratchCardLine <- inputLines){
       if (includeDebuggingInfo) printf("LINE: %s\n",scratchCardLine)
       // ...
@@ -161,10 +162,10 @@ object Day4 {
       // if (includeDebuggingInfo) println("got number's iterators")
       // ...
       var scratchCardMatches = 0
-      
+      var currScratchCardIdx = 0
       // given winner number
       for(winningNumberToTest <- winningNumbersIterator){
-        if(includeDebuggingInfo) printf("%s --> ",winningNumberToTest)
+        if(includeDebuggingInfo) printf("%3s --> ",winningNumberToTest)
 
         var myNumbersIterator = numberMatcher.findAllIn(myNumbersPortion).map((numberString)=>numberString.toInt)
         // check all of the numbers on my card
@@ -172,7 +173,7 @@ object Day4 {
           // given winning number to my car
           // if(includeDebuggingInfo) printf("%s == %s??",myNumberChoice,winningNumberToTest)
 
-          if(includeDebuggingInfo) printf("%s,%s",winningNumberToTest,myNumberChoice)
+          if(includeDebuggingInfo) printf("%2s,%2s",winningNumberToTest,myNumberChoice)
           
           if(myNumberChoice == winningNumberToTest){
             if(includeDebuggingInfo) print("ye ")
@@ -184,22 +185,51 @@ object Day4 {
         // if(includeDebuggingInfo) printf(" --------- isNext? %s \n",winningNumbersIterator.hasNext)
         if(includeDebuggingInfo) println("")
         // go next
+        currScratchCardIdx = currScratchCardIdx+1
       }
       // done all winning numbers
 
-      // if (includeDebuggingInfo) println("compareable and scoring")
-      
-      
-      // ... 
-      if(scratchCardMatches>0){
-        scoresRunningTotal = scoresRunningTotal + getScratchCardScore(scratchCardMatches-1,1)
-      }
+      // stash the game's winning total
+      scratchCardMatchesArray(currScratchCardIdx) = scratchCardMatchesArray(currScratchCardIdx) + scratchCardMatches
 
-      if (includeDebuggingInfo) printf("MATCHES: %d\nSCORE: %d\n",scratchCardMatches,getScratchCardScore(scratchCardMatches-1,1))
+      if (includeDebuggingInfo) printf("MATCHES: %d\n",scratchCardMatches)
       // if (includeDebuggingInfo) println("score update for card")
     }
-    // ...
-    println("aaaa we got: "+scoresRunningTotal)
+    // now that we have them??
+
+    var scratchCardMatchWeightArray:Array[Int] = new Array[Int](inputLines.length)
+
+    // run backwards and get what the "weight" of a given scratch card is
+    for(weighingIndex <- inputLines.length-1 to 0){
+      // ...
+      val currCardMatches = scratchCardMatchesArray(weighingIndex)
+      if(includeDebuggingInfo) printf("scratch match: %d\n",currCardMatches)
+      // ...
+      currCardMatches match {
+        case 0 => {
+          // weight is 0 bc no matchess, gg ez
+          scratchCardMatchWeightArray(weighingIndex) = 0 // unecessary but brain brains it more
+          // if (includeDebuggingInfo) println("nonmatcher")
+        }
+        case includedWeightCount => {
+          // go back and find the other weights starting with next
+          // assume at least this one
+          scratchCardMatchWeightArray(weighingIndex) = currCardMatches
+          // ignore current matches value
+          for(accumulatingWeighIndex <- weighingIndex+1 to weighingIndex+currCardMatches-1 ){
+            scratchCardMatchWeightArray(weighingIndex) = scratchCardMatchWeightArray(weighingIndex) + scratchCardMatchWeightArray(accumulatingWeighIndex)
+          }
+        }
+      }
+    }
+
+    // now just run back through and accumulate??
+    var cummulativeTotalValue = 0
+    for(item <- scratchCardMatchWeightArray){
+      cummulativeTotalValue = cummulativeTotalValue + item
+    }
+
+    printf("total is %d captain 🫡\n",cummulativeTotalValue)
   }
   
   // ========================================
