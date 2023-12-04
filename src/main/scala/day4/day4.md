@@ -18,3 +18,7 @@
   b. second last one says x plus possible y if we had a match
   c. third last says grab the thingies based on ours
   d. this gives what all future branches are if we take "another copy" of a given thing
+5. tbh y irl
+  a. we got the ye
+  b. it of the hello? words? yes we got in the amount of the matches dont work
+  c. probably something in the list not referencing correctly or the identifier use, test the indexes
