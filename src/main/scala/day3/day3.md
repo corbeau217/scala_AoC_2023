@@ -2,4 +2,22 @@
   scala attempt at day 3
 ## part 1
 ### strategy
-1. ...
+1. setup the formatting, mild refactoring, confirmed no `[a-z]` in input file
+2. musings:
+  a. find the x/y of first all numbers paired with the digit count
+  b. speed of results depend on how many numbers and how many symbols
+  c. number perspective: (cpu intensive)
+    i. check surrounding spots for symbols in orderly fashion
+    ii. ignore `.`
+    iii. dont look down if last row/left if first column etc
+    iv. when none found, discard the number, otherwise accumulate it
+  d. symbol perspective: (memory intensive)
+    i. location of all symbols
+    ii. check surrounding locations for numbers and flip `isPartNum = true`
+    iii. iterate all found parts, accumulate the result
+    iv. could use binary search tree/hash map/graph/tree?
+  e. 2d array of usefulness states, default none
+    i. `none|sym|adjacentToSym`
+    ii. find syms mark as `sym`, mark adjacents as `adjacentToSym`
+    iii. find numbers, iterate checking any digit `adjacentToSym`
+3. ...???

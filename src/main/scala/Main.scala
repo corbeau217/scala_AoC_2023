@@ -36,7 +36,7 @@ object Main{
     * @param args
     */
   def main(args:Array[String]):Unit={
-    val dayMatcher = "day([1-9][0-9]*)\\-pt([1-9][0-9]*)".r
+    val dayMatcher = "day([0-9]*)\\-pt([0-9]*)".r
     
     // just match the arg thing of the choice
     args.toList match {
@@ -51,54 +51,51 @@ object Main{
           val dayMatcher(dayNumVal,dayPartVal) = singleArg
 
           // the arg we want
-          dayNumVal match {
-            // ........................................
-            // ........................................
-
-            // FUNTODO: REFACTOR TO JUST BE THE FUNCTION SIGNATURE THAT THE SWITCH STATEMENT CHOOSES
+          var dayHandle = dayNumVal match {
             // ........................................
             // ........................................
             case "1" => {
-              day1.Day1.handleDay(
-                // trying to parse the numbered
-                try{
-                  dayPartVal.toInt
-                }
-                catch {
-                  case e : Exception => 666
-                }
-              )
+              day1.Day1.handleDay(_)
             }
             // ........................................
             // ........................................
             case "2" => {
-              day2.Day2.handleDay(
-                // trying to parse the numbered
-                try{
-                  dayPartVal.toInt
-                }
-                catch {
-                  case e : Exception => 666
-                }
-              )
+              day2.Day2.handleDay(_)
             }
             // ........................................
             // ........................................
             case "3" => {
-              day3.Day3.handleDay(
-                // trying to parse the numbered
-                try{
-                  dayPartVal.toInt
-                }
-                catch {
-                  case e : Exception => 666
-                }
-              )
+              day3.Day3.handleDay(_)
             }
             // ........................................
             // ........................................
-            case semivaluableSting => failingMessage("none day: " +semivaluableSting)
+            case "4" => {
+              // printf("landed case 4, %s %s \n",dayNumVal,dayPartVal)
+              day4.Day4.handleDay(_)
+            }
+            // ........................................
+            // ........................................
+            case semivaluableSting => {
+              // println("landed semivaluableString")
+              // println(semivaluableSting)
+              failingMessageNumberInputPart(_)
+            }
           }
+          // use it now
+          dayHandle(
+            // trying to parse the numbered
+            try{
+              dayPartVal.toInt
+            }
+            catch {
+              case e : Exception => {
+                println("failedable with the " + e.toString())
+                666
+              }
+            }
+          )
+
+          // ...
         }
         catch {
           case e:Exception =>{
@@ -108,6 +105,7 @@ object Main{
               case _ => {
                 println("!!! FAILURE IN THE GRABBING THE DAY/PART\n"+
                 "args like: day<number>-pt<number>")
+                printf("had: %s\nday: %s\npart: %s\n",singleArg,dayNumVal,dayPartVal)
               }
             }
           }
@@ -175,10 +173,13 @@ object Main{
   // }
 
   // // ###############################################################
-  def failingMessage() : Unit = {
-    println("!!! FAILED SOMEHOW, KTHNXBYE")
-  }
+  // def failingMessage() : Unit = {
+  //   println("!!! FAILED SOMEHOW, KTHNXBYE")
+  // }
   def failingMessage(semivaluableSting:String) : Unit = {
+    println("!!! FAILURE WITH SOME INFORMATION:\n\n"+semivaluableSting)
+  }
+  def failingMessageNumberInputPart(semivaluableSting:Int) : Unit = {
     println("!!! FAILURE WITH SOME INFORMATION:\n\n"+semivaluableSting)
   }
 

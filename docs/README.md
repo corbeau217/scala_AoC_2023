@@ -37,7 +37,7 @@
 | [day 7 scala](../src/main/scala/day7/day7.md) | ⬛ | ⬛ |
 | [day 6 scala](../src/main/scala/day6/day6.md) | ⬛ | ⬛ |
 | [day 5 scala](../src/main/scala/day5/day5.md) | ⬛ | ⬛ |
-| [day 4 scala](../src/main/scala/day4/day4.md) |    |    |
+| [day 4 scala](../src/main/scala/day4/day4.md) | ⭐ |    |
 | [day 3 scala](../src/main/scala/day3/day3.md) |    |    |
 | [day 2 scala](../src/main/scala/day2/day2.md) | ⭐ | ⭐ |
 | [day 1 scala](../src/main/scala/day1/day1.md) | ⭐ | ⭐ |
