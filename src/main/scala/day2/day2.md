@@ -38,4 +38,4 @@ gameData:    gameNumber ~ drawingIter ~ ("; " ~> drawingIter)*
   a. add in `List[(String,Int)]` for `largestColorSelectionSoFar` (initialise int to `0`)
   b. then get `gamePower = ...`
   c. accumulate `gamePower`
-2. ...
+2. prepared the file for conversion, taking short break before continuing for the brain refresh cache

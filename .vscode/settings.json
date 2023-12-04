@@ -34,6 +34,7 @@
       // -- stuff my preference -------------------
       // ------------------------------------------
       "BIGTODO",
+      "FUNTODO",
       
       "PRE",
       "PRECOND",
@@ -54,6 +55,13 @@
           "icon": "beaker",
           "background": "#0059a6",
           "iconColour": "#0059a6",
+          "foreground": "#eeeeee"
+      },
+      "FUNTODO": {
+          "type": "text-and-comment",
+          "icon": "beaker",
+          "background": "#ff0090",
+          "iconColour": "#ff0090",
           "foreground": "#eeeeee"
       },
       "BIGTODO": {
