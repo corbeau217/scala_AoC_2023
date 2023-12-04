@@ -10,6 +10,24 @@ object Main{
   // -----------------------------------------------------------------
   // -----------------------------------------------------------------
 
+
+  def grabLinesFromFile(pathStr:String):List[String] = {
+    var linesList = List[String]()
+    try {
+
+      val fileGrabbedBuffer = Source.fromFile(pathStr)
+      for (line <- fileGrabbedBuffer.getLines()) {
+          // println(line)
+          linesList = linesList :+ line
+      }
+      fileGrabbedBuffer.close()
+    }
+    catch {
+      case e: Exception => println("but it doesnae work: "+e.toString())
+    }
+    linesList
+  } 
+
   // ###############################################################
 
   /**
@@ -37,6 +55,7 @@ object Main{
             // ........................................
             // ........................................
 
+            // FUNTODO: REFACTOR TO JUST BE THE FUNCTION SIGNATURE THAT THE SWITCH STATEMENT CHOOSES
             // ........................................
             // ........................................
             case "1" => {
@@ -54,6 +73,19 @@ object Main{
             // ........................................
             case "2" => {
               day2.Day2.handleDay(
+                // trying to parse the numbered
+                try{
+                  dayPartVal.toInt
+                }
+                catch {
+                  case e : Exception => 666
+                }
+              )
+            }
+            // ........................................
+            // ........................................
+            case "3" => {
+              day3.Day3.handleDay(
                 // trying to parse the numbered
                 try{
                   dayPartVal.toInt
