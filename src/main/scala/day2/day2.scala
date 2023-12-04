@@ -47,6 +47,7 @@ object Day2 {
       }
       case 2 => {
         handlePart2("src/main/scala/day2/day2input.txt",true)
+        // handlePart2("src/main/scala/day2/day2testinput1.txt",true)
       }
       case numberInput => {
         Main.failingMessage("DAY 2 INVALID PART NUMBER: "+numberInput)
@@ -285,8 +286,10 @@ object Day2 {
         // == == == == == == == == == == == == == == == == == == == == == == 
         // == game's power level
         var currGamePower = redMaxSoFar * greenMaxSoFar * blueMaxSoFar
+        
         if(includeDebuggingInfo) printf("")
-        runningGameNumberTotal = runningGameNumberTotal+gameNumber
+
+        runningGameNumberTotal = runningGameNumberTotal+currGamePower
 
         if(includeDebuggingInfo) printf(
           "GAME: %d, POWER: %d, TOTAL: %d\n",
