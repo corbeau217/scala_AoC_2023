@@ -38,11 +38,15 @@ object Day2 {
       case 99 => {
         // ============================================================
         handlePart1("src/main/scala/day2/day2testinput1.txt",true)
+        handlePart2("src/main/scala/day2/day2testinput1.txt",true)
         // ============================================================
       }
       // aaaaa the parts
       case 1 => { 
         handlePart1("src/main/scala/day2/day2input.txt",false)
+      }
+      case 2 => {
+        handlePart2("src/main/scala/day2/day2input.txt",true)
       }
       case numberInput => {
         Main.failingMessage("DAY 2 INVALID PART NUMBER: "+numberInput)
@@ -163,6 +167,14 @@ object Day2 {
     // done all games
 
     printf("END RESULT: %d\n",runningGameNumberTotal)
+  }
+  // ========================================
+  // ========================================
+
+  def handlePart2(inputFilePath:String,includeDebuggingInfo:Boolean):Unit={
+    // ...
+    var inputLines = grabLinesFromFile(inputFilePath)
+    // ...
   }
   // ========================================
   // ========================================
