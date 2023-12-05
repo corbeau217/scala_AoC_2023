@@ -20,4 +20,4 @@
     i. `none|sym|adjacentToSym`
     ii. find syms mark as `sym`, mark adjacents as `adjacentToSym`
     iii. find numbers, iterate checking any digit `adjacentToSym`
-3. ...???
+3. ...onnhold workinng on day 4
