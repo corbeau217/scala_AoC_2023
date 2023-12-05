@@ -283,7 +283,9 @@ object Day4 {
 
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     
+    // POSSIBLEBUG: weighingIndex might not because cant backwards range, that's cringe, idk the thing to backwards step
     for(weighingIndex <- inputLines.length-1 to 0){
+      
       // ...
       // POSSIBLEBUG: maybe change to using just the indexing each time rather than iteration local copy of the position?
       val currCardMatches = scratchCardMatchesArray(weighingIndex)
@@ -316,6 +318,7 @@ object Day4 {
           
           // POSSIBLEBUG: maybe there's an isssue with us doing +1 and -1?? seems a bit wonky, but we'd have more than 0 ending if that were bug
           for(accumulatingWeighIndex <- weighingIndex+1 to weighingIndex+currCardMatches-1 ){
+            if(includeDebuggingInfo) printf("[wIdx: %d]: %d\n[aIdx: %d]: %d\n",weighingIndex,scratchCardMatchWeightArray(weighingIndex),accumulatingWeighIndex,scratchCardMatchWeightArray(accumulatingWeighIndex))
             scratchCardMatchWeightArray(weighingIndex) = scratchCardMatchWeightArray(weighingIndex) + scratchCardMatchWeightArray(accumulatingWeighIndex)
           }
 
@@ -336,13 +339,19 @@ object Day4 {
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     // == == RUN THROUGH AGAIN AND ACCUMULATE
 
+    if(includeDebuggingInfo) print("ACCUMULATING TOTAL...\n")
+    
     // POSSIBLEBUG: idk what right this moment bc i havent looked but end result is 0 so maybe this is point of failure
     // POSSIBLEBUG: perhaps it's the way enhanced for loop works with arrays in scala?
     var cummulativeTotalValue = 0
     for(item <- scratchCardMatchWeightArray){
-      if(includeDebuggingInfo) printf("CT: %d, ADD: %d\n",cummulativeTotalValue,item)
+      // if(includeDebuggingInfo) printf("CT: %d, ADD: %d\n",cummulativeTotalValue,item)
+      // SPAMMER: for knowing that it does the accumulating
+      if(includeDebuggingInfo) print("*")
       cummulativeTotalValue = cummulativeTotalValue + item
     }
+
+    if(includeDebuggingInfo) println("")
 
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##

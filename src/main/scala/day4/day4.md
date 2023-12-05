@@ -27,3 +27,5 @@
   * noticing an issue with the updating of the index of `currScratchCardIdx` so moved to after the inner loop and post inner loop code
 8. current bug info (zero result):
   a. seems before accumulating the total weights?
+  b. NEVER ACCUMULATES WEIGHT, ALWAYS 0 CASE MATCH `scratchCardMatchesArray(weighingIndex)`
+  c. never even scratch match??
