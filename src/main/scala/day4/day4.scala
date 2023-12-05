@@ -158,9 +158,11 @@ object Day4 {
     
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
 
+    // for a given sscratch card (line)
     for(scratchCardLine <- inputLines){
+      // figuring out the stuff
 
-      if (includeDebuggingInfo) printf("LINE: %s\n",scratchCardLine)
+      if (includeDebuggingInfo) printf("SCRATCH CARD: %s\n",scratchCardLine)
       // ...
 
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
@@ -190,7 +192,7 @@ object Day4 {
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
 
-      // ...
+      // POSSIBLEBUG: ".map" maybe sandbox try this then split up not on one line, map keyword seems to be shared with hashmaps in scala
       var winningNumbersIterator = numberMatcher.findAllIn(winningNumbersPortion).map((numberString)=>numberString.toInt)
       // ...
       // if (includeDebuggingInfo) println("got number's iterators")
@@ -210,6 +212,10 @@ object Day4 {
         // == == == == == == == == == == == == == == == == == == == == == == 
         // == == == == == == == == == == == == == == == == == == == == == == 
 
+        // POSSIBLEBUG: ".map" maybe sandbox try this then split up not on one line, map keyword seems to be shared with hashmaps in scala
+        // scratch card hass numbers iterator, used for us to check a given winning number
+        //  we reinitialise every iteration of the winning numbers loop so it starts frmom the beginning again
+        // POSSIBLEBUG: not exactly bug, but it's super ridiculously horrible inefficiency, maybe just find a way to restart or `toArray` or `toList` our `Iterator`
         var myNumbersIterator = numberMatcher.findAllIn(myNumbersPortion).map((numberString)=>numberString.toInt)
 
         // == == == == == == == == == == == == == == == == == == == == == == 
@@ -220,6 +226,7 @@ object Day4 {
           // given winning number to my car
           // if(includeDebuggingInfo) printf("%s == %s??",myNumberChoice,winningNumberToTest)
 
+          // SPAMMER litererally every test of winningNumber to myNumber
           if(includeDebuggingInfo) printf("%2s,%2s",winningNumberToTest,myNumberChoice)
           
           if(myNumberChoice == winningNumberToTest){
@@ -235,8 +242,6 @@ object Day4 {
         
         // if(includeDebuggingInfo) printf(" --------- isNext? %s \n",winningNumbersIterator.hasNext)
         if(includeDebuggingInfo) println("")
-        // go next
-        currScratchCardIdx = currScratchCardIdx+1
       }
       
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
@@ -245,11 +250,22 @@ object Day4 {
 
       // done all winning numbers
 
-      // stash the game's winning total
-      scratchCardMatchesArray(currScratchCardIdx) = scratchCardMatchesArray(currScratchCardIdx) + scratchCardMatches
+      // // stash the game's winning total
+      // scratchCardMatchesArray(currScratchCardIdx) = scratchCardMatchesArray(currScratchCardIdx) + scratchCardMatches
+      
+      // we just keep the matches ammount now
+      scratchCardMatchesArray(currScratchCardIdx) = scratchCardMatches
 
       if (includeDebuggingInfo) printf("MATCHES: %d\n",scratchCardMatches)
       // if (includeDebuggingInfo) println("score update for card")
+      
+      // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
+      // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
+      // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
+
+      // POSSIBLEBUG: maybe change inverse of foreach/index usage
+      // go next
+      currScratchCardIdx = currScratchCardIdx+1
       
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
@@ -269,6 +285,7 @@ object Day4 {
     
     for(weighingIndex <- inputLines.length-1 to 0){
       // ...
+      // POSSIBLEBUG: maybe change to using just the indexing each time rather than iteration local copy of the position?
       val currCardMatches = scratchCardMatchesArray(weighingIndex)
       if(includeDebuggingInfo) printf("scratch match: %d\n",currCardMatches)
 
@@ -282,6 +299,7 @@ object Day4 {
         // == == == == == == == == == == == == == == == == == == == == == == 
         case 0 => {
           // weight is 0 bc no matchess, gg ez
+          // POSSIBLEBUG idk if this is a bug, it makes sense it should be 0
           scratchCardMatchWeightArray(weighingIndex) = 0 // unecessary but brain brains it more
           // if (includeDebuggingInfo) println("nonmatcher")
         }
@@ -296,6 +314,7 @@ object Day4 {
           // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
           // ignore current matches value
           
+          // POSSIBLEBUG: maybe there's an isssue with us doing +1 and -1?? seems a bit wonky, but we'd have more than 0 ending if that were bug
           for(accumulatingWeighIndex <- weighingIndex+1 to weighingIndex+currCardMatches-1 ){
             scratchCardMatchWeightArray(weighingIndex) = scratchCardMatchWeightArray(weighingIndex) + scratchCardMatchWeightArray(accumulatingWeighIndex)
           }
@@ -317,8 +336,11 @@ object Day4 {
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     // == == RUN THROUGH AGAIN AND ACCUMULATE
 
+    // POSSIBLEBUG: idk what right this moment bc i havent looked but end result is 0 so maybe this is point of failure
+    // POSSIBLEBUG: perhaps it's the way enhanced for loop works with arrays in scala?
     var cummulativeTotalValue = 0
     for(item <- scratchCardMatchWeightArray){
+      if(includeDebuggingInfo) printf("CT: %d, ADD: %d\n",cummulativeTotalValue,item)
       cummulativeTotalValue = cummulativeTotalValue + item
     }
 
@@ -326,6 +348,7 @@ object Day4 {
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
 
+    // POSSIBLEBUG: maybe this is always 0??
     printf("total is %d captain 🫡\n",cummulativeTotalValue)
   }
   

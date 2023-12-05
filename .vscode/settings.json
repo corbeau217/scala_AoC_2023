@@ -33,6 +33,8 @@
       // ------------------------------------------
       // -- stuff my preference -------------------
       // ------------------------------------------
+      "SPAMMER",
+      "POSSIBLEBUG",
       "BIGTODO",
       "FUNTODO",
       
@@ -50,6 +52,13 @@
   
       // ------------------------------------------
       // ------------------------------------------
+      "SPAMMER": {
+          "type": "tag",
+          "icon": "warn",
+          "background": "#5600a6",
+          "iconColour": "#5600a6",
+          "foreground": "#eeeeee"
+      },
       "SECTION": {
           "type": "text-and-comment",
           "icon": "beaker",
@@ -70,6 +79,13 @@
           "background": "#ff6a00",
           "iconColour": "#ff6a00",
           "foreground": "#2a2849"
+      },
+      "POSSIBLEBUG": {
+          "type": "text-and-comment",
+          "icon": "bug",
+          "background": "#1be71b",
+          "iconColour": "#1be71b",
+          "foreground": "#492828"
       },
       // ------------------------------------------
 

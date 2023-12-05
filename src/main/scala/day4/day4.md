@@ -23,3 +23,7 @@
   b. it of the hello? words? yes we got in the amount of the matches dont work
   c. probably something in the list not referencing correctly or the identifier use, test the indexes
 6. mild refactoring to the starting of a part, and added in comments to break up code
+7. went through and labeled potential bugs
+  * noticing an issue with the updating of the index of `currScratchCardIdx` so moved to after the inner loop and post inner loop code
+8. current bug info (zero result):
+  a. seems before accumulating the total weights?
