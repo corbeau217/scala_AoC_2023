@@ -30,5 +30,7 @@
   b. NEVER ACCUMULATES WEIGHT, ALWAYS 0 CASE MATCH `scratchCardMatchesArray(weighingIndex)`
   c. never even scratch match??
     * fixed scratch match, but still 0, another bug earlier
+    * target eliminated, new target in sights
 9. new bug info (still earlier):
   a. likely an earlier same bug
+  
