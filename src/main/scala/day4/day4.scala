@@ -284,8 +284,8 @@ object Day4 {
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     
     // POSSIBLEBUG: weighingIndex might not because cant backwards range, that's cringe, idk the thing to backwards step
-    for(weighingIndex <- inputLines.length-1 to 0){
-      
+    for(toWeighIndexDif <- 0 to inputLines.length-1){
+      val weighingIndex = inputLines.length-1 - toWeighIndexDif
       // ...
       // POSSIBLEBUG: maybe change to using just the indexing each time rather than iteration local copy of the position?
       val currCardMatches = scratchCardMatchesArray(weighingIndex)
