@@ -15,7 +15,7 @@
   <tr><td><i>⬛</i></td><td>▫️</td><td>💭</td><td>⏳</td><td>⭐</td></tr>
 </table>
 
-### emoji reference
+### day stats
 
 <table>
   <tr>                    <th>day</th>                                   <th>pt1</th> <th>pt2</th>  </tr>
