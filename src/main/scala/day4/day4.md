@@ -33,4 +33,12 @@
     * target eliminated, new target in sights
 9. new bug info (still earlier):
   a. likely an earlier same bug
+  b. wass indexing
+  c. maybe we refactor and simplify?
+10. new bug, wrong matches?
+  a. oh we count the number not the weight
+    * it's like bruv can u read innit?
+  b. change structure so that instead of this weight rubbish, we have an array of the number of times a scratch card is used, then timess the two
+  c. at this point, break, scrub, try again
+11. unfixable of unfixable, it spaghetti now
   

@@ -189,41 +189,84 @@ object Main{
 
   def doingSandbox(){
 
-    val dayDigitList = List(
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9'
-    )
-    val dayCharList = List(
-      'o','n','e',
-      't','w','o',
-      't','h','r','e','e',
-      'f','o','u','r',
-      'f','i','v','e',
-      's','i','x',
-      's','e','v','e','n',
-      'e','i','g','h','t',
-      'n','i','n','e'
-      )  
+    // val dayDigitList = List(
+    //   '1',
+    //   '2',
+    //   '3',
+    //   '4',
+    //   '5',
+    //   '6',
+    //   '7',
+    //   '8',
+    //   '9'
+    // )
+    // val dayCharList = List(
+    //   'o','n','e',
+    //   't','w','o',
+    //   't','h','r','e','e',
+    //   'f','o','u','r',
+    //   'f','i','v','e',
+    //   's','i','x',
+    //   's','e','v','e','n',
+    //   'e','i','g','h','t',
+    //   'n','i','n','e'
+    //   )  
       
-      var uniqueCharacterList = List(' ')
-      for( ch <- dayCharList){
-        if(!uniqueCharacterList.contains(ch)) {
-          uniqueCharacterList = uniqueCharacterList:+ch
-        }
-      }
+    //   var uniqueCharacterList = List(' ')
+    //   for( ch <- dayCharList){
+    //     if(!uniqueCharacterList.contains(ch)) {
+    //       uniqueCharacterList = uniqueCharacterList:+ch
+    //     }
+    //   }
       
-      println(uniqueCharacterList.tail.sorted.toString())
+    //   println(uniqueCharacterList.tail.sorted.toString())
 
-    }
-    
-    
-    
+
+      var arrayableThing = new Array[Int](7)
+      println("the thing is it looks like: "+arrayableThing.toString())
+      for(elem <- arrayableThing){
+        printf("elem: %d\n",elem)
+      }
+      arrayableThing(0)=77
+      arrayableThing(1)=88
+      println("now?")
+      
+      for(elem <- arrayableThing){
+        printf("elem: %d\n",elem)
+      }
+      println("how about?")
+      for(elemIdx <- 0 to arrayableThing.length-1){
+        printf("%d --> %d\n",elemIdx,arrayableThing(elemIdx))
+      }
+      printf("items are: %d\n",arrayableThing.length)
+
+      println("now we go for mapping cartographically saying the doghouse what?")
+
+
+      val scratchCardLine = "Card   3: 87 17 54 56  4 53 14 76 63 11 | 96 53 52 90 50 91 17 24 99  5 83 44 97 63 66 54 35 37 84 11 73 34  7 79 12"
+
+      var winningNumbersPortion = day4.Day4.winningNumbersMatcher.findFirstIn(scratchCardLine) match {
+        case None => "???"
+        case Some(thing) => thing
+      }
+      var myNumbersPortion = day4.Day4.scratchCardNumbersMatcher.findFirstIn(scratchCardLine) match {
+        case None => "???"
+        case Some(thing) => thing
+      }
+
+      var winningNumbersIterator = day4.Day4.numberMatcher.findAllIn(winningNumbersPortion).map((numberString)=>numberString.toInt)
+      for(winner <- winningNumbersIterator){
+        printf("winner: %2s--> ",winner.toString)
+        var myNumbersIterator = day4.Day4.numberMatcher.findAllIn(myNumbersPortion).map((numberString)=>numberString.toInt)
+        for(mine <- myNumbersIterator){
+          printf("[%2s=%2s]",winner.toString,mine.toString)
+        }
+        println("")
+      }
+
   }
+    
+    
+    
+}
   

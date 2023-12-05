@@ -155,6 +155,7 @@ object Day4 {
     // == == GET MATCHES PER CARD
 
     var scratchCardMatchesArray:Array[Int] = new Array[Int](inputLines.length)
+    var currScratchCardIdx = 0
     
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
 
@@ -198,8 +199,7 @@ object Day4 {
       // if (includeDebuggingInfo) println("got number's iterators")
 
       // ...
-      var scratchCardMatches = 0
-      var currScratchCardIdx = 0
+      // var scratchCardMatches = 0
 
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
@@ -231,7 +231,9 @@ object Day4 {
           
           if(myNumberChoice == winningNumberToTest){
             if(includeDebuggingInfo) print("ye ")
-            scratchCardMatches=scratchCardMatches+1
+            // we just keep the matches ammount now
+            scratchCardMatchesArray(currScratchCardIdx) = scratchCardMatchesArray(currScratchCardIdx)+1
+            // scratchCardMatches=scratchCardMatches+1
           }else {
             if(includeDebuggingInfo) print("   ")
           }
@@ -253,10 +255,8 @@ object Day4 {
       // // stash the game's winning total
       // scratchCardMatchesArray(currScratchCardIdx) = scratchCardMatchesArray(currScratchCardIdx) + scratchCardMatches
       
-      // we just keep the matches ammount now
-      scratchCardMatchesArray(currScratchCardIdx) = scratchCardMatches
 
-      if (includeDebuggingInfo) printf("MATCHES: %d\n",scratchCardMatches)
+      if (includeDebuggingInfo) printf("MATCHES: %d\n",scratchCardMatchesArray(currScratchCardIdx))
       // if (includeDebuggingInfo) println("score update for card")
       
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
@@ -277,57 +277,41 @@ object Day4 {
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
-    // == == WORK BACKWARDS THROUGH LIST AND GET WEIGHT OF A CARD
+    // == == WORK THROUGH LIST AND GET NUMBER OF A CARD
 
-    var scratchCardMatchWeightArray:Array[Int] = new Array[Int](inputLines.length)
+    var scratchCardCopyCountArray:Array[Int] = new Array[Int](inputLines.length)
 
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
     
-    // POSSIBLEBUG: weighingIndex might not because cant backwards range, that's cringe, idk the thing to backwards step
-    for(toWeighIndexDif <- 0 to inputLines.length-1){
-      val weighingIndex = inputLines.length-1 - toWeighIndexDif
+    for(copyingCardIdxDif <- 0 to inputLines.length-1){
+      var copyingCardIdx = (inputLines.length)-copyingCardIdxDif
       // ...
       // POSSIBLEBUG: maybe change to using just the indexing each time rather than iteration local copy of the position?
-      val currCardMatches = scratchCardMatchesArray(weighingIndex)
-      if(includeDebuggingInfo) printf("scratch match: %d\n",currCardMatches)
+      val currCardMatches = scratchCardMatchesArray(copyingCardIdx)
+      if(includeDebuggingInfo) printf("card %d scratch match: %d\n",copyingCardIdx+1,currCardMatches)
 
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
       
+      // current card number 
+      // scratchCardCopyCountArray(copyingCardIdx) = scratchCardCopyCountArray(copyingCardIdx) + 1
+
+      // find future ones
       // ...
-      currCardMatches match {
-        // == == == == == == == == == == == == == == == == == == == == == == 
-        // == == == == == == == == == == == == == == == == == == == == == == 
-        case 0 => {
-          // weight is 0 bc no matchess, gg ez
-          // POSSIBLEBUG idk if this is a bug, it makes sense it should be 0
-          scratchCardMatchWeightArray(weighingIndex) = 0 // unecessary but brain brains it more
-          // if (includeDebuggingInfo) println("nonmatcher")
-        }
-        // == == == == == == == == == == == == == == == == == == == == == == 
-        // == == == == == == == == == == == == == == == == == == == == == == 
-        case includedWeightCount => {
-          // go back and find the other weights starting with next
-          // assume at least this one
-          scratchCardMatchWeightArray(weighingIndex) = currCardMatches
-
-          // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-          // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-          // ignore current matches value
-          
-          // POSSIBLEBUG: maybe there's an isssue with us doing +1 and -1?? seems a bit wonky, but we'd have more than 0 ending if that were bug
-          for(accumulatingWeighIndex <- weighingIndex+1 to weighingIndex+currCardMatches-1 ){
-            if(includeDebuggingInfo) printf("[wIdx: %d]: %d\n[aIdx: %d]: %d\n",weighingIndex,scratchCardMatchWeightArray(weighingIndex),accumulatingWeighIndex,scratchCardMatchWeightArray(accumulatingWeighIndex))
-            scratchCardMatchWeightArray(weighingIndex) = scratchCardMatchWeightArray(weighingIndex) + scratchCardMatchWeightArray(accumulatingWeighIndex)
-          }
-
-          // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-          // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-        }
-        // == == == == == == == == == == == == == == == == == == == == == == 
-        // == == == == == == == == == == == == == == == == == == == == == == 
+      // == == == == == == == == == == == == == == == == == == == == == == 
+      // == == == == == == == == == == == == == == == == == == == == == == 
+        
+      // POSSIBLEBUG: maybe there's an isssue with us doing +1 and -1?? seems a bit wonky, but we'd have more than 0 ending if that were bug
+      val nextIndex = copyingCardIdx+1
+      for(increasingCardCountIndex <- copyingCardIdx to copyingCardIdx+scratchCardMatchesArray(copyingCardIdx) ){
+        // if(includeDebuggingInfo) printf("[%d]: %d   +1\n",increasingCardCountIndex,scratchCardCopyCountArray(increasingCardCountIndex))
+        scratchCardCopyCountArray(increasingCardCountIndex) = scratchCardCopyCountArray(increasingCardCountIndex) + 1
+        // if(includeDebuggingInfo) printf("%d\n",scratchCardCopyCountArray(increasingCardCountIndex))
       }
+      // == == == == == == == == == == == == == == == == == == == == == == 
+      // == == == == == == == == == == == == == == == == == == == == == == 
+      
       
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
       // ## ## == == == == == == == == == == == == == == == == == == == == == == ## ##
@@ -341,14 +325,11 @@ object Day4 {
 
     if(includeDebuggingInfo) print("ACCUMULATING TOTAL...\n")
     
-    // POSSIBLEBUG: idk what right this moment bc i havent looked but end result is 0 so maybe this is point of failure
-    // POSSIBLEBUG: perhaps it's the way enhanced for loop works with arrays in scala?
     var cummulativeTotalValue = 0
-    for(item <- scratchCardMatchWeightArray){
-      // if(includeDebuggingInfo) printf("CT: %d, ADD: %d\n",cummulativeTotalValue,item)
+    for(itemIdx <- 0 to inputLines.length-1){
       // SPAMMER: for knowing that it does the accumulating
-      if(includeDebuggingInfo) print("*")
-      cummulativeTotalValue = cummulativeTotalValue + item
+      if(includeDebuggingInfo) printf("card %d --> %d * %d = %d\n",itemIdx+1,scratchCardMatchesArray(itemIdx),(scratchCardCopyCountArray(itemIdx)),(scratchCardMatchesArray(itemIdx) * (scratchCardCopyCountArray(itemIdx))))
+      cummulativeTotalValue = cummulativeTotalValue + scratchCardMatchesArray(itemIdx) * (scratchCardCopyCountArray(itemIdx))
     }
 
     if(includeDebuggingInfo) println("")
