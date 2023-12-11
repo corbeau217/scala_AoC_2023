@@ -22,14 +22,15 @@
     iii. find numbers, iterate checking any digit `adjacentToSym`
 3. ...onnhold workinng on day 4
 4. ideas for retry:
-  * day4: loop all and mark if symbol or digit or none
+  * day3: loop all and mark if symbol or digit or none
     - stash digit locations and length
     - loop all digit locations, check adjacency
     - what if each cell had a memory of who wants to know
     - loop all symbols then tell the knowers
-  * day4b: lists
+  * day3b: lists
     - list of symbols
     - list of part numbers
       * isDigit
       * if is, then check last digit was connected to this digit and increase its count if is
     - need symbol to know about candidates
+5. forgor to trycatch our handle day so we didnt skip back to main

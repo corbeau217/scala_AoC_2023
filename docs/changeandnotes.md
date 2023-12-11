@@ -21,6 +21,7 @@
 * confirmed that repo likes the new file structure for input files
 * completed moving the markdown files for each day, and restructured file placement
 * confirmed removing the input files from repo 
+* also changed `day1.scala` over to using the input files instead of statically defined content
 
 ## todo thingables
 * change each day to add its handle to a list for main to use before `main(Array[String]):Unit`?

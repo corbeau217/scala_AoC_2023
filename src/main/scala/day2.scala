@@ -33,25 +33,30 @@ object Day2 {
     * @param partNumber
     */
   def handleDay(partNumber:Int):Unit={
-    partNumber match {
-      // testing addition
-      case 99 => {
-        // ============================================================
-        handlePart1("data/day2testinput1.txt",true)
-        handlePart2("data/day2testinput1.txt",true) // same test file
-        // ============================================================
+    try{
+      partNumber match {
+        // testing addition
+        case 99 => {
+          // ============================================================
+          handlePart1("data/day2testinput1.txt",true)
+          handlePart2("data/day2testinput1.txt",true) // same test file
+          // ============================================================
+        }
+        // aaaaa the parts
+        case 1 => { 
+          handlePart1("data/day2input.txt",false)
+        }
+        case 2 => {
+          handlePart2("data/day2input.txt",true)
+          // handlePart2("data/day2testinput1.txt",true)
+        }
+        case numberInput => {
+          Main.failingMessage("DAY 2 INVALID PART NUMBER: "+numberInput)
+        }
       }
-      // aaaaa the parts
-      case 1 => { 
-        handlePart1("data/day2input.txt",false)
-      }
-      case 2 => {
-        handlePart2("data/day2input.txt",true)
-        // handlePart2("data/day2testinput1.txt",true)
-      }
-      case numberInput => {
-        Main.failingMessage("DAY 2 INVALID PART NUMBER: "+numberInput)
-      }
+    }
+    catch {
+      case e:Exception=> Main.failingMessage("DAY 2 HAD EXCEPTION: "+e.toString())
     }
   }
   // ========================================

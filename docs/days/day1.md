@@ -1,5 +1,12 @@
 # day 1: scala
   scala attempt at day 1
+## notes
+* has `handleDay(Int):Unit` entry point
+* has the following instead of getting files:
+  - `day1InputAsStringList`
+  - `day1TestInput1AsStringList`
+  - `day1TestInput2AsStringList`
+* `[11/12/23]` --> updated to use input files instead of a statically defined list
 ## part 1
 ### strategy
 1. attempted to use file inputting
