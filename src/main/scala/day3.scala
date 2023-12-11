@@ -50,8 +50,13 @@ object Day3 {
       charMatrix = charMatrix :+ currLine.toCharArray()
     }
 
-    // printf("we have the first as: %c\n",charMatrix(0)(0))
-    // printf("we have another as: %c\n",charMatrix(5)(4))
+    // gather information about the part numbers
+    // (x,y,digitCount)
+    var possiblePartNumberLocationList = List[(Int,Int,Int)]()
+    // gather infomration about the symbols
+    var symbolsLocationList = List[(Int,Int)]()
+
+    // TODO loop and acquire the part numbers and symbols
     var x = 0
     var y = 0
     for(y <- 0 to charMatrix.length-1){
@@ -62,6 +67,8 @@ object Day3 {
       println("")
     }
     // ...
+
+    // TODO loop the part numbers or symbols with match case and mark adjacent as good
   }
   // ========================================
   // ========================================
