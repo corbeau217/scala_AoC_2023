@@ -3,8 +3,10 @@
 
   took me a bit to remember how to do the initialisation of the project lmao
 
-## References
-* [changes and notes](./changeandnotes.md)
+## Quick links
+* **`README`**
+* [`projectChangesAndNotes`](./projectChangesAndNotes.md)
+* [`dayDocMaker`](./dayDocMaker.md)
 
 ## Days
 ### emoji reference
@@ -39,9 +41,9 @@
   <tr>  <td><a href="./days/day15.md">15 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day14.md">14 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day13.md">13 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day12.md">12 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
 -->
-  <tr>  <td><a href="./days/day11.md">11 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
+  <tr>  <td><a href="./days/day12.md">12 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
+  <tr>  <td><a href="./days/day11.md">11 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
   <tr>  <td><a href="./days/day10.md">10 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
   <tr>    <td><a href="./days/day9.md"> 9 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
   <tr>    <td><a href="./days/day8.md"> 8 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
@@ -55,3 +57,5 @@
 </table>
 
 
+## References
+* [github markdown reference](https://github.com/tchapi/markdown-cheatsheet/tree/master)

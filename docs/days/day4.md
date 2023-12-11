@@ -14,30 +14,30 @@
 2. run through to grab score from `matchCount` future games,
 3. also branch on subsequent games
 4. maybe build this from bottom up??
-  a. has to be x number if we take last one, 
-  b. second last one says x plus possible y if we had a match
-  c. third last says grab the thingies based on ours
-  d. this gives what all future branches are if we take "another copy" of a given thing
+    1. has to be x number if we take last one, 
+    2. second last one says x plus possible y if we had a match
+    3. third last says grab the thingies based on ours
+    4. this gives what all future branches are if we take "another copy" of a given thing
 5. tbh y irl
-  a. we got the ye
-  b. it of the hello? words? yes we got in the amount of the matches dont work
-  c. probably something in the list not referencing correctly or the identifier use, test the indexes
+    1. we got the ye
+    2. it of the hello? words? yes we got in the amount of the matches dont work
+    3. probably something in the list not referencing correctly or the identifier use, test the indexes
 6. mild refactoring to the starting of a part, and added in comments to break up code
 7. went through and labeled potential bugs
-  * noticing an issue with the updating of the index of `currScratchCardIdx` so moved to after the inner loop and post inner loop code
+    * noticing an issue with the updating of the index of `currScratchCardIdx` so moved to after the inner loop and post inner loop code
 8. current bug info (zero result):
-  a. seems before accumulating the total weights?
-  b. NEVER ACCUMULATES WEIGHT, ALWAYS 0 CASE MATCH `scratchCardMatchesArray(weighingIndex)`
-  c. never even scratch match??
-    * fixed scratch match, but still 0, another bug earlier
-    * target eliminated, new target in sights
+    1. seems before accumulating the total weights?
+    2. NEVER ACCUMULATES WEIGHT, ALWAYS 0 CASE MATCH `scratchCardMatchesArray(weighingIndex)`
+    3. never even scratch match??
+        * fixed scratch match, but still 0, another bug earlier
+        * target eliminated, new target in sights
 9. new bug info (still earlier):
-  a. likely an earlier same bug
-  b. wass indexing
-  c. maybe we refactor and simplify?
+    1. likely an earlier same bug
+    2. wass indexing
+    3. maybe we refactor and simplify?
 10. new bug, wrong matches?
-  a. oh we count the number not the weight
-    * it's like bruv can u read innit?
-  b. change structure so that instead of this weight rubbish, we have an array of the number of times a scratch card is used, then timess the two
-  c. at this point, break, scrub, try again
+    1. oh we count the number not the weight
+      * it's like bruv can u read innit?
+    2. change structure so that instead of this weight rubbish, we have an array of the number of times a scratch card is used, then timess the two
+    3. at this point, break, scrub, try again
 11. unfixable of unfixable, it spaghetti now

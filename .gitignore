@@ -1,12 +1,27 @@
-# macOS got me like
+# ===============================================
+# ------------ macOS related ignores ------------
 .DS_Store
 **/.DS_Store
 
-# ignore the ignorables
+# ===============================================
+# --------- sbt project related ignores ---------
 .bsp
 .metals
 project/*/
 target
 
+# ===============================================
+# ------------ scala related ignores ------------
+# ... none so far
 
+# ===============================================
+# ---------- data file related ignores ----------
 data/*.txt
+
+# ===============================================
+# -------------- C related ignores --------------
+# ignore everything bc we cant ignore no extension files
+src/c/*
+# then whitelist the C related files we want
+!src/c/*.c
+!src/c/*.h
