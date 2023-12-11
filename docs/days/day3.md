@@ -27,6 +27,7 @@
     - loop all digit locations, check adjacency
     - what if each cell had a memory of who wants to know
     - loop all symbols then tell the knowers
+      * what if we compare number of symbols to number of parts before doing this to see which is faster?
   * day3b: lists
     - list of symbols
     - list of part numbers

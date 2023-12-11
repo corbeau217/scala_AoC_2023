@@ -50,23 +50,36 @@ object Day3 {
       charMatrix = charMatrix :+ currLine.toCharArray()
     }
 
+
     // gather information about the part numbers
-    // (x,y,digitCount)
+    // (rowIdx, colIdx, digitCount)
     var possiblePartNumberLocationList = List[(Int,Int,Int)]()
-    // gather infomration about the symbols
-    var symbolsLocationList = List[(Int,Int)]()
 
     // TODO loop and acquire the part numbers and symbols
-    var x = 0
-    var y = 0
-    for(y <- 0 to charMatrix.length-1){
-      for(x <- 0 to charMatrix(y).length-1){
-        // at an x y
-        print(charMatrix(y)(x))
+    var colIdx = 0
+    var rowIdx = 0
+    for(rowIdx <- 0 to charMatrix.length-1){
+      for(colIdx <- 0 to charMatrix(rowIdx).length-1){
+        // at an rowIdx colIdx
+        if(includeDebuggingInfo) print(charMatrix(rowIdx)(colIdx))
+        charMatrix(rowIdx)(colIdx) match {
+          case ch if(ch.isDigit) => {
+            // deal with digit
+            // check last possible part and see if that idx would be 1 less than ours
+            //  if it is, then increase the count for that
+            // otherwise new possible part
+            
+          }
+          case _ => {
+            // otherwise snooze
+          }
+        }
       }
-      println("")
+      if(includeDebuggingInfo) println("")
     }
     // ...
+    // check all part numbers for being adjacent to the symbols
+    //  what if 
 
     // TODO loop the part numbers or symbols with match case and mark adjacent as good
   }
