@@ -13,3 +13,9 @@
   - loop all digit locations, check adjacency
   - what if each cell had a memory of who wants to know
   - loop all symbols then tell the knowers
+* day4b: lists
+  - list of symbols
+  - list of part numbers
+    * isDigit
+    * if is, then check last digit was connected to this digit and increase its count if is
+  - need symbol to know about candidates
