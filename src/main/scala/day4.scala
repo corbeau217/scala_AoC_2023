@@ -23,20 +23,20 @@ object Day4 {
         // testing addition
         case 99 => {
           // ============================================================
-          handlePart1(Main.grabLinesFromFile("src/main/scala/day4/day4testinput1.txt"),true)
-          handlePart2(Main.grabLinesFromFile("src/main/scala/day4/day4testinput1.txt"),true)
+          handlePart1(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
+          handlePart2(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
           // ============================================================
         }
         // aaaaa the parts
         case 1 => {
           // ============================================================
-          handlePart1(Main.grabLinesFromFile("src/main/scala/day4/day4input.txt"),false)
+          handlePart1(Main.grabLinesFromFile("data/day4input.txt"),false)
           // ============================================================
         }
         case 2 => {
           // ============================================================
-          // handlePart2(Main.grabLinesFromFile("src/main/scala/day4/day4input.txt"),true)
-          handlePart2(Main.grabLinesFromFile("src/main/scala/day4/day4testinput1.txt"),true)
+          // handlePart2(Main.grabLinesFromFile("data/day4input.txt"),true)
+          handlePart2(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
           // ============================================================
         }
         case numberInput => {

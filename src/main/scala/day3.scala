@@ -26,7 +26,7 @@ object Day3 {
       }
       // aaaaa the parts
       case 1 => { 
-        handlePart1("src/main/scala/day3/day3input.txt",true)
+        handlePart1("data/day3input.txt",true)
       }
       case numberInput => {
         Main.failingMessage("DAY 3 INVALID PART NUMBER: "+numberInput)

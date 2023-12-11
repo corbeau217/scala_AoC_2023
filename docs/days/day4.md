@@ -41,4 +41,3 @@
   b. change structure so that instead of this weight rubbish, we have an array of the number of times a scratch card is used, then timess the two
   c. at this point, break, scrub, try again
 11. unfixable of unfixable, it spaghetti now
-  

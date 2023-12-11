@@ -7,3 +7,6 @@
 .metals
 project/*/
 target
+
+
+data/*.txt
