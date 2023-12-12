@@ -1,5 +1,11 @@
 # day 1: scala
   scala attempt at day 1
+## Quick links
+* [`README`](./README.md)
+* [`projectChangesAndNotes`](./projectChangesAndNotes.md)
+* [`dayDocMaker`](./dayDocMaker.md)
+* [day's AoC page](https://adventofcode.com/2023/day/1)
+* [day's scala file](../../src/main/scala/day1.scala)
 ## notes
 * has `handleDay(Int):Unit` entry point
 * has the following instead of getting files:

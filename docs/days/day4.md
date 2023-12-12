@@ -1,5 +1,11 @@
 # day 4: scala
   scala attempt at day 4
+## Quick links
+* [`README`](./README.md)
+* [`projectChangesAndNotes`](./projectChangesAndNotes.md)
+* [`dayDocMaker`](./dayDocMaker.md)
+* [day's AoC page](https://adventofcode.com/2023/day/4)
+* [day's scala file](../../src/main/scala/day4.scala)
 ## part 1
 ### strategy
 1. section out the portions

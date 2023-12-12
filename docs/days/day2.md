@@ -1,5 +1,11 @@
 # day 2: scala
   scala attempt at day 2
+## Quick links
+* [`README`](./README.md)
+* [`projectChangesAndNotes`](./projectChangesAndNotes.md)
+* [`dayDocMaker`](./dayDocMaker.md)
+* [day's AoC page](https://adventofcode.com/2023/day/2)
+* [day's scala file](../../src/main/scala/day2.scala)
 ## part 1
 ### strategy
 1. ...thoughts:

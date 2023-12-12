@@ -13,6 +13,8 @@
   * [`README`](./README.md)
   * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
   * [`dayDocMaker`](./dayDocMaker.md)
+  * [day's AoC page](https://adventofcode.com/2023/day/1)
+  * [day's scala file](../../src/main/scala/day1.scala)
   ```
 
 ## Ideas

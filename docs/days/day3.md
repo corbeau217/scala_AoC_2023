@@ -1,5 +1,11 @@
 # day 3: scala
   scala attempt at day 3
+## Quick links
+* [`README`](./README.md)
+* [`projectChangesAndNotes`](./projectChangesAndNotes.md)
+* [`dayDocMaker`](./dayDocMaker.md)
+* [day's AoC page](https://adventofcode.com/2023/day/3)
+* [day's scala file](../../src/main/scala/day3.scala)
 ## part 1
 ### strategy
 1. setup the formatting, mild refactoring, confirmed no `[a-z]` in input file
