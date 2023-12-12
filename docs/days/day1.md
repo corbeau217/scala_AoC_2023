@@ -1,10 +1,13 @@
 # day 1: scala
   scala attempt at day 1
 ## Quick links
+### REPO NAV
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/1)
+* [Input file](https://adventofcode.com/2023/day/1/input)
 * [day's scala file](../../src/main/scala/day1.scala)
 ## notes
 * has `handleDay(Int):Unit` entry point

@@ -1,10 +1,13 @@
 # day 3: scala
   scala attempt at day 3
 ## Quick links
+### REPO NAV
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/3)
+* [Input file](https://adventofcode.com/2023/day/3/input)
 * [day's scala file](../../src/main/scala/day3.scala)
 ## part 1
 ### strategy
@@ -62,3 +65,6 @@
                 - when row is changed, col is set back to max
                 - they decrease from max to 0
                 - if col reaches 0, row might want to decrease
+## part 2
+### strategy
+1. ...

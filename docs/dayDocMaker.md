@@ -7,20 +7,15 @@
 * **`dayDocMaker`**
 
 ## Todo thingables
-* need to add this to each `day*.md`:
-  ```md
-  ## Quick links
-  * [`README`](./README.md)
-  * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
-  * [`dayDocMaker`](./dayDocMaker.md)
-  * [day's AoC page](https://adventofcode.com/2023/day/1)
-  * [day's scala file](../../src/main/scala/day1.scala)
-  ```
+* ...
+
+
+## Changes
+1. made it handle the path
+2. added in the quicklinks
+3. also added in status text of which file is being updated
+4. created stubs for generating scala files
+5. tested and completed the creation of scala and input files
 
 ## Ideas
-1. need to figure out updating existing text
-  a. lazy mode:
-    * make a copy of the file in a char array buffer
-    * modify a part of that char array
-    * write whole buffer back to file
-  b. abuse 
+1. maybe should remove redundancy from our file bc rn we're redefining a bunch of very similar code
