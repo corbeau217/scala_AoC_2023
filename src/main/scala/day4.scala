@@ -23,7 +23,7 @@ object Day4 {
         // testing addition
         case 99 => {
           // ============================================================
-          handlePart1(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
+          // handlePart1(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
           handlePart2(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
           // ============================================================
         }
@@ -36,7 +36,7 @@ object Day4 {
         case 2 => {
           // ============================================================
           // handlePart2(Main.grabLinesFromFile("data/day4input.txt"),true)
-          handlePart2(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
+          handlePart2(Main.grabLinesFromFile("data/day4testinput1.txt"),false)
           // ============================================================
         }
         case numberInput => {
@@ -146,7 +146,7 @@ object Day4 {
   // ========================================================================================================================
   // ========================================================================================================================
 
-  def handlePart2(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
+  def handlePart2old(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
     // ...
     
     // ## ## == == == == ## == == == == ## ## ## ## ## == == == == ## == == == == ## ##
@@ -340,6 +340,9 @@ object Day4 {
 
     // POSSIBLEBUG: maybe this is always 0??
     printf("total is %d captain 🫡\n",cummulativeTotalValue)
+  }
+  def handlePart2(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
+    // ...
   }
   
   // ========================================================================================================================
