@@ -65,6 +65,13 @@
                 - when row is changed, col is set back to max
                 - they decrease from max to 0
                 - if col reaches 0, row might want to decrease
+7. started getting painful with the whole idea of backlog and everything so we just settled for n^2
+    * kinda ended up n^3 really, bc the contains thing
+8. omg u done it
 ## part 2
 ### strategy
-1. ...
+1. honesstly just copy the idea from part 1, dont overcomplicate it
+2. change the match case to search for `'*'` instead of symbols, then find if the numbers are adjacent
+3. what if we loop all symbols in order and break from loop when we find one that's too far?
+    * spooky sandwich with tuna, we're overcomplicating again
+4. ladies and gentlemen, we gottem

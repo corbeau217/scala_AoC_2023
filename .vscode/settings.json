@@ -54,7 +54,7 @@
       // ------------------------------------------
       "SPAMMER": {
           "type": "tag",
-          "icon": "warn",
+          "icon": "info",
           "background": "#5600a6",
           "iconColour": "#5600a6",
           "foreground": "#eeeeee"
