@@ -61,12 +61,6 @@
 
 ## todo thingables
 * change each day to add its handle to a list for main to use before `main(Array[String]):Unit`?
-* update the day markdowns
-  - to have a link back to `readme.md`
-  - to have a link to the advent of code page they're for
-  - can do this using `src/dayDocMaker.c` for the ones that aren't yet made, maybe even for the made ones
-* add link for `dayDocMaker.md` to the `readme.md`
-  - maybe look at ways to structure this
 
 
 ## Ideas

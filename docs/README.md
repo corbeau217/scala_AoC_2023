@@ -40,14 +40,14 @@
   <tr>  <td><a href="./days/day16.md">16 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
 -->
   <tr>  <td><a href="./days/day15.md">15 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day14.md">14 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
-  <tr>  <td><a href="./days/day13.md">13 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
-  <tr>  <td><a href="./days/day12.md">12 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
-  <tr>  <td><a href="./days/day11.md">11 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
-  <tr>  <td><a href="./days/day10.md">10 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
-  <tr>   <td><a href="./days/day9.md"> 9 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
-  <tr>   <td><a href="./days/day8.md"> 8 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
-  <tr>   <td><a href="./days/day7.md"> 7 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
+  <tr>  <td><a href="./days/day14.md">14 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
+  <tr>  <td><a href="./days/day13.md">13 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
+  <tr>  <td><a href="./days/day12.md">12 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
+  <tr>  <td><a href="./days/day11.md">11 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
+  <tr>  <td><a href="./days/day10.md">10 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
+  <tr>   <td><a href="./days/day9.md"> 9 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
+  <tr>   <td><a href="./days/day8.md"> 8 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
+  <tr>   <td><a href="./days/day7.md"> 7 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
   <tr>   <td><a href="./days/day6.md"> 6 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
   <tr>   <td><a href="./days/day5.md"> 5 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
   <tr>   <td><a href="./days/day4.md"> 4 scala</a></td>  <td>⭐</td>  <td>⏳</td>  </tr>
