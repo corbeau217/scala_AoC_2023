@@ -36,10 +36,10 @@
   <tr>  <td><a href="./days/day20.md">20 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day19.md">19 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day18.md">18 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day17.md">17 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day16.md">16 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
 -->
-  <tr>  <td><a href="./days/day15.md">15 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
+  <tr>  <td><a href="./days/day17.md">17 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
+  <tr>  <td><a href="./days/day16.md">16 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
+  <tr>  <td><a href="./days/day15.md">15 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
   <tr>  <td><a href="./days/day14.md">14 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
   <tr>  <td><a href="./days/day13.md">13 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
   <tr>  <td><a href="./days/day12.md">12 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
@@ -59,3 +59,5 @@
 
 ## References
 * [github markdown reference](https://github.com/tchapi/markdown-cheatsheet/tree/master)
+* [kiama](https://github.com/inkytonik/kiama/)
+  - [code linkers](https://github.com/inkytonik/kiama/tree/master/core/src/main/scala/org/bitbucket/inkytonik/kiama)

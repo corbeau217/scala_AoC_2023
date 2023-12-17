@@ -18,6 +18,204 @@
 5. what if we just make a parser lmao?
     1. parser means we get things to use later on to speed things up
     2. means more time spent on earlier days though
+6. SO WHADAWE GOT
+    1. need some defineables
+    2. just keep them as they were then redefine later we can tree it
+        * Input
+          - `seedExp ~ MapExpList`
+        * seedExp
+          - `seedDeclaration`
+        * seedDeclaraction
+          - `"Seed:" ~> (Integer)+`
+        * MapExpList
+          - `(Mapping)+`
+        * Mapping
+          - `MapSignature ~ (mappingDeclaration)+`
+        * MapSignature
+          - `source ~ ("-to-" ~> destination <~ "map:")`
+        * mappingDeclaration
+          - `Integer ~ Integer ~ Integer`
+
+<details><summary><i>show/hide <code>FunLangTree</code></i></summary>
+
+```mermaid
+classDiagram
+    %% ===================================
+    %% ===================================
+    %% === supers
+
+    class FunLangNode
+
+    class Type
+    
+    class Identifier{
+        String
+    }
+
+    %% ===================================
+    %% ===================================
+    %% === super children
+
+    class Exp
+    FunLangNode <|-- Exp
+
+    class Program {
+        Program(Exp)
+    }
+    FunLangNode <|-- Program
+
+    class Idn{
+        +Identifier idn
+    }
+    FunLangNode <|-- Idn
+    Identifier <.. Idn
+
+    class Defn {
+        Defn(Vector[IdnDef], Exp)
+    }
+    FunLangNode <|-- Defn
+
+    %% ===================================
+    %% ===================================
+    %% === identifier branch branch
+
+    class IdnDef
+    Exp <|-- IdnDef
+    Idn <.. IdnDef
+
+    class IdnUse
+    Exp <|-- IdnUse
+    Idn <.. IdnUse
+
+    %% ===================================
+    %% ===================================
+    %% === Type branch
+
+    class BoolType
+    Type <|-- BoolType
+
+    class FunType{
+        FunType(Type,Type)
+    }
+    Type <|-- FunType
+
+    class IntType
+    Type <|-- IntType
+
+    class ListType{
+        ListType(Type)
+    }
+    Type <|-- ListType
+
+    class TupleType{
+        TupleType(Vector[Type])
+    }
+    Type <|-- TupleType
+
+    class UnknownType
+    Type <|-- UnknownType
+
+    %% ===================================
+    %% ===================================
+    %% === Exp branch
+
+    class WithDoExp{
+        WithDoExp(Vector[Defn],Exp)
+    }
+    Exp <|-- WithDoExp
+    Defn <.. WithDoExp
+
+    
+    class AppExp{
+        AppExp(Exp,Exp)
+    }
+    Exp <|-- AppExp
+
+     
+    class LamExp{
+        LamExp(Vector[IdnDef],Exp)
+    }
+    Exp <|-- LamExp
+    IdnDef <.. LamExp
+
+    
+    class TupleExp{
+        TupleExp(Vector[Exp])
+    }
+    Exp <|-- TupleExp
+
+    
+    class ListExp{
+        ListExp(Vector[Exp])
+    }
+    Exp <|-- ListExp
+
+    
+    class BoolExp{
+        BoolExp(Boolean)
+    }
+    Exp <|-- BoolExp
+
+    
+    class EqualExp{
+        EqualExp(Exp,Exp)
+    }
+    Exp <|-- EqualExp
+
+    
+    class IfExp{
+        IfExp(Exp,Exp,Exp)
+    }
+    Exp <|-- IfExp
+
+    
+    class IntExp{
+        IntExp(Int)
+    }
+    Exp <|-- IntExp
+
+    
+    class LessExp{
+        LessExp(Exp,Exp)
+    }
+    Exp <|-- LessExp
+
+    class MinusExp{
+        MinusExp(Exp,Exp)
+    }
+    Exp <|-- MinusExp
+
+    
+    class PlusExp{
+        PlusExp(Exp,Exp)
+    }
+    Exp <|-- PlusExp
+
+    
+    class SlashExp{
+        SlashExp(Exp,Exp)
+    }
+    Exp <|-- SlashExp
+
+    
+    class StarExp{
+        StarExp(Exp,Exp)
+    }
+    Exp <|-- StarExp
+
+    
+    class ConsExp{
+        ConsExp(Exp,Exp)
+    }
+    Exp <|-- ConsExp
+
+    %% ===================================
+    %% ===================================
+```
+</details>
+
+
+
 ## part 2
 ### strategy
 1. ...

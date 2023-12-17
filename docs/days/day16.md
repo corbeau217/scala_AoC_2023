@@ -11,7 +11,8 @@ scala attempt at day 16
 * [Scala file](../../src/main/scala/day16.scala)
 ## part 1
 ### strategy
-1. ...
+1. bouncing light beams, kinda cute
+2. ...
 ## part 2
 ### strategy
 1. ...

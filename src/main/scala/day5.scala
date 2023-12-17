@@ -2,8 +2,37 @@ package day5
 
 import scala.io.Source
 import Main._
+// import scala.language.postfixOps
+import org.bitbucket.inkytonik.kiama.output.PrettyPrinter.{any, layout}
+import org.bitbucket.inkytonik.kiama.parsing.{Success, Parsers}
+import org.bitbucket.inkytonik.kiama.util.{FileSource, Positions}
+
+class MapAnalysis(positions : Positions) extends Parsers (positions) {
+
+  import MapLangTree._
+  import scala.language.postfixOps
+
+  lazy val parser : PackratParser[Input] =
+      phrase (input)
+
+  lazy val input : PackratParser[Input] =
+      exp ^^ Input
+
+  lazy val exp : PackratParser[Exp] =
+    seedDef |
+    failure ("exp expected")
+
+  lazy val integer =
+      regex ("[0-9]+".r)
+
+  lazy val seedDef : PackratParser[SeedDefn] = 
+    "seeds: " ~> (integer ~ (integer*)) ^^ { (a:String,b:Vector[String]) => SeedDefn(a+:b) }
+}
 
 object Day5 {
+  // ========================================
+  // ========================================
+  
   // ========================================
   // ========================================
 
@@ -50,6 +79,9 @@ object Day5 {
   // ========================================
   // ========================================
 
+  // ========================================
+  // ========================================
+
   def handlePart1(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
     // TODO: DAY 5 PART 1
   }
@@ -64,3 +96,30 @@ object Day5 {
   // ========================================
   // ========================================
 }
+// ################################################################################
+// ################################################################################
+
+object MapLangTree {
+  // common super of all the things
+  sealed abstract class MapLangNode
+
+  case class Input (exp : Exp) extends MapLangNode
+
+  sealed abstract class Exp extends MapLangNode
+
+  case class SeedDefn (seeds : Vector[String]) extends Exp
+
+  // the particular mapping
+  case class MapExp (destStart : Int,sourceStart : Int,range : Int) extends Exp
+  // for the map block signatures
+  case class MapDec (source : String, destination : String) extends Exp
+  // for a map block
+  case class MapDefnExp (mapSignature : MapDec, mappings : Vector[MapExp]) extends Exp
+
+  case class MapDefList (maps : Vector[MapDefnExp]) extends Exp
+  
+  // case class SeedVal (val : String)
+}
+
+// ################################################################################
+// ################################################################################

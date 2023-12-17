@@ -11,7 +11,7 @@ scala attempt at day 15
 * [Scala file](../../src/main/scala/day15.scala)
 ## part 1
 ### strategy
-1. ...
+1. hashing?? library catalogue
 ## part 2
 ### strategy
 1. ...

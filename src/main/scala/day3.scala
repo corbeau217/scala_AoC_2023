@@ -85,17 +85,17 @@ object Day3 {
                   // check last possible part and see if that idx would be 1 less than ours
                   case (lastRowIdx,lastColIdx,lastDigitCount) if  (lastRowIdx == rowIdx && lastColIdx + lastDigitCount == colIdx) => {
                     // when it'ss the one we gotta update, do it
-                    possiblePartNumberLocationList = rest :+ (lastRowIdx,lastColIdx, lastDigitCount+1)
+                    possiblePartNumberLocationList = rest :+ Tuple3(lastRowIdx,lastColIdx, lastDigitCount+1)
                   }
                   // otherwise
                   case _ => {
-                    possiblePartNumberLocationList = possiblePartNumberLocationList :+ (rowIdx,colIdx,1)
+                    possiblePartNumberLocationList = possiblePartNumberLocationList :+ Tuple3(rowIdx,colIdx,1)
                   }
                 }
               }
               case _ => {
                 // empty list or not one we gotta update, just start a new one
-                possiblePartNumberLocationList = possiblePartNumberLocationList :+ (rowIdx,colIdx,1)
+                possiblePartNumberLocationList = possiblePartNumberLocationList :+ Tuple3(rowIdx,colIdx,1)
               }
             }
             // ------------------------------------------------------------------
@@ -107,7 +107,7 @@ object Day3 {
           }
           case _ => {
             // otherwise it's a symbol, add it regardless of last
-            symbolLocationList = symbolLocationList :+ (rowIdx,colIdx)
+            symbolLocationList = symbolLocationList :+ Tuple2(rowIdx,colIdx)
           }
         } // end of current character match case
       }
@@ -234,17 +234,17 @@ object Day3 {
                   // check last possible part and see if that idx would be 1 less than ours
                   case (lastRowIdx,lastColIdx,lastDigitCount) if  (lastRowIdx == rowIdx && lastColIdx + lastDigitCount == colIdx) => {
                     // when it'ss the one we gotta update, do it
-                    possiblePartNumberLocationList = rest :+ (lastRowIdx,lastColIdx, lastDigitCount+1)
+                    possiblePartNumberLocationList = rest :+ Tuple3(lastRowIdx,lastColIdx, lastDigitCount+1)
                   }
                   // otherwise
                   case _ => {
-                    possiblePartNumberLocationList = possiblePartNumberLocationList :+ (rowIdx,colIdx,1)
+                    possiblePartNumberLocationList = possiblePartNumberLocationList :+ Tuple3(rowIdx,colIdx,1)
                   }
                 }
               }
               case _ => {
                 // empty list or not one we gotta update, just start a new one
-                possiblePartNumberLocationList = possiblePartNumberLocationList :+ (rowIdx,colIdx,1)
+                possiblePartNumberLocationList = possiblePartNumberLocationList :+ Tuple3(rowIdx,colIdx,1)
               }
             }
             // ------------------------------------------------------------------
@@ -252,7 +252,7 @@ object Day3 {
           }
           case '*' => {
             // otherwise it's a symbol, add it regardless of last
-            symbolLocationList = symbolLocationList :+ (rowIdx,colIdx)
+            symbolLocationList = symbolLocationList :+ Tuple2(rowIdx,colIdx)
           }
           case _ => {
             // when it's an empty spot or other symbol
