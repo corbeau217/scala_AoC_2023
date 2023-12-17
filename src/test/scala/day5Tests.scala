@@ -14,9 +14,13 @@ class MapAnalysisTests extends ParseTests {
 
     val parsers = new MapAnalysis (positions)
     import parsers._
-
+    
+    
+    test ("INT PARSING: able to parse int") {
+        exp ("312323") should parseTo[MapLangNode] (IntExp(312323))
+    } 
 
     test ("SEEDS PARSING: able to parse seeds") {
-        seedDef ("seeds: 34 27 281 1") should parseTo[SeedDefn] (SeedDefn( Vector("34", "27", "281", "1") ))
+        exp ("seeds: 34 27 281 1") should parseTo[MapLangNode] (SeedDefn( Vector(IntExp(34), IntExp(27), IntExp(281), IntExp(1)) ))
     }
 }

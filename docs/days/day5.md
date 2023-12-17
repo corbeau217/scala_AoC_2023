@@ -214,6 +214,8 @@ classDiagram
 ```
 </details>
 
+7. need to build the tests documents for this 
+    1. build out what the expectations are so we know what to aim for
 
 
 ## part 2

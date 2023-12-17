@@ -7,6 +7,40 @@ import org.bitbucket.inkytonik.kiama.output.PrettyPrinter.{any, layout}
 import org.bitbucket.inkytonik.kiama.parsing.{Success, Parsers}
 import org.bitbucket.inkytonik.kiama.util.{FileSource, Positions}
 
+// ################################################################################
+// ################################################################################
+
+object MapLangTree {
+  // common super of all the things
+  sealed abstract class MapLangNode
+
+  case class Input (exp : Exp) extends MapLangNode
+
+  sealed abstract class Exp extends MapLangNode
+
+  case class IntExp (n : Int) extends Exp
+
+  case class SeedDefn (seeds : Vector[Exp]) extends Exp
+
+  // the particular mapping
+  case class MapExp (destStart : Exp, sourceStart : Exp, range : Exp) extends Exp
+  // for the map block signatures
+  case class MapDec (source : Exp, destination : Exp) extends Exp
+  // for a map block
+  case class MapDefnExp (mapSignature : MapDec, mappings : Vector[MapExp]) extends Exp
+
+  case class MapDefList (maps : Vector[MapDefnExp]) extends Exp
+  
+  // case class SeedVal (val : String)
+  /**
+   * A representation of identifiers as strings.
+   */
+  type Identifier = String
+}
+
+// ################################################################################
+// ################################################################################
+
 class MapAnalysis(positions : Positions) extends Parsers (positions) {
 
   import MapLangTree._
@@ -19,6 +53,7 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
       exp ^^ Input
 
   lazy val exp : PackratParser[Exp] =
+    integer ^^ (s => IntExp(s.toInt)) |
     seedDef |
     failure ("exp expected")
 
@@ -26,8 +61,11 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
       regex ("[0-9]+".r)
 
   lazy val seedDef : PackratParser[SeedDefn] = 
-    "seeds: " ~> (integer ~ (integer*)) ^^ { (a:String,b:Vector[String]) => SeedDefn(a+:b) }
+    "seeds: " ~> (exp ~ (exp*)) ^^ { (a:Exp,b:Vector[Exp]) => SeedDefn(a+:b) }
 }
+
+// ################################################################################
+// ################################################################################
 
 object Day5 {
   // ========================================
@@ -95,30 +133,6 @@ object Day5 {
 
   // ========================================
   // ========================================
-}
-// ################################################################################
-// ################################################################################
-
-object MapLangTree {
-  // common super of all the things
-  sealed abstract class MapLangNode
-
-  case class Input (exp : Exp) extends MapLangNode
-
-  sealed abstract class Exp extends MapLangNode
-
-  case class SeedDefn (seeds : Vector[String]) extends Exp
-
-  // the particular mapping
-  case class MapExp (destStart : Int,sourceStart : Int,range : Int) extends Exp
-  // for the map block signatures
-  case class MapDec (source : String, destination : String) extends Exp
-  // for a map block
-  case class MapDefnExp (mapSignature : MapDec, mappings : Vector[MapExp]) extends Exp
-
-  case class MapDefList (maps : Vector[MapDefnExp]) extends Exp
-  
-  // case class SeedVal (val : String)
 }
 
 // ################################################################################
