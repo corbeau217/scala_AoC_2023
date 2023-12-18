@@ -34,10 +34,10 @@
   <tr>  <td><a href="./days/day22.md">22 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day21.md">21 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day20.md">20 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day19.md">19 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day18.md">18 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
 -->
-  <tr>  <td><a href="./days/day17.md">17 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
+  <tr>  <td><a href="./days/day19.md">19 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
+  <tr>  <td><a href="./days/day18.md">18 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
+  <tr>  <td><a href="./days/day17.md">17 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
   <tr>  <td><a href="./days/day16.md">16 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
   <tr>  <td><a href="./days/day15.md">15 scala</a></td>  <td>▫️</td>  <td>▫️</td>  </tr>
   <tr>  <td><a href="./days/day14.md">14 scala</a></td>  <td>⏳</td>  <td>▫️</td>  </tr>
