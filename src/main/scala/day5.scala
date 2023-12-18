@@ -19,16 +19,16 @@ object MapLangTree {
 
   sealed abstract class Exp extends MapLangNode
 
-  case class IdnUse (sym : String) extends Exp
-  case class IntExp (n : Int) extends Exp
+  // case class IdnUse (sym : String) extends Exp
+  // case class IntExp (n : Int) extends Exp
 
-  case class SeedDefn (seeds : Vector[Exp]) extends Exp
+  case class SeedDefn (seeds : Vector[Int]) extends Exp
 
   // the particular mapping
-  case class MapExp (destStart : Exp, sourceStart : Exp, range : Exp) extends Exp
+  case class MapExp (destStart : Int, sourceStart : Int, range : Int) extends Exp
 
   // for a map block
-  case class MapDefnExp (source : Exp, destination : Exp, mappings : Vector[MapExp]) extends Exp
+  case class MapDefnExp (source : String, destination : String, mappings : Vector[MapExp]) extends Exp
 
   case class MapDefList (maps : Vector[MapDefnExp]) extends Exp
   
@@ -53,20 +53,20 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
   lazy val input : PackratParser[Input] =
       seedDef ~ mapDefExpList ^^ Input
 
-  lazy val intExp : PackratParser[IntExp] =
-    integer ^^ (s => IntExp(s.toInt))
+  lazy val intExp : PackratParser[Int] =
+    regex ("[0-9]+".r) ^^ (s => s.toInt)
 
-  lazy val idnExp : PackratParser[IdnUse] =
-     regex ("[a-zA-Z]+".r) ^^ IdnUse
+  lazy val idnExp : PackratParser[String] =
+     regex ("[a-zA-Z]+".r)
 
   lazy val seedDef : PackratParser[SeedDefn] = 
-    "seeds: " ~> intExp ~ ((intExp*)) ^^ { (a:IntExp,b:Vector[IntExp]) => SeedDefn(a+:b) }
+    "seeds: " ~> intExp ~ ((intExp*)) ^^ { (a:Int,b:Vector[Int]) => SeedDefn(a+:b) }
 
   lazy val mapExp : PackratParser[MapExp] = 
     intExp ~ intExp ~ intExp ^^ MapExp
 
   lazy val mapDefnExp : PackratParser[MapDefnExp] =
-    idnExp ~ ("-to-" ~> idnExp <~ "map:") ~ mapExp ~ ((mapExp)*) ^^ { (leftIdn:IdnUse, rightIdn:IdnUse, firstMap:MapExp, restMap:Vector[MapExp]) => MapDefnExp(leftIdn,rightIdn, firstMap+:restMap) }
+    idnExp ~ ("-to-" ~> idnExp <~ "map:") ~ mapExp ~ ((mapExp)*) ^^ { (leftIdn:String, rightIdn:String, firstMap:MapExp, restMap:Vector[MapExp]) => MapDefnExp(leftIdn,rightIdn, firstMap+:restMap) }
 
   lazy val mapDefExpList : PackratParser[MapDefList] = 
     mapDefnExp ~ ((mapDefnExp)*) ^^ { ( first:MapDefnExp, rest:Vector[MapDefnExp]) => MapDefList(first +: rest) }
@@ -76,8 +76,6 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
     seedDef |
     failure ("exp expected")
 
-  lazy val integer =
-      regex ("[0-9]+".r)
 
 }
 

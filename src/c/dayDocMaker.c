@@ -13,7 +13,7 @@
 #define FILEPATH_RELATIVEPART_UPTOWORKSPACE "../../"
 
 // the last AoC file we'd have
-#define LASTPOSSIBLE_AOC_FILENUMBER 31
+#define LASTPOSSIBLE_AOC_FILENUMBER 25
 
 #define STRING_PATTERN "%s"
 

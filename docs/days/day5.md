@@ -217,6 +217,7 @@ classDiagram
 7. need to build the tests documents for this 
     1. build out what the expectations are so we know what to aim for
 8. we built the tree now deal with it
+9. removed the unecessary translations
 
 
 ## part 2
