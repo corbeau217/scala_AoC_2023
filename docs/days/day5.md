@@ -289,3 +289,7 @@ classDiagram
         2. otherwise: process right's update
 14. what if we move the methods into handlepart2 method so we have access to the includeDebuggingInformation
 
+15. welp we cooked it captain, we need to invert the way we're processing things to use the whole map list and check it couldnt update before going to the next item in the tree
+16. pain, we were using the wrong seeds, it works now, and very overengineered.
+    * enjoy the spaghetti @ (anyone interested in how this works)
+

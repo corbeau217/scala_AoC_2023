@@ -93,7 +93,68 @@ object MapRangeTree {
   // ========================================
   // ========================================
 
+  def treeHasUntransformedChildren(rootNode:RangeNode, desiredTransformCounter:Int):Boolean={
+    rootNode match {
+      case DividedRange(leftRange, rightRange) => (treeHasUntransformedChildren(leftRange,desiredTransformCounter) || treeHasUntransformedChildren(rightRange,desiredTransformCounter))
+      case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) => (rangeTransformCount < desiredTransformCounter)
+    }
+  }
+
+  // ========================================
+  // ========================================
+
+  def getAllSpecifiedRanges(currRangeVector:Vector[SpecifiedRange],currRoot:RangeNode):Vector[SpecifiedRange]={
+    currRoot match {
+      case DividedRange(leftRange, rightRange) => {
+        getAllSpecifiedRanges(currRangeVector ++ getAllSpecifiedRanges(Vector[SpecifiedRange](),leftRange),rightRange)
+      }
+      case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) => {
+        currRangeVector :+ SpecifiedRange(rangeStart,rangeEnd,rangeTransformCount)
+      }
+    }
+  }
+  
+  // ========================================
+  // ========================================
+  
   import MapLangTree._
+
+  def updateChildrenTransformCounters(currRoot:DividedRange,desiredTransformCounter:Int,includeDebuggingInfo:Boolean):DividedRange={
+    DividedRange(
+      currRoot.leftRange match {
+        case DividedRange(childLeftRange, childRightRange) => updateChildrenTransformCounters(DividedRange(childLeftRange, childRightRange),desiredTransformCounter,includeDebuggingInfo)
+        case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) => SpecifiedRange(rangeStart, rangeEnd, desiredTransformCounter)
+      },
+      currRoot.rightRange match {
+        case DividedRange(childLeftRange, childRightRange) => updateChildrenTransformCounters(DividedRange(childLeftRange, childRightRange),desiredTransformCounter,includeDebuggingInfo)
+        case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) => SpecifiedRange(rangeStart, rangeEnd, desiredTransformCounter)
+      }
+    )
+  }
+
+  // ========================================
+  // ========================================
+
+
+  def applyMaplistToTree(treeRootNode:DividedRange, mapList:Vector[MapExp], desiredTransformCounter:Int,includeDebuggingInfo:Boolean):DividedRange={
+    var rangeTransformTreeCopy = treeRootNode
+    // this will take the root not and apply our map list to it
+    var mapDefIdx = desiredTransformCounter-1
+    for(currMapExp <- mapList){
+      if(includeDebuggingInfo) printf("--> | %10d | %10d | %10d |\n",currMapExp.destStart,currMapExp.sourceStart,currMapExp.rangeSize)
+
+      // apply the mapping to the tree
+      rangeTransformTreeCopy = MapRangeTree.applyTransform(rangeTransformTreeCopy,currMapExp,mapDefIdx+1,includeDebuggingInfo)
+      
+      // if(includeDebuggingInfo) println("    |------------|------------|------------|")
+    }
+    // check if there was a change
+    //  when no change, we just update it to be new transform counters
+    if(treeRootNode == rangeTransformTreeCopy) updateChildrenTransformCounters(treeRootNode,desiredTransformCounter,includeDebuggingInfo) else rangeTransformTreeCopy
+  }
+  // ========================================
+  // ========================================
+
   /**
     * @brief processes a given divided range with the map expression
     *
@@ -110,92 +171,11 @@ object MapRangeTree {
     // --> |------------|------------|------------|
     // --> |            |            |            |
 
-    def processChildNode(childNode:RangeNode):RangeNode={
-      childNode match {
-        // when divided range just reapply to the children nodes
-          // POSSIBLEBUG we changed this afterwards bc we noticed it'd infinite loop with previously calling processChildNode on it
-        case DividedRange(leftRange, rightRange) => applyTransform(DividedRange(leftRange,rightRange),mapTransformExp,postTransformCount,includeDebuggingInfo)
-
-        case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) if(
-            // make sure we should even touch this specified range before touching it
-            (postTransformCount>rangeTransformCount) && // have we already updated this thing?
-            ( // that our range lies within the range that the mapExp applies to
-              // our start is within range
-              (rangeStart >= mapTransformExp.sourceStart && rangeStart < mapTransformExp.sourceStart+mapTransformExp.rangeSize) ||
-              // our end is within range
-              (rangeEnd >= mapTransformExp.sourceStart && rangeEnd < mapTransformExp.sourceStart+mapTransformExp.rangeSize)
-            )
-          ) => {
-          // need to process on the current node making a new node
-          // ----------------------------------------------------------------------
-          
-          // check for when our range lies fully in the range of the mapexp
-          if( (rangeStart >= mapTransformExp.sourceStart && rangeStart < mapTransformExp.sourceStart+mapTransformExp.rangeSize) && // our start is within mapexp range AND
-            (rangeEnd >= mapTransformExp.sourceStart && rangeEnd < mapTransformExp.sourceStart+mapTransformExp.rangeSize) ){ // our end is within mapexp range
-            // direct translation of the thing
-
-            // get our start offset
-            var startOffset = rangeStart - mapTransformExp.sourceStart
-            var endDif = rangeEnd-rangeStart
-            // return updated range 
-            SpecifiedRange(mapTransformExp.destStart+startOffset,mapTransformExp.destStart+startOffset+endDif,postTransformCount)
-
-          }
-          // otherwise
-          // POSSIBLEBUG this wass kinda rushed
-          else{
-            // need to construct a divided range from our existing range as one child and the other as the new translated range
-            //  split our range to accomodate for the new ranges
-            // check if it's our start that needs updating
-            if (rangeStart >= mapTransformExp.sourceStart && rangeStart < mapTransformExp.sourceStart+mapTransformExp.rangeSize){
-              // when it's our start
-              
-              // get our start offset
-              var startOffset = rangeStart - mapTransformExp.sourceStart
-              // get where the end is in our range
-              //  this is the offset of the mapexp end value, minus our start offset
-              var newRangeEndDif = (mapTransformExp.rangeSize-1)-startOffset
-              // now we need to make our new node
-              var newNode = SpecifiedRange(rangeStart,rangeStart+newRangeEndDif,rangeTransformCount)
-              var oldNode = SpecifiedRange(rangeEnd-newRangeEndDif,rangeEnd,rangeTransformCount)
-
-              // return the processed form of the created node lol
-              applyTransform(DividedRange(oldNode,newNode),mapTransformExp,postTransformCount,includeDebuggingInfo)
-            }
-            // otherwise it's the end
-            else {
-              // when it's end
-              
-              // get our start offset
-              var endOffset = rangeEnd- mapTransformExp.sourceStart
-              // get where the end is in our range
-              //  this is the offset of the mapexp end value, minus our start offset
-              var newRangeEndDif = (mapTransformExp.rangeSize-1)-endOffset
-              // now we need to make our new node
-              var newNode = SpecifiedRange(rangeStart,rangeStart+newRangeEndDif,rangeTransformCount)
-              var oldNode = SpecifiedRange(rangeEnd-newRangeEndDif,rangeEnd,rangeTransformCount)
-
-              // return the processed form of the created node lol
-              applyTransform(DividedRange(oldNode,newNode),mapTransformExp,postTransformCount,includeDebuggingInfo)
-            }
-
-
-            //  have the modified one use the new transform count
-            //  and the leftover continue to use the old transform count
-          }
-          
-          // ----------------------------------------------------------------------
-        }
-        // otherwise just give it back as is with new transform count
-        case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) => SpecifiedRange(rangeStart, rangeEnd, postTransformCount)
-      }
-    }
-
     // recurse for left node
-    var newLeftNode = processChildNode(onNode.leftRange)
+    var newLeftNode = processChildNode(onNode.leftRange, mapTransformExp, postTransformCount, includeDebuggingInfo)
 
     // recurse for right node
-    var newRightNode = processChildNode(onNode.rightRange)
+    var newRightNode = processChildNode(onNode.rightRange, mapTransformExp, postTransformCount, includeDebuggingInfo)
 
     // return a new divided range build from the new things
     // test if there was a change
@@ -229,6 +209,122 @@ object MapRangeTree {
     // now we sshould have the tree
     rangeNodesVector.head
   }
+
+  // ========================================
+  // ========================================
+
+
+  def processChildNode(childNode:RangeNode, mapTransformExp : MapExp, postTransformCount : Int, includeDebuggingInfo : Boolean):RangeNode={
+    childNode match {
+      // when divided range just reapply to the children nodes
+        // POSSIBLEBUG we changed this afterwards bc we noticed it'd infinite loop with previously calling processChildNode on it
+      case DividedRange(leftRange, rightRange) => {
+        if(includeDebuggingInfo) println("    |            |            |            | has DividedRange")
+
+        applyTransform(DividedRange(leftRange,rightRange),mapTransformExp,postTransformCount,includeDebuggingInfo)
+      }
+
+      case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) if(
+          // make sure we should even touch this specified range before touching it
+          (postTransformCount>rangeTransformCount) && // have we already updated this thing?
+          ( // that our range lies within the range that the mapExp applies to
+            // our start is within range
+            (rangeStart >= mapTransformExp.sourceStart && rangeStart < mapTransformExp.sourceStart+mapTransformExp.rangeSize) ||
+            // our end is within range
+            (rangeEnd >= mapTransformExp.sourceStart && rangeEnd < mapTransformExp.sourceStart+mapTransformExp.rangeSize)
+          )
+      ) => {
+        if(includeDebuggingInfo) printf("    |            |            |            | has specified range to process: %d to %d, ", rangeStart,rangeEnd)
+        // need to process on the current node making a new node
+        // ----------------------------------------------------------------------
+        
+        // check for when our range lies fully in the range of the mapexp
+        if( (rangeStart >= mapTransformExp.sourceStart && rangeStart < mapTransformExp.sourceStart+mapTransformExp.rangeSize) && // our start is within mapexp range AND
+          (rangeEnd >= mapTransformExp.sourceStart && rangeEnd < mapTransformExp.sourceStart+mapTransformExp.rangeSize) ){ // our end is within mapexp range
+          // direct translation of the thing
+
+          var sourceEnd = mapTransformExp.sourceStart + mapTransformExp.rangeSize - 1
+
+          var newStart = mapTransformExp.destStart + (rangeStart - mapTransformExp.sourceStart)
+          var newEnd = newStart + (rangeEnd - rangeStart)
+          
+          if(includeDebuggingInfo) printf("became: (%d to %d)\n", newStart, newEnd)
+
+          // return updated range 
+          SpecifiedRange(newStart,newEnd,postTransformCount)
+        }
+        // otherwise
+        // POSSIBLEBUG this wass kinda rushed
+        else{
+          // need to construct a divided range from our existing range as one child and the other as the new translated range
+          //  split our range to accomodate for the new ranges
+          // check if it's our start that needs updating
+          if (rangeStart >= mapTransformExp.sourceStart && rangeStart < mapTransformExp.sourceStart+mapTransformExp.rangeSize){
+            // when it's our start
+            
+
+            
+            var sourceEnd = mapTransformExp.sourceStart + mapTransformExp.rangeSize - 1
+
+            var newRangeStart = mapTransformExp.destStart + (rangeStart - mapTransformExp.sourceStart)
+            var newRangeEnd = mapTransformExp.destStart + mapTransformExp.rangeSize - 1
+
+            var oldRangeStart = sourceEnd+1
+            var oldRangeEnd = rangeEnd
+
+
+            // now we need to make our new node
+            var newNode = SpecifiedRange(newRangeStart,newRangeEnd,postTransformCount)
+
+            // and make the old node copy
+            var oldNode = SpecifiedRange(oldRangeStart,oldRangeEnd,rangeTransformCount)
+          
+            if(includeDebuggingInfo) printf("became: (%d to %d) + %d to %d\n", newNode.rangeStart, newNode.rangeEnd, oldNode.rangeStart, oldNode.rangeEnd)
+
+            // return the processed form of the created node lol
+            DividedRange(newNode,processChildNode(oldNode, mapTransformExp, postTransformCount, includeDebuggingInfo))
+          }
+          // otherwise it's the end
+          else if(rangeEnd >= mapTransformExp.sourceStart && rangeEnd < mapTransformExp.sourceStart+mapTransformExp.rangeSize){
+            // when it's end
+            
+            var sourceEnd = mapTransformExp.sourceStart + mapTransformExp.rangeSize - 1
+
+            var newRangeStart = mapTransformExp.destStart
+            var newRangeEnd = mapTransformExp.destStart + (rangeEnd - mapTransformExp.sourceStart)
+
+            var oldRangeStart = rangeStart
+            var oldRangeEnd = mapTransformExp.sourceStart - 1
+
+
+            // now we need to make our new node
+            var newNode = SpecifiedRange(newRangeStart,newRangeEnd,postTransformCount)
+
+            // and make the old node copy
+            var oldNode = SpecifiedRange(oldRangeStart,oldRangeEnd,rangeTransformCount)
+
+            if(includeDebuggingInfo) printf("became: %d to %d and (%d to %d)\n", oldNode.rangeStart, oldNode.rangeEnd, newNode.rangeStart, newNode.rangeEnd)
+
+            // return the processed form of the created node lol
+            // DividedRange(processChildNode(oldNode, mapTransformExp, postTransformCount, includeDebuggingInfo),newNode)
+            DividedRange(processChildNode(oldNode, mapTransformExp, postTransformCount, includeDebuggingInfo),newNode)
+          }
+          else{
+            childNode
+          }
+
+
+          //  have the modified one use the new transform count
+          //  and the leftover continue to use the old transform count
+        }
+        
+        // ----------------------------------------------------------------------
+      }
+      // otherwise not within the range, give it back as it needs to be left alone
+      case SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) => SpecifiedRange(rangeStart, rangeEnd, rangeTransformCount) // how do we know when it has the good?
+    }
+  }
+
 
   // ========================================
   // ========================================
@@ -290,7 +386,7 @@ object Day5 {
         }
         case 2 => {
           // ============================================================
-          handlePart2("data/day5input.txt",true)
+          handlePart2("data/day5input.txt",false)
           // ============================================================
         }
         case numberInput => {
@@ -467,8 +563,8 @@ object Day5 {
           var currSeedRangeTransforms = new Array[Tuple2[Long,Long]](seedRangeCount)
           // copy our seeds
           for( i <- 0 to seedRangeCount-1){
-            currSeedRangeTransforms(i) = (sourcetree.seeds(i*2),sourcetree.seeds(i*2) + sourcetree.seeds(i*2 + 1) - 1)
-            if(includeDebuggingInfo) printf("seedRange[%d]: %10d to %10d\n",i,currSeedRangeTransforms(i)._1,currSeedRangeTransforms(i)._2)
+            currSeedRangeTransforms(i) = (sourcetree.seeds(i*2),sourcetree.seeds(i*2 + 1))
+            if(includeDebuggingInfo) printf("seedRange[%d]: %10d for this many: %10d\n",i,currSeedRangeTransforms(i)._1,currSeedRangeTransforms(i)._2)
           }
 
           // generate the range tree
@@ -487,19 +583,22 @@ object Day5 {
           // now hand off each mapping to the tree
           // --------------------------------------------------------
           // for each mapdef in our map list
-          for(mapDefIdx <- 0 to sourcetree.mapList.length-1){
+          var mapDefIdx = 0
+          while(mapDefIdx < sourcetree.mapList.length){
+            // before we move on, check that all our nodes are the current transform count??
+            //  maybe we need this???
             if(includeDebuggingInfo) printf("\n     ______________________________________ \n    /      %11s -> %-11s      \\\n    |____________.____________.____________|\n",sourcetree.mapList(mapDefIdx).source,sourcetree.mapList(mapDefIdx).destination)
             // for each mapping in the mapdef
             if(includeDebuggingInfo) println("    |  destStart |  srcStart  |  rangeSize |\n    |############|############|############|")
-            for(currMapExp <- sourcetree.mapList(mapDefIdx).mappings){
-              if(includeDebuggingInfo) printf("--> | %10d | %10d | %10d |\n",currMapExp.destStart,currMapExp.sourceStart,currMapExp.rangeSize)
+            
+            // hand off for appling things
+            rangeTransformTree = MapRangeTree.applyMaplistToTree(rangeTransformTree,sourcetree.mapList(mapDefIdx).mappings,mapDefIdx+1,includeDebuggingInfo)
 
-              // apply the mapping to the tree
-              rangeTransformTree = MapRangeTree.applyTransform(rangeTransformTree,currMapExp,mapDefIdx+1,includeDebuggingInfo)
-              
-              // if(includeDebuggingInfo) println("    |------------|------------|------------|")
-            }
             if(includeDebuggingInfo) println("    |######################################|")
+            // finished applying all the mapexp to the tree
+            if(!MapRangeTree.treeHasUntransformedChildren(rangeTransformTree,mapDefIdx+1)){
+              mapDefIdx = mapDefIdx+1
+            }
           }
 
           // find our best location in the resulting tree
@@ -509,11 +608,20 @@ object Day5 {
           if(includeDebuggingInfo) println ()
           if(includeDebuggingInfo) println (layout (any (rangeTransformTree)))
           if(includeDebuggingInfo) println ()
-
+          
+          
           var earliestRangeFound = MapRangeTree.getEarliestStartInTree(rangeTransformTree)
-
+          
           if(earliestRangeFound!=earliestSeedInTree) printf("\n\n\nEARLIEST HYPOTHETICAL LOCATION: %d\n",earliestRangeFound.rangeStart)
           else printf("\n\n\nEARLIEST LOCATION WAS EARLIEST SEED CAPTAIN !!!!: %d\n",earliestRangeFound.rangeStart)
+          
+          
+          // get the ranges
+          var transformedSpecifiedRanges = MapRangeTree.getAllSpecifiedRanges(Vector[MapRangeTree.SpecifiedRange](),rangeTransformTree)
+          
+          transformedSpecifiedRanges = transformedSpecifiedRanges.sortBy(item=>(item.rangeStart))
+          // now print it
+          if(includeDebuggingInfo) println (layout (any (transformedSpecifiedRanges)))
         }
         // Parsing failed, so report it
         case f =>
