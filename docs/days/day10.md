@@ -16,6 +16,11 @@ scala attempt at day 10
 3. or OR IdeA:
     1. just find the S in the grid,
     2. then march around with 2 position values until we find a place where `col1==col2&&row1==row2`
+4. so new idea:
+    1. break it into 2d array of char
+    2. turn the char into their case class value for the "CellType"
+    3. start the navigating of the thingy
+    4. look up those maze racer things for their style of searching?? (doesnt work tho)
 ## part 2
 ### strategy
 1. ...

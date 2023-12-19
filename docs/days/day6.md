@@ -19,4 +19,6 @@ scala attempt at day 6
 6. oh wow ez star
 ## part 2
 ### strategy
-1. ...
+1. need to crop using strings for the length to get the digit count
+2. then with the numbers we work from either side
+3. try binary search for start and end??
