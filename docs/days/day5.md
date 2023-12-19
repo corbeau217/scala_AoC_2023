@@ -218,6 +218,16 @@ classDiagram
     1. build out what the expectations are so we know what to aim for
 8. we built the tree now deal with it
 9. removed the unecessary translations
+10. each mapping needs a min and max for the source and destination
+    1. we then need to match the min of when it's source or destination for the non seed/location
+11. bigggg brain:
+    1. just get seed count
+        * dont even need to check minimum/maximum possible number
+        * but if we wanted to we just make a table of all the numbers and all their end range numbers, then loop all and check smallest/biggest
+    2. transform the seeds by the mapping
+        1. use to check if we're within a particular mapping, then our offset in, is what we get of destination
+        2. stash what idn state we're in of the current transform
+    3. then at the end we check which we are
 
 
 ## part 2

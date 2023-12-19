@@ -15,28 +15,16 @@ object MapLangTree {
   // common super of all the things
   sealed abstract class MapLangNode
 
-  case class Input (seedExp : Exp, mapListExp : Exp) extends MapLangNode
-
   sealed abstract class Exp extends MapLangNode
 
-  // case class IdnUse (sym : String) extends Exp
-  // case class IntExp (n : Int) extends Exp
-
-  case class SeedDefn (seeds : Vector[Int]) extends Exp
+  case class Input (seeds : Vector[Int], mapList : Vector[MapDefnExp]) extends MapLangNode
 
   // the particular mapping
-  case class MapExp (destStart : Int, sourceStart : Int, range : Int) extends Exp
+  case class MapExp (destStart : Int, sourceStart : Int, rangeSize : Int) extends Exp
 
   // for a map block
   case class MapDefnExp (source : String, destination : String, mappings : Vector[MapExp]) extends Exp
 
-  case class MapDefList (maps : Vector[MapDefnExp]) extends Exp
-  
-  // case class SeedVal (val : String)
-  /**
-   * A representation of identifiers as strings.
-   */
-  type Identifier = String
 }
 
 // ################################################################################
@@ -51,7 +39,8 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
       phrase (input)
 
   lazy val input : PackratParser[Input] =
-      seedDef ~ mapDefExpList ^^ Input
+      seedList ~ mapDefList ^^ Input /*|
+    failure ("Input expected") */
 
   lazy val intExp : PackratParser[Int] =
     regex ("[0-9]+".r) ^^ (s => s.toInt)
@@ -59,8 +48,8 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
   lazy val idnExp : PackratParser[String] =
      regex ("[a-zA-Z]+".r)
 
-  lazy val seedDef : PackratParser[SeedDefn] = 
-    "seeds: " ~> intExp ~ ((intExp*)) ^^ { (a:Int,b:Vector[Int]) => SeedDefn(a+:b) }
+  lazy val seedList : PackratParser[Vector[Int]] = 
+    "seeds: " ~> intExp ~ ((intExp*)) ^^ { (a:Int,b:Vector[Int]) => a+:b }
 
   lazy val mapExp : PackratParser[MapExp] = 
     intExp ~ intExp ~ intExp ^^ MapExp
@@ -68,14 +57,8 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
   lazy val mapDefnExp : PackratParser[MapDefnExp] =
     idnExp ~ ("-to-" ~> idnExp <~ "map:") ~ mapExp ~ ((mapExp)*) ^^ { (leftIdn:String, rightIdn:String, firstMap:MapExp, restMap:Vector[MapExp]) => MapDefnExp(leftIdn,rightIdn, firstMap+:restMap) }
 
-  lazy val mapDefExpList : PackratParser[MapDefList] = 
-    mapDefnExp ~ ((mapDefnExp)*) ^^ { ( first:MapDefnExp, rest:Vector[MapDefnExp]) => MapDefList(first +: rest) }
-
-  lazy val exp : PackratParser[Exp] =
-    mapDefExpList |
-    seedDef |
-    failure ("exp expected")
-
+  lazy val mapDefList : PackratParser[Vector[MapDefnExp]] = 
+    mapDefnExp ~ ((mapDefnExp)*) ^^ { ( first:MapDefnExp, rest:Vector[MapDefnExp]) => first +: rest }
 
 }
 
@@ -146,8 +129,8 @@ object Day5 {
       parsers.parse (parsers.parser, source) match {
         // If it worked, we get a source tree
         case Success (sourcetree, _) => {
+          // got a tree
           // --------------------------------------------------------
-          // have a tree
 
           // Pretty print the source tree
           if(includeDebuggingInfo) println (layout (any (sourcetree)))
@@ -155,6 +138,12 @@ object Day5 {
 
 
           // now handle the tree we get
+          // --------------------------------------------------------
+
+          // grab seed count
+          var seedCount = sourcetree.seeds.length
+          // 
+
 
 
           // --------------------------------------------------------

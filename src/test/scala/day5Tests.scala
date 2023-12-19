@@ -38,8 +38,11 @@ class MapAnalysisTests extends ParseTests {
     
     // ======================================================================
 
+    // test ("SEEDS PARSING: able to parse seeds") {
+    //     seedDef ("seeds: 34 27 281 1") should parseTo[MapLangNode] (SeedDefn( Vector(34, 27, 281, 1) ))
+    // }
     test ("SEEDS PARSING: able to parse seeds") {
-        seedDef ("seeds: 34 27 281 1") should parseTo[MapLangNode] (SeedDefn( Vector(34, 27, 281, 1) ))
+        seedList ("seeds: 34 27 281 1") should parseTo[Vector[Int]] ( Vector(34, 27, 281, 1) )
     }
     
     // ======================================================================
@@ -58,7 +61,7 @@ class MapAnalysisTests extends ParseTests {
     // ======================================================================
 
     test ("MAP DEF LIST PARSING: able to parse map def list"){
-        mapDefExpList ("""seed-to-soil map:
+        mapDefList ("""seed-to-soil map:
                 50 98 2
                 52 50 48
 
@@ -66,7 +69,7 @@ class MapAnalysisTests extends ParseTests {
                 0 15 37
                 31 52 2
                 59 0 15
-                """) should parseTo[MapLangNode] (MapDefList(Vector(
+                """) should parseTo[Vector[MapDefnExp]] ( Vector(
                     MapDefnExp("seed","soil",Vector(
                         MapExp(50,98,2),
                         MapExp(52,50,48)
@@ -76,7 +79,7 @@ class MapAnalysisTests extends ParseTests {
                         MapExp(31,52,2),
                         MapExp(59,0,15)
                     ))
-                )))
+                ) )
     }
     
     // ======================================================================
@@ -115,9 +118,9 @@ class MapAnalysisTests extends ParseTests {
                 humidity-to-location map:
                 60 56 37
                 56 93 4
-                """) should parseTo[MapLangNode] (Input(
-                    SeedDefn( Vector(79, 14, 55, 13) ),
-                    MapDefList(Vector(
+                """) should parseTo[MapLangNode] ( Input(
+                    Vector( 79, 14, 55, 13 ),
+                    Vector(
                         MapDefnExp("seed","soil",Vector(
                             MapExp(50,98,2),
                             MapExp(52,50,48)
@@ -150,8 +153,8 @@ class MapAnalysisTests extends ParseTests {
                             MapExp(60,56,37),
                             MapExp(56,93,4)
                         ))
-                    ))
-                ))
+                    )
+                ) )
     }
     
     // ======================================================================
