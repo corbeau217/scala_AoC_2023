@@ -287,4 +287,5 @@ classDiagram
     3. check right for `DividedRange`
         1. when `DividedRange`: recurse on right, replacing right with result
         2. otherwise: process right's update
+14. what if we move the methods into handlepart2 method so we have access to the includeDebuggingInformation
 
