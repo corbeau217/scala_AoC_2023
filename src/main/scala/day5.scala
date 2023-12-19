@@ -65,6 +65,70 @@ class MapAnalysis(positions : Positions) extends Parsers (positions) {
 // ################################################################################
 // ################################################################################
 
+object MapRangeTree {
+
+  // ========================================
+  // ========================================
+  
+  /**
+    * @brief common super class/type for the range nodes in the tree
+    */
+  sealed abstract class RangeNode
+
+  /**
+    * @brief this is a range node that is yet to be split
+    * @param rangeStart where it begins??
+    * @param rangeEnd where it ends honestly
+    * @param rangeTransformCount 0 when it's still the seed range, and increases each time it is transformed
+    */
+  case class SpecifiedRange ( rangeStart : Long, rangeEnd : Long, rangeTransformCount : Int ) extends RangeNode
+
+  /**
+    * @brief binary node that has children to make a tree structure
+    * @param leftRange either a divided range or a specified range child node to the left side to keep binary
+    * @param rightRange either a divided range or a specified range child node
+    */
+  case class DividedRange ( leftRange : RangeNode, rightRange : RangeNode ) extends RangeNode
+
+  // ========================================
+  // ========================================
+
+  def buildTree( rangeTuples : Vector[Tuple2[Long,Long]]) : RangeNode = {
+    // TODO implement this to build our tree as per doc part 2 list item 9
+
+    // dummy data while we havent finished this
+    SpecifiedRange(0,99,0)
+  }
+
+  // ========================================
+  // ========================================
+  
+  import day5.MapLangTree._
+
+  /**
+    * @brief processes a given divided range with the map expression
+    *
+    * @param onNode node to apply the transform
+    * @param mapTransformExp the transform to use
+    * @param postTransformCount the count it would be afterwards
+    * @return onNode when mapTransformExp doesn't apply to this range or
+    *         when both left and right ranges have same rangeTransformCount as postTransformCount
+    * otherwise, return the updated divided range node with the transsform applied
+    */
+  def applyTransform ( onNode : DividedRange, mapTransformExp : MapExp, postTransformCount : Int) : DividedRange={
+    // TODO: body of this method as per doc part 2 list item 13
+
+    // FIXME returns the node given no matter what bc we just say it's fine while making this stuff
+    onNode
+  }
+
+  // ========================================
+  // ========================================
+}
+
+// ################################################################################
+// ################################################################################
+
 object Day5 {
   // ========================================
   // ========================================

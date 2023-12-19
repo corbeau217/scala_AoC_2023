@@ -231,6 +231,14 @@ classDiagram
 
 
 ## part 2
+### todo thingables
+1. need to implement `MapRangeTree.buildTree`
+    1. just lazy pairs up all items in the vector till we have single node
+    2. sorting could happen here if we wanted to do merging nodes
+2. need to implement `MapRangeTree.applyTransform`
+    1. takes in `MapExp`
+    2. spits out `DividedRange` node with the exp applied
+
 ### strategy
 1. bruh
 2. idk just loop the seeds and try see if any transform has cross over at all
@@ -240,4 +248,43 @@ classDiagram
     2. so it's a seed range node
     3. then if it's partially in a list, it splits into two seed range nodes
     4. each time a range is partially in the range, the sub range gets put into its own splitted thing
-    
+5. we whiteboarded some things and figured out the flow of it
+6. the whiteboard notes:
+    1. tree up sseed ranges
+    2. create vector for seed ranges (leave new range, make leftover range)?? (maybe not needed)
+    3. each trransition (e.g. seed to soil)
+        1. each map range
+            1. access range it applies or **ranges**
+                1. update/split as needed with new ~~state label~~ *transform count*
+                2. update ~~state labels~~ transform counts that arent in ranges (when the range stays the same)
+    4. ~~ends at state "location" for smallest range~~ ends when done all mappings
+7. using number of transforms instead of state label as it prevents us needing to compare strings
+8. since we're using a binary tree we could just perform swaps to reorganise it then do merge on all the ones that are aligned to each other
+9. building the tree:
+    1. we just turrn them into rangess
+    2. then we pair up the ranges into divided range nodes
+    3. then pair the divided range nodes till we have one node
+    4. then process
+10. should be working on divided nodes only, never on specific range nodes
+11. tail recursive fix involves moving to giving parent node + direction instead of child node??
+12. junk idea but worth mentioning
+    1. if we wanted to keep track of history/corresponding seed
+        * each seed range could be an option in an array of `seedRangeCount` length
+        * starting them as `SpecifiedRange` nodes for each
+        * then as the algorithm progresses, their children/index is updated to either be one node or the nodes in that index's tree is updated
+        * thiss then preserves the index in our seed list to reference later to say what it is from
+    2. if we wanted to keep a history of the changes
+        * we use the `new Array[RangeNode](seedRangeCount)` idea
+        * then we also add to `RangeNode` a vector treated like a stack
+        * thiss is pushed to whenever there's a change made for that node of:
+            * *the node changes from a `SpecifiedRange` to `DividedRange`*
+            * OR *the `SpecifiedRange` node is changed to a new `SpecifiedRange`*
+13. now for the apply transform method implementation notes
+    1. when called on `DividedRange` node
+    2. check left for `DividedRange`
+        1. when `DividedRange`: recurse on left, replacing left with result
+        2. otherwise: process left's update
+    3. check right for `DividedRange`
+        1. when `DividedRange`: recurse on right, replacing right with result
+        2. otherwise: process right's update
+
