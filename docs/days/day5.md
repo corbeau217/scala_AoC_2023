@@ -232,4 +232,12 @@ classDiagram
 
 ## part 2
 ### strategy
-1. ...
+1. bruh
+2. idk just loop the seeds and try see if any transform has cross over at all
+3. we tried, and it'ss a scam. there's partial portions in ranges
+4. new idea:
+    1. what if we stash how it's splitting each time
+    2. so it's a seed range node
+    3. then if it's partially in a list, it splits into two seed range nodes
+    4. each time a range is partially in the range, the sub range gets put into its own splitted thing
+    

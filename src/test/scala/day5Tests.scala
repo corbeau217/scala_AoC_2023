@@ -21,7 +21,7 @@ class MapAnalysisTests extends ParseTests {
     // ======================================================================
 
     test ("INT PARSING: able to parse int") {
-        intExp ("312323") should parseTo[Int] (312323)
+        longExp ("312323") should parseTo[Long] (312323)
     }
     
     // ======================================================================
@@ -42,7 +42,7 @@ class MapAnalysisTests extends ParseTests {
     //     seedDef ("seeds: 34 27 281 1") should parseTo[MapLangNode] (SeedDefn( Vector(34, 27, 281, 1) ))
     // }
     test ("SEEDS PARSING: able to parse seeds") {
-        seedList ("seeds: 34 27 281 1") should parseTo[Vector[Int]] ( Vector(34, 27, 281, 1) )
+        seedList ("seeds: 34 27 281 1") should parseTo[Vector[Long]] ( Vector(34, 27, 281, 1) )
     }
     
     // ======================================================================
