@@ -25,4 +25,5 @@ scala attempt at day 7
 10. AAAAAAAAAAAAAAAAAAAAAAAAAND THAT'S A WRAP PEEEEEOPLLLLLLE
 ## part 2
 ### strategy
-1. ...
+1. yeah we just yoinked the previous format and changed the regex
+2. did ssome scribblings on paper to figure out the regex
