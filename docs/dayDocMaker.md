@@ -5,6 +5,8 @@
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * **`dayDocMaker`**
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 
 ## Todo thingables
 * ...

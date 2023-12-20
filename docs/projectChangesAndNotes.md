@@ -4,40 +4,10 @@
 * [`README`](./README.md)
 * **`projectChangesAndNotes`**
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 
-## Structure notes
-<details><summary><i>[show/hide]</i></summary>
-
-* `${workspaceFolder}/.vscode/`
-  - vscode files
-  - *settings etc so we keep the workspace stuff*
-* `${workspaceFolder}/data/`
-  - input files
-  - *this is where our scala files will look for their daily input files, so we can blacklist those files since AoC doesn't like having their datasets redistributed*
-* `${workspaceFolder}/docs/`
-  - documentation files
-  - *for neatness and so we follow convention of where documentation is*
-* `${workspaceFolder}/project/`
-  - sbt/scala related files
-  - *we include this so sbt/metals remembers that it's a scala project*
-* `${workspaceFolder}/src/`
-  - source files
-  - *inside here is where our source files are, to follow convention of typical compilers i'm used to*
-  - Subfolders:
-    * `${workspaceFolder}/src/c/`
-      - location for C source files
-      - *simple scripts for file management mostly, but once we catch up we may attempt it in C later*
-    * `${workspaceFolder}/src/main/scala/`
-      - location for scala source files
-      - *sbt wants us to use this specific folder and i forget how to change this. worrying about it too much meant i'd take away from the coding part so that's a later studiable*
-      - Subfolders:
-        * `${workspaceFolder}/src/main/scala/day*.scala`
-          - each day's specific scala file
-          - *using this format because then it's matching the markdown files meaning each is paired with its own scala file for compartmentalisation*
-</details>
-
-## major changes by date
-<details><summary><i>[show/hide]</i></summary>
+## Major changes by date
 
 ### `[05/12/23]`
 * changed day structure to just provide lines, handle day does the grab file
@@ -57,11 +27,12 @@
 * restructured C files to be in `src/c/`
 * cleaned up `.gitignore`
 * fixed up the issues with ordered listss and their sublists across markdown files needing additional indentation
-</details>
-
-## todo thingables
-* change each day to add its handle to a list for main to use before `main(Array[String]):Unit`?
-
-
-## Ideas
-* ...
+### `[21/12/23]`
+* mild reformatting of `src/main/scala/Main.scala`
+  - added stubs for time based day selectiong
+  - cleaned up comments
+  - moved early sandbox junk to their relative day files
+* moved project structure outline to `docs/structureNotes.md`
+  - added link manually to the quicklinks section of `docs/*.md`
+* moved todo items and ideas to `docs/todoItems.md`
+  - added link manually to the quicklinks section of `docs/*.md`

@@ -27,6 +27,11 @@ object Day4 {
           handlePart2(Main.grabLinesFromFile("data/day4testinput1.txt"),true)
           // ============================================================
         }
+        case 100 => {
+          // ============================================================
+          sandbox()
+          // ============================================================
+        }
         // aaaaa the parts
         case 1 => {
           // ============================================================
@@ -345,6 +350,63 @@ object Day4 {
     // ...
   }
   
+  // ========================================================================================================================
+  // ========================================================================================================================
+  // ========================================================================================================================
+  // ========================================================================================================================
+  
+  def sandbox():Unit={
+
+
+
+    
+      var arrayableThing = new Array[Int](7)
+      println("the thing is it looks like: "+arrayableThing.toString())
+      for(elem <- arrayableThing){
+        printf("elem: %d\n",elem)
+      }
+      arrayableThing(0)=77
+      arrayableThing(1)=88
+      println("now?")
+      
+      for(elem <- arrayableThing){
+        printf("elem: %d\n",elem)
+      }
+      println("how about?")
+      for(elemIdx <- 0 to arrayableThing.length-1){
+        printf("%d --> %d\n",elemIdx,arrayableThing(elemIdx))
+      }
+      printf("items are: %d\n",arrayableThing.length)
+
+      println("now we go for mapping cartographically saying the doghouse what?")
+
+
+      val scratchCardLine = "Card   3: 87 17 54 56  4 53 14 76 63 11 | 96 53 52 90 50 91 17 24 99  5 83 44 97 63 66 54 35 37 84 11 73 34  7 79 12"
+
+      var winningNumbersPortion = day4.Day4.winningNumbersMatcher.findFirstIn(scratchCardLine) match {
+        case None => "???"
+        case Some(thing) => thing
+      }
+      var myNumbersPortion = day4.Day4.scratchCardNumbersMatcher.findFirstIn(scratchCardLine) match {
+        case None => "???"
+        case Some(thing) => thing
+      }
+
+      var winningNumbersIterator = day4.Day4.numberMatcher.findAllIn(winningNumbersPortion).map((numberString)=>numberString.toInt)
+      for(winner <- winningNumbersIterator){
+        printf("winner: %2s--> ",winner.toString)
+        var myNumbersIterator = day4.Day4.numberMatcher.findAllIn(myNumbersPortion).map((numberString)=>numberString.toInt)
+        for(mine <- myNumbersIterator){
+          printf("[%2s=%2s]",winner.toString,mine.toString)
+        }
+        println("")
+      }
+
+
+
+
+  }
+
   // ========================================================================================================================
   // ========================================================================================================================
   // ========================================================================================================================

@@ -1,12 +1,16 @@
 # Corbeau217  - Advent of Code - 2023
 # ![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=for-the-badge&logo=scala&logoColor=white)
 
-  took me a bit to remember how to do the initialisation of the project lmao
+  This is my attempt at 2023 AoC using scala
+
+  In the links below we have more information on our structure and changes etc. as well as our stars tracking table
 
 ## Quick links
 * **`README`**
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 
 ## Days
 ### emoji reference
@@ -22,12 +26,6 @@
 <table>
   <tr>                    <th>day</th>                                   <th>pt1</th> <th>pt2</th>  </tr>
 <!--
-  <tr>  <td><a href="./days/day31.md">31 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day30.md">30 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day29.md">29 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day28.md">28 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day27.md">27 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
-  <tr>  <td><a href="./days/day26.md">26 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day25.md">25 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day24.md">24 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>
   <tr>  <td><a href="./days/day23.md">23 scala</a></td>  <td>⬛</td>  <td>⬛</td>  </tr>

@@ -36,6 +36,8 @@ Test / parallelExecution := false
 
 libraryDependencies ++=
     Seq (
+        // "com.github.nscala-time" %% "nscala-time" % "2.32.0",
+        // "org.scalaj" %% "scalaj-time" % "0.7",
         "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.1.0",
         "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.1.0" % "test" classifier ("tests"),
         "junit" % "junit" % "4.12" % "test",

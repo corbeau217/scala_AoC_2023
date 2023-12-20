@@ -16,6 +16,7 @@
   - `day1TestInput1AsStringList`
   - `day1TestInput2AsStringList`
 * `[11/12/23]` --> updated to use input files instead of a statically defined list
+* `[21/12/23]` --> changed to use the entry format the others use
 ## part 1
 ### strategy
 1. attempted to use file inputting
