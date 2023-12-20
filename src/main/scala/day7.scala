@@ -195,7 +195,6 @@ object Day7 {
   // ========================================
 
   def handlePart2(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
-    // TODO: DAY 7 PART 2
 
 
     val intMatcher = "[1-9][0-9]*".r
@@ -255,7 +254,6 @@ object Day7 {
     printf("RESULT SHOULD BE: %d\n",totalAccumulator)
 
 
-    println("TODO")
   }
 
   // ========================================

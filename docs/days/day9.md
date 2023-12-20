@@ -20,6 +20,7 @@ scala attempt at day 9
     3. just get the diff between each element pairing of the last one
     4. mark off if we found a non 0 at all 
     5. when we finished getting them all without getting a non 0, we go back through grabbing the last of each
+5. we done'd it c:
 ## part 2
 ### strategy
 1. ...
