@@ -22,3 +22,10 @@ scala attempt at day 6
 1. need to crop using strings for the length to get the digit count
 2. then with the numbers we work from either side
 3. try binary search for start and end??
+4. idea-able
+    1. we have a store for start and end
+    2. then we move our start/end so we're only looking in each region needed for the thing
+    3. then when start and end are the same, we have thing
+5. oh my god it's mirrored
+6. just /2 then you have neat data to work with
+7. search first greater then deal
