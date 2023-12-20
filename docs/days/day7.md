@@ -22,6 +22,7 @@ scala attempt at day 7
     * try hash the hand type + card values to make the hand value
     * then we can sort by hand hashed value
 9. finally just grab the things as needed
+10. AAAAAAAAAAAAAAAAAAAAAAAAAND THAT'S A WRAP PEEEEEOPLLLLLLE
 ## part 2
 ### strategy
 1. ...
