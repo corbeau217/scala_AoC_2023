@@ -23,4 +23,5 @@ scala attempt at day 9
 5. we done'd it c:
 ## part 2
 ### strategy
-1. ...
+1. 👁️👄👁️
+2. we did it
