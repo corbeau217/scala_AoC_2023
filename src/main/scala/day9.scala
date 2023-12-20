@@ -16,11 +16,17 @@ object Day9 {
     try{
       partNumber match {
         // testing addition
-        case 99 => {
+        case 98 => {
           // ============================================================
           // ...
           handlePart1(Main.grabLinesFromFile("data/day9testinput1.txt"),true)
-          // handlePart2(Main.grabLinesFromFile("data/day9testinput1.txt"),true)
+          // ...
+          // ============================================================
+        }
+        case 99 => {
+          // ============================================================
+          // ...
+          handlePart2(Main.grabLinesFromFile("data/day9testinput1.txt"),true)
           // ...
           // ============================================================
         }
@@ -52,6 +58,7 @@ object Day9 {
 
   def handlePart1(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
     // TODO: DAY 9 PART 1
+    println("TODO")
   }
 
   // ========================================
@@ -59,6 +66,7 @@ object Day9 {
 
   def handlePart2(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
     // TODO: DAY 9 PART 2
+    println("TODO")
   }
 
   // ========================================
