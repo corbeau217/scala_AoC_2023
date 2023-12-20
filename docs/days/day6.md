@@ -29,3 +29,4 @@ scala attempt at day 6
 5. oh my god it's mirrored
 6. just /2 then you have neat data to work with
 7. search first greater then deal
+8. ladies and gentlemen, we gottem

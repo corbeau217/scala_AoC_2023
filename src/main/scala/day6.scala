@@ -136,110 +136,78 @@ object Day6 {
     // general information
 
     var intMatcher = "[1-9][0-9]*".r
-    // prepare vectors of numbers
-    var raceTimes = Vector[Int]()
-    var raceDistances = Vector[Int]()
-    // strip the numbers
+    // prepare strings
+
+    var raceTimeString = ""
+    var raceDistanceString = ""
+    
+    // strip the numbers and add to our number
     for(item <- intMatcher.findAllIn(inputLines(0))){
-      raceTimes=raceTimes:+item.toInt
+      raceTimeString = raceTimeString + item
     }
     for(item <- intMatcher.findAllIn(inputLines(1))){
-      raceDistances=raceDistances:+item.toInt
+      raceDistanceString = raceDistanceString + item
     }
 
-    if(includeDebuggingInfo) {
-      print("race Times: ")
-      raceTimes.map(item=>printf("[%3d]",item))
-      println()
-    }
-    if(includeDebuggingInfo) {
-      print("race dists: ")
-      raceDistances.map(item=>printf("[%3d]",item))
-      println()
-    }
+    // convert them now
+    var raceTime = raceTimeString.toLong
+    var raceDistance = raceDistanceString.toLong
 
-    // both should be same length
-    val raceCount = raceTimes.length
+    if(includeDebuggingInfo) printf("race time: %d\nrace dist: %d\n",raceTime,raceDistance)
 
-    // setup our results information
+    //  finding the minumum using binary search
     // --------------------------------------------------------------------------------------------
 
-    var minHeldArray = new Array[Int](raceCount)
-    var maxHeldArray = new Array[Int](raceCount)
+    // prepare variables for minimum search
+    // ---------------------------------------------
+    
+    // at least 1
+    var searchStart:Long = 1
+    // middle is the maximum distance we can travel
+    var searchEnd:Long = raceTime / 2
+    // the middle of the targetted range prepared for loop
+    var searchMid:Long = (searchEnd-searchStart)/2 + searchStart
 
-    // handle each race seperately
-    //  finding the first and last using binary search
-    // --------------------------------------------------------------------------------------------
-
-    // ...
-
-    // every race index
-    for(currRaceIndex <- 0 to raceCount-1){
-      // loop iteration overhead
-      // ---------------------------------------------
-
-      // PRE: have raceTimes(currRaceIndex) corresponding to this race's time
-      // PRE: have raceDistances(currRaceIndex) corresponding to this race's distance
-
-      // so that we dont accidently the modifyablility
-      //  also for readability
-      val currRaceTime     = raceTimes(currRaceIndex)
-      val currRaceDistance = raceDistances(currRaceIndex)
-
-      // prepare variables for minimum search
-      // ---------------------------------------------
-      
-      // at least 1
-      var searchStart = 1
-      // middle is the maximum distance we can travel
-      var searchEnd = currRaceTime / 2
-      // the middle of the targetted range prepared for loop
-      var searchMid = (searchEnd-searchStart)/2 + searchStart
-
-      // find the minimum
-      // ---------------------------------------------
-      
-      while(searchStart!=searchEnd){
-        // when calculating less than or equal distance
-        if((searchMid*(currRaceTime-searchMid)) <= currRaceDistance){
-          searchStart = searchMid+1
-        }
-        // must be more our possible distance we can travel
-        else {
-          searchEnd = searchMid
-        }
-        // prepare the new middle for next iteration
-        searchMid = (searchEnd-searchStart)/2 + searchStart
+    // find the minimum
+    // ---------------------------------------------
+    
+    while(searchStart!=searchEnd){
+      // when calculating less than or equal distance
+      if((searchMid*(raceTime-searchMid)) <= raceDistance){
+        searchStart = searchMid+1
       }
-      
-      // stash the minimum
-      // ---------------------------------------------
-      
-      minHeldArray(currRaceIndex) = searchStart
-      
-      // find the maximum
-      // ---------------------------------------------
-      
-      // it's just flipping the range we look in
-
-      val middleDiffFromMin = (currRaceTime / 2) - minHeldArray(currRaceIndex)
-
-      // add an additional 1 to the offseting if we're an odd thingy
-      maxHeldArray(currRaceIndex) = (currRaceTime / 2) + middleDiffFromMin + (currRaceTime % 2)
-      
-      // ---------------------------------------------
+      // must be more our possible distance we can travel
+      else {
+        searchEnd = searchMid
+      }
+      // prepare the new middle for next iteration
+      searchMid = (searchEnd-searchStart)/2 + searchStart
     }
+    
+    // stash the minimum
+    // ---------------------------------------------
+    
+    var minHeld:Long = searchStart
+    
+    // find the maximum using our minimum since it's mirrored
+    // ---------------------------------------------
+    
+    // it's just flipping the range we look in
+
+    val middleDiffFromMin:Long = (raceTime / 2) - minHeld
+
+    // add an additional 1 to the offseting if we're an odd thingy
+    var maxHeld:Long = (raceTime / 2) + middleDiffFromMin + (raceTime % 2)
+    
+    // ---------------------------------------------
+
+    // tell the user about what we found
+    if(includeDebuggingInfo) printf("min held: %d\nmax held: %d\n", minHeld, maxHeld)
 
     // deal with resulting data
     // --------------------------------------------------------------------------------------------
 
-    if(includeDebuggingInfo) {
-      print("minimums: ")
-      minHeldArray.map(item=>printf("[%4d]",item))
-      print("\nmaximums: ")
-      maxHeldArray.map(item=>printf("[%4d]",item))
-      println()
-    }
+    printf("RESULT SHOULD BE: %d\n",(maxHeld-minHeld+1))
 
     // --------------------------------------------------------------------------------------------
   }
