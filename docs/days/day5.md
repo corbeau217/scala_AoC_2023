@@ -5,10 +5,16 @@
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/5)
 * [Input file](https://adventofcode.com/2023/day/5/input)
 * [day's scala file](../../src/main/scala/day5.scala)
+
+### COMIC PAGE
+* [`"IF YOU GIVE A SEED A FERTILIZER" - (Fish N Chips UK) #61`](https://www.webtoons.com/en/canvas/advent-of-code/if-you-give-a-seed-a-fertilizer/viewer?title_no=713188&episode_no=61)
+
 ## part 1
 ### strategy
 1. kinda just yoinks from our day4 solution,

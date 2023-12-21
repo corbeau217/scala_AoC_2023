@@ -5,10 +5,16 @@
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/4)
 * [Input file](https://adventofcode.com/2023/day/4/input)
 * [day's scala file](../../src/main/scala/day4.scala)
+
+### COMIC PAGE
+* [`"SCRATCHCARDS" - (Fish N Chips UK) #60`](https://www.webtoons.com/en/canvas/advent-of-code/scratchcards/viewer?title_no=713188&episode_no=60)
+
 ## part 1
 ### strategy
 1. section out the portions

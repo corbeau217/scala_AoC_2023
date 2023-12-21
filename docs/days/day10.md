@@ -5,10 +5,16 @@ scala attempt at day 10
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [AoC page](https://adventofcode.com/2023/day/10)
 * [Input file](https://adventofcode.com/2023/day/10/input)
 * [Scala file](../../src/main/scala/day10.scala)
+
+### COMIC PAGE
+* [`"PIPE MAZE" - (Fish N Chips UK) #66`](https://www.webtoons.com/en/canvas/advent-of-code/pipe-maze/viewer?title_no=713188&episode_no=66)
+
 ## part 1
 ### strategy
 1. probably needs to be the syntax analysis tbh

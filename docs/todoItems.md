@@ -51,4 +51,30 @@
 3. day object ideas
     1. have the day objects as extending a day structure so they always have the same handle function
     2. having the day objects tell main about their handle function instead of hard coded
-
+4. future AoC pre-planning ideas?
+    1. check if input is square
+        * might be char grid
+    2. check for only numbers or numbers + symbols or only alpha or hex or only symbols
+    3. line similarity comparison
+    4. time based fetching of content
+        * stub files
+        * generate modules
+        * save the input files (and test data fetched from the webpage)
+            - language tree for analysing the test data relation to the input files
+            - for certainty about which bit is test data
+            - allows for generate tests for day based on fetched content
+            - would want to have a web client engine to fetch the webpage
+                * then have a language parsing thing to translate the content into useful stuff
+            - translation of the html file into markdown
+                * so it can be put into a github document
+                * also for use in obsidian
+        * code to check how many stars we have and automatically update our stars table
+            - need to rest/oauth/whatever the thing is they use
+            - but then we could have it as a periodic update that then pushes to the github repo, updating only the file responsible for tracking that
+            - or it's fetched from my own api thing? (maybe look into svg things)
+        * what if make own language lel
+5. idea of web fetching the content
+    1. [`ADVENTOFCODE.COM/ABOUT`](https://adventofcode.com/about) mentions that there's [`a github thing about the oauth called octocat`](https://api.github.com/users/octocat)
+        * `ADVENTOFCODE.COM/ABOUT` also mentions that there's [`a reddit thing about the oauth`](https://api.reddit.com/user/reddit/about)
+6. timed release of content as mentioned in about section of page: "*puzzles unlock at midnight EST/UTC-5*"
+7. need private leaderboard stuffs?

@@ -5,10 +5,19 @@
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/3)
 * [Input file](https://adventofcode.com/2023/day/3/input)
 * [day's scala file](../../src/main/scala/day3.scala)
+
+### COMIC PAGE
+* [`"GEAR RATIOS" - (Fish N Chips UK) #59`](https://www.webtoons.com/en/canvas/advent-of-code/gear-ratios/viewer?title_no=713188&episode_no=59)
+
+> [!WARNING]  
+> Day 3 was completed before file handling was implemented
+
 ## part 1
 ### strategy
 1. setup the formatting, mild refactoring, confirmed no `[a-z]` in input file

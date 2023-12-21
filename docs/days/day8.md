@@ -5,10 +5,16 @@ scala attempt at day 8
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/8)
 * [Input file](https://adventofcode.com/2023/day/8/input)
 * [day's scala file](../../src/main/scala/day8.scala)
+
+### COMIC PAGE
+* [`"HAUNTED WASTELAND" - (Fish N Chips UK) #64`](https://www.webtoons.com/en/canvas/advent-of-code/haunted-wasteland/viewer?title_no=713188&episode_no=64)
+
 ## part 1
 ### strategy
 1. it's the `AAA = (BBB, DDD)` thingy

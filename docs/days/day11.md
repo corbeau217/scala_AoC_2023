@@ -5,10 +5,16 @@ scala attempt at day 11
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [AoC page](https://adventofcode.com/2023/day/11)
 * [Input file](https://adventofcode.com/2023/day/11/input)
 * [Scala file](../../src/main/scala/day11.scala)
+
+### COMIC PAGE
+* [`"COSMIC EXPANSION" - (Fish N Chips UK) #67`](https://www.webtoons.com/en/canvas/advent-of-code/cosmic-expansion/viewer?title_no=713188&episode_no=67)
+
 ## part 1
 ### strategy
 1. kinda cells?

@@ -5,10 +5,16 @@ scala attempt at day 13
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [AoC page](https://adventofcode.com/2023/day/13)
 * [Input file](https://adventofcode.com/2023/day/13/input)
 * [Scala file](../../src/main/scala/day13.scala)
+
+### COMIC PAGE
+* [`"TBD" - (Fish N Chips UK) #60?`](https://www.webtoons.com/en/creator/69q8f)
+
 ## part 1
 ### strategy
 1. sounds syntax analysis

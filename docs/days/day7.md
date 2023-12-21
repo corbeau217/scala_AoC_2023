@@ -5,10 +5,16 @@ scala attempt at day 7
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/7)
 * [Input file](https://adventofcode.com/2023/day/7/input)
 * [day's scala file](../../src/main/scala/day7.scala)
+
+### COMIC PAGE
+* [`"CAMEL CARDS" - (Fish N Chips UK) #63`](https://www.webtoons.com/en/canvas/advent-of-code/camel-cards/viewer?title_no=713188&episode_no=63)
+
 ## part 1
 ### strategy
 1. card hands

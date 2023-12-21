@@ -5,10 +5,20 @@
 * [`README`](./README.md)
 * [`projectChangesAndNotes`](./projectChangesAndNotes.md)
 * [`dayDocMaker`](./dayDocMaker.md)
+* [`stuctureNotes`](./structureNotes.md)
+* [`todoItems`](./todoItems.md)
 ### DAY FILES
 * [day's AoC page](https://adventofcode.com/2023/day/1)
 * [Input file](https://adventofcode.com/2023/day/1/input)
 * [day's scala file](../../src/main/scala/day1.scala)
+
+### COMIC PAGE
+* [`"OUT OF SNOW" - (Fish N Chips UK) #56`](https://www.webtoons.com/en/canvas/advent-of-code/out-of-snow/viewer?title_no=713188&episode_no=56)
+* [`"TREBUCHET?!" - (Fish N Chips UK) #57`](https://www.webtoons.com/en/canvas/advent-of-code/trebuchet/viewer?title_no=713188&episode_no=57)
+
+> [!WARNING]  
+> Day 1 was completed before file handling was implemented
+
 ## notes
 * has `handleDay(Int):Unit` entry point
 * has the following instead of getting files:
