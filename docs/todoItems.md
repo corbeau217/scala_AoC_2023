@@ -38,7 +38,9 @@
 - [x] ~~*todo items probably need to be moved to their own file, this also needs to be updated in the documentation files*~~
 
 #### MISC changes
-- [ ] updating the file structure for each day to use a padding `0` when it's only 1 digit
+- [x] ~~*updating the file structure for each day to use a padding `0` when it's only 1 digit*~~
+    * did manually, may break later on package name not changed
+        - only changed file names and markdown links to the day .md files
     * will require the implementation of C file generation reformatting, otherwise it'll be manually updated
 - [ ] change to use more than 1 arguement for say what day / part we want
     * have pattern match to extract int for the things
