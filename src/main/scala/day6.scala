@@ -128,7 +128,6 @@ object Day6 {
   // ========================================
 
   def handlePart2(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
-    // TODO: DAY 6 PART 2
 
     // setup our general input information
     // --------------------------------------------------------------------------------------------
