@@ -4,6 +4,7 @@ import scala.io.Source
 import Main._
 import java.io._
 import scala.collection.mutable.ArraySeq
+import day10.GridHandle.getNextTileLocation
 
 // ################################################################################################################################
 // ################################################################################################################################
@@ -52,7 +53,22 @@ object GridHandle {
   // ========================================================================================================================
   // ========================================================================================================================
 
-  // ...
+  type TileLoc = Tuple2[Int,Int]
+
+  // doesnt like being given stuff adjacent to start tiles or dirt tiles
+  def getNextTileLocation(currentTile:TileUse, prevTileLoc:TileLoc):TileLoc={
+    val currentTileDef = tileCharList(currentTile._1)
+    val adj1Loc:TileLoc = (currentTileDef._2+currentTile._2,currentTileDef._3+currentTile._3)
+    val adj2Loc:TileLoc = (currentTileDef._4+currentTile._2,currentTileDef._5+currentTile._3)
+
+    // when our prev location was the adj1Loc, give 2
+    if(prevTileLoc==adj1Loc){
+      adj2Loc
+    }
+    else{
+      adj1Loc
+    }
+  }
 
   // ========================================================================================================================
   // ========================================================================================================================
@@ -310,10 +326,10 @@ object Day10 {
     val cellColIdx = specificTile._3
 
     var optionResultingVector:Vector[Option[GridHandle.TileUse]] = Vector[Tuple2[Int,Int]](
-      ( cellRowIdx+1, cellColIdx+1 ),
       ( cellRowIdx+1,  cellColIdx  ),
+      ( cellRowIdx-1,  cellColIdx  ),
       (  cellRowIdx , cellColIdx+1 ),
-      (  cellRowIdx ,  cellColIdx  )
+      (  cellRowIdx , cellColIdx-1 )
     ).map(
       (coordTuple)=>{
         // real coord
@@ -388,7 +404,6 @@ object Day10 {
   // ========================================================================================================================
 
   def handlePart1(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
-    // TODO: DAY 10 PART 1
 
     // break into 2d tile use array
     // --------------------------------------------------------------------------------------------
@@ -484,29 +499,154 @@ object Day10 {
       }
     }
 
+    if(includeDebuggingInfo) Ofbug.println("--------------------------------------------------------------------------------------------")
+
     // print out the legal tiles?
     // --------------------------------------------------------------------------------------------
 
     if(includeDebuggingInfo) printMasterGrid(masterGrid,' ',true)
     if(includeDebuggingInfo) printGridAsUnicode(masterGrid,true)
 
+    if(includeDebuggingInfo) Ofbug.println("--------------------------------------------------------------------------------------------")
+
     // got our legal maze, now we need to setup traversing information
     // --------------------------------------------------------------------------------------------
 
-    // var startLocation 
+    // prepare starting coord
+    var startLocation:Tuple2[Int,Int] = (-1,-1)
 
-    // // find the start location
+    // prepare traversable grid
+    var traverseGrid:Array[Array[GridHandle.TileUse]] = new Array[Array[GridHandle.TileUse]](masterGrid.length)
 
-    // for(currRowIdx <- 0 to masterGrid.length-1){
-    //   for(currColIdx <- 0 to masterGrid(0).length-1){
-    //     //...
-    //   }
-    // }
+    // find the start location, also build our traverse grid
+    for(currRowIdx <- 0 to masterGrid.length-1){
+      // make the that row
+      traverseGrid(currRowIdx) = new Array[GridHandle.TileUse](masterGrid(currRowIdx).length)
+      // now loopable and make each
+      for(currColIdx <- 0 to masterGrid(0).length-1){
+        // copy reference
+        val stealingTile = masterGrid(currRowIdx)(currColIdx)
+        // make the instance at the place
+        traverseGrid(currRowIdx)(currColIdx) = (
+          (if(stealingTile._4) stealingTile._1 else 0), // turn it into a ground tile if not active
+          currRowIdx, // row copy
+          currColIdx, // col copy
+          false       // inactive till we traverse it
+        )
+        // check for start
+        if('S'==GridHandle.tileCharList(stealingTile._1)._1){
+          startLocation = (currRowIdx,currColIdx)
+        }
+      }
+    }
+    
+    // setup navigating objects
+    var possibleFirstMoveList = getNearbyTiles(masterGrid,masterGrid(startLocation._1)(startLocation._2)).filter(
+      (tileUse)=>{
+        tileAcceptsTileAsAdjacency(masterGrid,masterGrid(startLocation._1)(startLocation._2),(tileUse._2,tileUse._3),includeDebuggingInfo)
+      }
+    )
+
+    if(includeDebuggingInfo) possibleFirstMoveList.map(
+      (tileUse)=>{
+        Ofbug.println(String.format("possible location: [%s][r:%s][c:%s]",GridHandle.tileUnicodeList(tileUse._1),tileUse._2,tileUse._3))
+      }
+    )
+
+    // enable it
+    traverseGrid(startLocation._1)(startLocation._2) = (
+      traverseGrid(startLocation._1)(startLocation._2)._1,
+      startLocation._1,
+      startLocation._2,
+      true
+    )
+
+    // prepare
+    var moveCounter = 1
+
+    var searcher1:Tuple4[Int,Int,Int,Int] = (
+      possibleFirstMoveList(0)._2,
+      possibleFirstMoveList(0)._3,
+      startLocation._1,
+      startLocation._2
+    )
+    var searcher2:Tuple4[Int,Int,Int,Int] = (
+      possibleFirstMoveList(1)._2,
+      possibleFirstMoveList(1)._3,
+      startLocation._1,
+      startLocation._2
+    )
+
+
+    // enable the locations we are
+    traverseGrid(searcher1._1)(searcher1._2) = (
+      traverseGrid(searcher1._1)(searcher1._2)._1,
+      searcher1._1,
+      searcher1._2,
+      true
+    )
+    traverseGrid(searcher2._1)(searcher2._2) = (
+      traverseGrid(searcher2._1)(searcher2._2)._1,
+      searcher2._1,
+      searcher2._2,
+      true
+    )
+
+
+    if(includeDebuggingInfo){
+      Ofbug.println(String.format("searcher1: [r:%s][c:%s]",searcher1._1,searcher1._2))
+      Ofbug.println(String.format("searcher2: [r:%s][c:%s]",searcher2._1,searcher2._2))
+    }
+
+
+
+    if(includeDebuggingInfo) Ofbug.println("--------------------------------------------------------------------------------------------")
 
     // do the traversing
     // --------------------------------------------------------------------------------------------
+
+    while( !((searcher1._1 == searcher2._1) && (searcher1._2 == searcher2._2)) ){
+      // going new movement
+      moveCounter = moveCounter + 1
+
+      val searcher1Next = GridHandle.getNextTileLocation(traverseGrid(searcher1._1)(searcher1._2),(searcher1._3,searcher1._4))
+      val searcher2Next = GridHandle.getNextTileLocation(traverseGrid(searcher2._1)(searcher2._2),(searcher2._3,searcher2._4))
+
+      searcher1 = (searcher1Next._1,searcher1Next._2,searcher1._1,searcher1._2)
+      searcher2 = (searcher2Next._1,searcher2Next._2,searcher2._1,searcher2._2)
+
+
+      // enable the locations we are
+      traverseGrid(searcher1._1)(searcher1._2) = (
+        traverseGrid(searcher1._1)(searcher1._2)._1,
+        searcher1._1,
+        searcher1._2,
+        true
+      )
+      traverseGrid(searcher2._1)(searcher2._2) = (
+        traverseGrid(searcher2._1)(searcher2._2)._1,
+        searcher2._1,
+        searcher2._2,
+        true
+      )
+    }
+
+    if(includeDebuggingInfo) printGridAsUnicode(traverseGrid,true)
     
-    println("THIS PART IS UNFINISHED")
+    if(includeDebuggingInfo) Ofbug.println("--------------------------------------------------------------------------------------------")
+
+    // print where we get up to
+    // --------------------------------------------------------------------------------------------
+    
+    if(includeDebuggingInfo) {
+      Ofbug.println(String.format("moves: %s",moveCounter))
+      Ofbug.println(String.format("searcher1: [r:%s][c:%s]",searcher1._1,searcher1._2))
+      Ofbug.println(String.format("searcher2: [r:%s][c:%s]",searcher2._1,searcher2._2))
+    }
+
+    
+    // --------------------------------------------------------------------------------------------
+    println(String.format("FURTHEST IS: %s",moveCounter))
   }
 
   // ========================================================================================================================

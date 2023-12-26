@@ -104,6 +104,11 @@ scala attempt at day 10
 14. need to either
     1. copy maze for the enable traversed tiles
     2. or just keep last spot we were and be lazy?
+15. finding furtherest?
+    1. we just traverse full loop back to start then /2
+    2. we keep two thingers and hope for no bug
+16. need a function for get other adjacency
+17. we gottem
 ## part 2
 ### strategy
 1. ...
