@@ -92,6 +92,18 @@ scala attempt at day 10
     * this then gives us the reference points of view from one connection to the other
     * but then we need to do so much more math
 11. added in a thing that prints the grid, our code wasnt working bc we forgor test file
+12. [MAZING ALGORITHM VISUALISER THINGY??](https://github.com/hisham-maged10/path-finder)
+13. newest idea
+    1. give all cells the two locations they connect
+    2. iterate all and check that for the two locations that the cell of that location has it's location in its locations
+        1. when it is, we mark it as good
+        2. otherwise add it to the list of cells to be handled for being illegal
+    3. then iterate over illegal cells while we have illegal cells,
+        1. when a cell is being popped from queue to handle, we add the adjacent cells to update queue
+        2. then iterate the update queue to update cells and add to our illegal queue any that need to be made illegal
+14. need to either
+    1. copy maze for the enable traversed tiles
+    2. or just keep last spot we were and be lazy?
 ## part 2
 ### strategy
 1. ...

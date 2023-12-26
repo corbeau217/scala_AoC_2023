@@ -2,6 +2,8 @@ package day10
 
 import scala.io.Source
 import Main._
+import java.io._
+import scala.collection.mutable.ArraySeq
 
 // ################################################################################################################################
 // ################################################################################################################################
@@ -12,144 +14,94 @@ object GridHandle {
 
   // ========================================================================================================================
   // ========================================================================================================================
-
-  val startableIndexChange:Tuple2[Int,Int] = (    0,    0)
-  val nonMovingIndexChange:Tuple2[Int,Int] = (-8888,-8888)
-  val exceptionIndexChange:Tuple2[Int,Int] = (-9999,-9999)
-
-  // ========================================================================================================================
-  // ========================================================================================================================
-
-  val tileCharList = Array[Char](
-    '.', 
-    'S', 
-    '|', 
-    '-', 
-    'L', 
-    'J', 
-    'F', 
-    '7'
-  )
   
-  // ========================================================================================================================
-  // ========================================================================================================================
+  //                      ch, r1, c1, r2, c2
+  type TileDef = Tuple5[Char,Int,Int,Int,Int]
 
-  def tileCharDataList = Array[Tuple2[()=>Int,Tuple2[Int,Int]]](
-  //*---/*#@@@@@#*/---/*------*/---/*#@@@@@#*/---*---------------------------*----/*#@@@@@#*/---*--------------------*---/*#@@@@@#*/---*--//------*
-  //|   /*#@@@@@#*/   /*      */   /*#@@@@@#*/   |                           |    /*#@@@@@#*/   |                    |   /*#@@@@@#*/   |  //      |
-  //|   /*#@@@@@#*/   /* char */   /*#@@@@@#*/   |    tile retrieving func   |    /*#@@@@@#*/   |  rowDiff   colDiff |   /*#@@@@@#*/   |  // DESC |
-  //|   /*#@@@@@#*/   /*      */   /*#@@@@@#*/   |                           |    /*#@@@@@#*/   |                    |   /*#@@@@@#*/   |  //      |
-  //*---/*#@@@@@#*/---/*------*/---/*#@@@@@#*/---*---------------------------*----/*#@@@@@#*/---*--------------------*---/*#@@@@@#*/---*--//------*
-    (   /*#@@@@@#*/   /*  '.' */   /*#@@@@@#*/   ( () => { tileCharList(0) } ),   /*#@@@@@#*/    nonMovingIndexChange    /*#@@@@@#*/   ), // non  |
-    (   /*#@@@@@#*/   /*  'S' */   /*#@@@@@#*/   ( () => { tileCharList(1) } ),   /*#@@@@@#*/    startableIndexChange    /*#@@@@@#*/   ), // ANY  |
-    (   /*#@@@@@#*/   /*  '|' */   /*#@@@@@#*/   ( () => { tileCharList(2) } ),   /*#@@@@@#*/   (       +2,       0  )   /*#@@@@@#*/   ), // N-S  |
-    (   /*#@@@@@#*/   /*  '-' */   /*#@@@@@#*/   ( () => { tileCharList(3) } ),   /*#@@@@@#*/   (        0,      +2  )   /*#@@@@@#*/   ), // E-W  |
-    (   /*#@@@@@#*/   /*  'L' */   /*#@@@@@#*/   ( () => { tileCharList(4) } ),   /*#@@@@@#*/   (       -1,      +1  )   /*#@@@@@#*/   ), // N-E  |
-    (   /*#@@@@@#*/   /*  'J' */   /*#@@@@@#*/   ( () => { tileCharList(5) } ),   /*#@@@@@#*/   (       -1,      -1  )   /*#@@@@@#*/   ), // N-W  |
-    (   /*#@@@@@#*/   /*  'F' */   /*#@@@@@#*/   ( () => { tileCharList(6) } ),   /*#@@@@@#*/   (       +1,      +1  )   /*#@@@@@#*/   ), // S-E  |
-    (   /*#@@@@@#*/   /*  '7' */   /*#@@@@@#*/   ( () => { tileCharList(7) } ),   /*#@@@@@#*/   (       +1,      -1  )   /*#@@@@@#*/   )  // S-W  |
-  //*---/*#@@@@@#*/---/*------*/---/*#@@@@@#*/---*---------------------------*----/*#@@@@@#*/---*--------------------*---/*#@@@@@#*/---*--//------*
-  //|   /*#@@@@@#*/   /*      */   /*#@@@@@#*/   |                           |    /*#@@@@@#*/   |                    |   /*#@@@@@#*/   |  //      |
-  //*---/*#@@@@@#*/---/*------*/---/*#@@@@@#*/---*---------------------------*----/*#@@@@@#*/---*--------------------*---/*#@@@@@#*/---*--//------*
+  val tileCharList = Array[TileDef](
+    //ch,  r1, c1,  r2, c2
+    ('.',   0,  0,   0,  0 ), 
+    ('S', 999,999, 999,999 ), 
+    ('|',  -1,  0,   1,  0 ), 
+    ('-',   0, -1,   0,  1 ), 
+    ('L',  -1,  0,   0,  1 ), 
+    ('J',  -1,  0,   0, -1 ), 
+    ('F',   0,  1,   1,  0 ), 
+    ('7',   0, -1,   1,  0 )
+  )
+  val tileUnicodeList = Array[Char](
+    ' ', // . 
+    '▓', // S 
+    '║', // | 
+    '═', // - 
+    '╚', // L 
+    '╝', // J 
+    '╔', // F 
+    '╗'  // 7
   )
 
+  //              tileDefIdx, r,  c, legal
+  type TileUse = Tuple4[Int,Int,Int,Boolean]
+
   // ========================================================================================================================
   // ========================================================================================================================
 
-  def gridIndexChangeByTile(tileChar:Char, includeDebuggingInfo:Boolean):Tuple2[Int,Int]={
-    try{
-      // try for grab where the tile char matches, and then send the index change tuple to user
-      tileCharDataList.find(possibleTile=>{possibleTile._1()==tileChar}).get._2
+  // regex for grabbing any single character
+  val singleCharPattern = ".".r
+
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+  // ...
+
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+  // ...
+
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+}
+
+// ################################################################################################################################
+// ################################################################################################################################
+// ################################################################################################################################
+// ################################################################################################################################
+
+object Ofbug {
+  // ...
+  val logFile:java.io.File = new java.io.File("logs/day10log.txt")
+
+  def out:java.io.PrintStream = {
+    if(null==instance){
+      // instance = new PrintWriter(logFile)
+      instance = new java.io.PrintStream(logFile)
+      instance
     }
-    catch {
-      case e: Exception =>{
-        if(includeDebuggingInfo) printf("!! gridIndexChangeByTile '%c' failed !!: %s ---- %s\n",tileChar,e.toString(),e.getMessage())
-        exceptionIndexChange
-      }
+    else{
+      instance 
     }
   }
 
-  // ========================================================================================================================
-  // ========================================================================================================================
+  var instance:java.io.PrintStream = null
 
-  // def printOutCharGrid(charGrid:Array[Array[Char]]):Unit={
-  //   print("GRID CHARS:\n|")
-  //   for(colIdx <- 0 to charGrid(0).length-1){ printf("%2d |",colIdx) }
-  //   print("\n+")
-  //   for(colIdx <- 0 to charGrid(0).length-1){ print("---+") }
-    
-  //   print("\n|")
-  //   // every row in the grid
-  //   for(gridRow <- charGrid){
-  //     // every col in the row
-  //     for(charCell <- gridRow){
-  //       printf(" %c |",charCell)
-  //     }
-  //   }
-  //   print("\n+")
-  //   for(colIdx <- 0 to charGrid(0).length-1){ print("---+") }
-  // }
-
-    // var charGrid = inputLines.map(
-    //   // given line, get all the chars
-    //   (currInputLine) => {
-    //     singleCharPattern.findAllIn(currInputLine).toArray.map(str=>{str.charAt(0)})
-    //   }
-    // ).toArray
-
-  // ========================================================================================================================
-  // ========================================================================================================================
-
-  def getCharGrid(inputLines:List[String]):Array[Array[Char]]={
-    inputLines.map(
-      (currLine)=>{
-        currLine.toCharArray()
-      }
-    ).toArray
+  def print(message:Any):Unit = {
+    out.print(message)
+    System.out.print(message)
+  }
+  def println():Unit = {
+    out.println()
+    System.out.println()
+  }
+  def println(message:Any):Unit = {
+    out.println(message)
+    System.out.println(message)
   }
 
-  // ========================================================================================================================
-  // ========================================================================================================================
-
-  def printOutCharGrid(charGrid:Array[Array[Char]]):Unit={
-    print("GRID CHARS:\n|")
-    for(colIdx <- 0 to charGrid(0).length-1){ printf("%2d |",colIdx) }
-    print("\n+")
-    for(colIdx <- 0 to charGrid(0).length-1){ print("---+") }
-    
-    // every row in the grid
-    charGrid.map((gridRow)=>{
-      print("\n|")
-      // every col in the row
-      gridRow.map((charCell)=>{
-        printf(" %c |",(
-          if('.'==charCell) ' ' else charCell
-        ))
-      })
-      print("\n+")
-      gridRow.map((_)=>{print("---+")})
-    })
-    println()
+  def close():Unit={
+    instance.close()
   }
-
-  // ========================================================================================================================
-  // ========================================================================================================================
-
-  // ...
-
-  // ========================================================================================================================
-  // ========================================================================================================================
-
-  // ...
-
-  // ========================================================================================================================
-  // ========================================================================================================================
-
-  // ...
-
-  // ========================================================================================================================
-  // ========================================================================================================================
-
 }
 
 // ################################################################################################################################
@@ -188,7 +140,7 @@ object Day10 {
         // the part matching
         case 1 => {
           // ============================================================
-          handlePart1(Main.grabLinesFromFile("data/day10input.txt"),false)
+          handlePart1(Main.grabLinesFromFile("data/day10input.txt"),true)
           // ============================================================
         }
         case 2 => {
@@ -202,9 +154,233 @@ object Day10 {
           // ============================================================
         }
       }
+
+      Ofbug.close()
     }
     catch {
-      case e:Exception=> Main.failingMessage("DAY 10 HAD EXCEPTION: "+e.toString())
+      case e:Exception=> {
+        Main.failingMessage("DAY 10 HAD EXCEPTION: "+e.toString())
+        e.printStackTrace()
+      }
+    }
+  }
+
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+  def tileAcceptsTileAsAdjacency(masterGrid:Array[Array[GridHandle.TileUse]], consumerTileUse:GridHandle.TileUse, subjectTileCoords:Tuple2[Int,Int], includeDebuggingInfo:Boolean):Boolean={
+
+    // tile definition for our tile
+    // val consumerTileDef = GridHandle.tileCharList(consumerTileUse._1)
+
+    var printBuffer = String.format("ADJ-TEST [%s][r:%4s][c:%4s][e:%1s] >>> ",GridHandle.tileCharList(consumerTileUse._1)._1.toString(),consumerTileUse._2.toString(),consumerTileUse._3.toString(),(if(consumerTileUse._4) "T" else "F"))
+
+    if(
+      ((0 <= subjectTileCoords._1) && (0 <= subjectTileCoords._2)) &&
+      ((masterGrid.length > subjectTileCoords._1) && (masterGrid(0).length > subjectTileCoords._2))
+    ){
+      // real tile
+      val subjectTileUse = masterGrid(subjectTileCoords._1)(subjectTileCoords._2)
+      val subjectTileDef = GridHandle.tileCharList(subjectTileUse._1)
+      
+      printBuffer = printBuffer + 
+        String.format("[%s][r:%4s][c:%4s][e:%1s] >>> ",GridHandle.tileCharList(subjectTileUse._1)._1.toString(),subjectTileUse._2.toString(),subjectTileUse._3.toString(),(if(subjectTileUse._4) "T" else "F"))
+
+      if(!subjectTileUse._4){
+        Ofbug.print(
+          printBuffer +
+          "FAILURE --- SUBJECT INACTIVE\n"
+        )
+        false
+      }
+      else subjectTileDef._1 match {
+        case '.' => {
+          // dirty consumer, so no
+          Ofbug.print(
+            printBuffer +
+            "FAILURE --- DIRTY\n"
+          )
+          false
+        }
+        case 'S' => {
+          // start consumer, so yes
+          // Ofbug.print(
+          //   printBuffer +
+          //   "SUCCESS --- START\n"
+          // )
+          true
+        }
+        case _ => {
+          // otherwise we might?
+
+          val subjectAdjacency1Coords = Tuple2[Int,Int]((subjectTileUse._2+subjectTileDef._2),(subjectTileUse._3+subjectTileDef._3))
+          val subjectAdjacency2Coords = Tuple2[Int,Int]((subjectTileUse._2+subjectTileDef._4),(subjectTileUse._3+subjectTileDef._5))
+
+          // test that they're real coords
+          if(
+            (0<=subjectAdjacency1Coords._1)&&(0<=subjectAdjacency1Coords._2) &&
+            (0<=subjectAdjacency2Coords._1)&&(0<=subjectAdjacency2Coords._2) &&
+            (masterGrid.length > subjectAdjacency1Coords._1)&&(masterGrid(0).length > subjectAdjacency1Coords._2) &&
+            (masterGrid.length > subjectAdjacency2Coords._1)&&(masterGrid(0).length > subjectAdjacency2Coords._2)
+          ){ 
+            // check that one of them matches the consumer
+            if(((consumerTileUse._2==subjectAdjacency1Coords._1)&&(consumerTileUse._3==subjectAdjacency1Coords._2))||
+            ((consumerTileUse._2==subjectAdjacency2Coords._1)&&(consumerTileUse._3==subjectAdjacency2Coords._2))){
+              // Ofbug.print(
+              //   printBuffer +
+              //   "SUCCESS --- MATCHED ADJACENCY\n"
+              // )
+              true
+            }
+            else{
+              Ofbug.print(
+                printBuffer +
+                "FAILURE --- NOT MATCHING\n"
+              )
+              false
+            }
+          }
+          else {
+            Ofbug.print(
+              printBuffer +
+              "FAILURE --- OUT OF BOUNDS SUBJECT ADJ\n"
+            )
+            false
+          }
+          
+        }
+      }
+    }
+    else {
+      // spooky tile
+      // subjectTileUse:GridHandle.TileUse
+      Ofbug.print(
+        printBuffer +
+        String.format("[?][r:%4s][c:%4s][e:?] >>> SPOOKY SUBJECT COORDS\n",subjectTileCoords._1.toString(),subjectTileCoords._2.toString())
+      )
+      false
+    }
+
+  }
+
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+  // for handling the checking of legality
+  // assume spooky if called on a ground tile
+  def getNumberOfLegalAdjacencies(masterGrid:Array[Array[GridHandle.TileUse]], specificTile:GridHandle.TileUse, includeDebuggingInfo:Boolean):Int={
+    
+    // tile definition for our tile
+    val cellTileDef = GridHandle.tileCharList(specificTile._1)
+
+    // indexes
+    val cellRowIdx = specificTile._2
+    val cellColIdx = specificTile._3
+    
+    // ...
+    val adjacency1:Tuple2[Int,Int] = Tuple2[Int,Int]((cellRowIdx+cellTileDef._2),(cellColIdx+cellTileDef._3))
+    val adjacency2:Tuple2[Int,Int] = Tuple2[Int,Int]((cellRowIdx+cellTileDef._4),(cellColIdx+cellTileDef._5))
+    
+    var goodAdjacencyCounter = 0
+
+    if(tileAcceptsTileAsAdjacency(masterGrid,specificTile,adjacency1,includeDebuggingInfo)){
+      goodAdjacencyCounter = goodAdjacencyCounter + 1
+    }
+    if(tileAcceptsTileAsAdjacency(masterGrid,specificTile,adjacency2,includeDebuggingInfo)){
+      goodAdjacencyCounter = goodAdjacencyCounter + 1
+    }
+
+    // then tell the asker
+    goodAdjacencyCounter
+  }
+
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+
+
+  // ========================================================================================================================
+  // ========================================================================================================================
+  
+  // sub function for handling the assassination of a tile
+  def getNearbyTiles(masterGrid:Array[Array[GridHandle.TileUse]], specificTile:GridHandle.TileUse):Vector[GridHandle.TileUse]={
+
+    // indexes
+    val cellRowIdx = specificTile._2
+    val cellColIdx = specificTile._3
+
+    var optionResultingVector:Vector[Option[GridHandle.TileUse]] = Vector[Tuple2[Int,Int]](
+      ( cellRowIdx+1, cellColIdx+1 ),
+      ( cellRowIdx+1,  cellColIdx  ),
+      (  cellRowIdx , cellColIdx+1 ),
+      (  cellRowIdx ,  cellColIdx  )
+    ).map(
+      (coordTuple)=>{
+        // real coord
+        (if(
+          ((0 <= coordTuple._1) && (0 <= coordTuple._2))&&
+          ((masterGrid.length > coordTuple._1) && (masterGrid(0).length > coordTuple._2))
+        ){
+          // grab the tile
+          val wouldBeTileUse = masterGrid(coordTuple._1)(coordTuple._2)
+          // check enabled
+          if(wouldBeTileUse._4){
+            Option(wouldBeTileUse)
+          }
+          else{
+            None
+          }
+        }
+        else{
+          None
+        })
+      }
+    )
+
+    // now make a vector of those
+    var resultingVector =  Vector[GridHandle.TileUse]()
+
+    optionResultingVector.map(
+      (optionalTileUse)=>{
+        optionalTileUse match {
+          case None => {/* zzzz */}
+          case Some(value) => {
+            resultingVector = resultingVector :+ value
+          }
+        }
+      }
+    )
+
+    // done
+    resultingVector
+  }
+  
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+  def printMasterGrid(masterGrid:Array[Array[GridHandle.TileUse]],deadTileCharReplacer:Char,includeColoring:Boolean):Unit={
+    for(rowIdx <- 0 to masterGrid.length-1){
+      for(colIdx <- 0 to masterGrid(0).length-1){
+        //...
+        Ofbug.print(String.format("%s",(
+          if(masterGrid(rowIdx)(colIdx)._4) GridHandle.tileCharList(masterGrid(rowIdx)(colIdx)._1)._1.toString() else deadTileCharReplacer.toString()
+        )))
+      }
+      Ofbug.println()
+    }
+  }
+  
+  // ========================================================================================================================
+  // ========================================================================================================================
+
+  def printGridAsUnicode(masterGrid:Array[Array[GridHandle.TileUse]],includeColoring:Boolean):Unit={
+    for(rowIdx <- 0 to masterGrid.length-1){
+      for(colIdx <- 0 to masterGrid(0).length-1){
+        Ofbug.print(String.format("%s",(
+          if(masterGrid(rowIdx)(colIdx)._4) GridHandle.tileUnicodeList(masterGrid(rowIdx)(colIdx)._1).toString() else GridHandle.tileUnicodeList(0).toString()
+        )))
+      }
+      Ofbug.println()
     }
   }
 
@@ -214,33 +390,122 @@ object Day10 {
   def handlePart1(inputLines:List[String],includeDebuggingInfo:Boolean):Unit={
     // TODO: DAY 10 PART 1
 
-    // break into 2d char array
+    // break into 2d tile use array
     // --------------------------------------------------------------------------------------------
-    
-    // regex for grabbing any single character
-    val singleCharPattern = ".".r
 
-    var charGrid = inputLines.map(
-      // given line, get all the chars
-      (currInputLine) => {
-        singleCharPattern.findAllIn(currInputLine).toArray.map(str=>{str.charAt(0)})
+
+    val rowCount = inputLines.length
+    var masterGrid = new Array[Array[GridHandle.TileUse]](rowCount)
+    var updateQueue = Vector[GridHandle.TileUse]()
+    // all lines
+    for(charGridRowIdx <- 0 to rowCount-1){
+      // specific line
+      // convert to chars
+      val currLineChars = inputLines(charGridRowIdx).toCharArray()
+      // save the number
+      val colCount = currLineChars.length
+      // prepare the row array
+      masterGrid(charGridRowIdx) = new Array[GridHandle.TileUse](colCount)
+      // all cols in a row
+      for(charGridColIdx <- 0 to colCount-1 ){
+        // specific row col combination
+        val currChar = currLineChars(charGridColIdx)
+        val tileDefIdx = GridHandle.tileCharList.indexWhere((tileDef=>{
+          tileDef._1==currChar
+        }))
+        val isLegal = ('.'!=currChar)// make sure it's not ground tile
+        masterGrid(charGridRowIdx)(charGridColIdx) = (
+          tileDefIdx,
+          charGridRowIdx,
+          charGridColIdx,
+          isLegal
+        )
+        if(isLegal && 'S'!=GridHandle.tileCharList(tileDefIdx)._1){ // check if ground tile and not start tile
+          // add to update queue
+          updateQueue = masterGrid(charGridRowIdx)(charGridColIdx)+:updateQueue
+        }
       }
-    ).toArray
+    }
 
-    GridHandle.printOutCharGrid(charGrid)
-    
 
-    // ...
+    // print out the legal tiles?
     // --------------------------------------------------------------------------------------------
     
-    // ...
 
-    // ...
+    if(includeDebuggingInfo) printMasterGrid(masterGrid,'.',true)
+
+    // has tile use array, now loop all update required till we have none more to update
     // --------------------------------------------------------------------------------------------
     
-    // ...
+    while(updateQueue.length > 0){
+      if(includeDebuggingInfo) Ofbug.print(String.format("[queueLength: %6s] --- ",updateQueue.length.toString()))
+      // grab last leaving the rest in our update queue
+      val currUpdatingTile = updateQueue match {
+        case rest :+ last => {
+          updateQueue = rest
+          last
+        } 
+        case _ => { null }
+      }
 
+      if(includeDebuggingInfo) Ofbug.print(String.format(
+        "TILE: [%s][r:%4s][c:%4s][g?:%s]\n",
+        (GridHandle.tileCharList(currUpdatingTile._1)._1).toString(),
+        currUpdatingTile._2.toString(),
+        currUpdatingTile._3.toString(),
+        (if(0==currUpdatingTile._1){"Y"} else {"N"}))
+      )
+
+      val numLegalAdjacencies = getNumberOfLegalAdjacencies(masterGrid,currUpdatingTile,includeDebuggingInfo)
+      
+      // if(includeDebuggingInfo) if(2==numLegalAdjacencies) Ofbug.print(String.format("[adjCount:%s]\n", numLegalAdjacencies.toString()))
+
+      // when there's not enough legal adjacencies
+      if(2 > numLegalAdjacencies){
+        updateQueue = getNearbyTiles(masterGrid,currUpdatingTile) ++ updateQueue
+        // remake it disabled tho
+        masterGrid(currUpdatingTile._2)(currUpdatingTile._3) = (currUpdatingTile._1,currUpdatingTile._2,currUpdatingTile._3,false)
+      }
+
+      // otherwise, already popped, so just move along
+
+      // unless empty
+      // when empty list, run through everything again just incase
+      if(0==updateQueue.length) {
+        for(currRowIdx <- 0 to masterGrid.length-1){
+          for(currColIdx <- 0 to masterGrid(0).length-1){
+            val currTile = masterGrid(currRowIdx)(currColIdx)
+            if ((currTile._4) && ('S'!=GridHandle.tileCharList(currTile._1)._1) && (2 > getNumberOfLegalAdjacencies(masterGrid,currTile,includeDebuggingInfo))){
+              if(includeDebuggingInfo) Ofbug.print(String.format("[%d][%d] >>> sneaky, recheck needed\n",currRowIdx,currColIdx))
+              updateQueue = updateQueue:+currTile
+            }
+          }
+        }
+      }
+    }
+
+    // print out the legal tiles?
     // --------------------------------------------------------------------------------------------
+
+    if(includeDebuggingInfo) printMasterGrid(masterGrid,' ',true)
+    if(includeDebuggingInfo) printGridAsUnicode(masterGrid,true)
+
+    // got our legal maze, now we need to setup traversing information
+    // --------------------------------------------------------------------------------------------
+
+    // var startLocation 
+
+    // // find the start location
+
+    // for(currRowIdx <- 0 to masterGrid.length-1){
+    //   for(currColIdx <- 0 to masterGrid(0).length-1){
+    //     //...
+    //   }
+    // }
+
+    // do the traversing
+    // --------------------------------------------------------------------------------------------
+    
     println("THIS PART IS UNFINISHED")
   }
 

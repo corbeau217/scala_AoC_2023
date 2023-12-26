@@ -6,7 +6,7 @@ organization := "comp.mq.edu.au"
 
 // Scala compiler settings
 
-scalaVersion := "2.12.18"
+scalaVersion := "3.3.1"
 
 scalacOptions :=
     Seq(
@@ -38,11 +38,11 @@ libraryDependencies ++=
     Seq (
         // "com.github.nscala-time" %% "nscala-time" % "2.32.0",
         // "org.scalaj" %% "scalaj-time" % "0.7",
-        "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.1.0",
-        "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.1.0" % "test" classifier ("tests"),
+        "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.5.1",
+        "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.5.1" % "test" classifier ("tests"),
         "junit" % "junit" % "4.12" % "test",
-        "org.scalacheck" %% "scalacheck" % "1.13.5" % "test",
-        "org.scalatest" %% "scalatest" % "3.0.3" % "test"
+        "org.scalacheck" %% "scalacheck" % "1.15.4" % "test",
+        "org.scalatest" %% "scalatest" % "3.2.17" % "test"
     )
 
 console / initialCommands := """
