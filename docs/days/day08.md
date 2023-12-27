@@ -38,4 +38,32 @@ scala attempt at day 8
 6. welp, guess we used a treemap, that was kinda funky to use i like it
 ## part 2
 ### strategy
-1. ...
+1. turn each node into a list
+2. we grab all the ones ending in A
+3. then we run through all of them and apply instruction
+4. repeating until we have nothing ending in `Z`
+5. idea
+    1. have it that each iteration we assume we make it to the end
+    2. while looping over all of them to apply instruction
+        * check if it doesnt end in `Z`
+        * say we need another iteration still
+    3. when found a next that didnt end in `Z` we do an iteration
+6. idea another
+    1. before building our current node
+    2. we loop over the elements until we find one not ending in `A`
+        * could just `indexWhere` with a pattern asking for not ending in `A`
+    3. counting how many there are
+    4. then we make a states array the size of the number we found
+7. bruteforce solution done
+    1. currently unconfirmed
+    2. chars in console reference:
+        1. `m` - all nodes match their first node
+        2. `.` - `1000000` instructions performed on all nodes
+        3. `'` - every `10` of `.`
+        4. `*` - every `10` of `'`
+8. new idea:
+    1. run on each to see if it returns to its first element
+    2. also then when it starts looping and what the period is for that looping
+    3. find each time it lands on a Z for a given node
+    4. then find how many steps it takes to make them all land on the node with math
+    5. then say it
