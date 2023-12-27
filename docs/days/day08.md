@@ -68,3 +68,6 @@ scala attempt at day 8
     4. then find how many steps it takes to make them all land on the node with math
     5. then say it
 9. need to find when there's a cycle that lines up with our instructions
+10. just get every one of the instructions till we try to add the same instruction at the same index for a node
+    1. map all node names to numbers (faster read write to compare them than strings)
+    2. pair the node with the instruction index

@@ -117,3 +117,8 @@ scala attempt at day 10
 4. rotationing of the points to say if we went 360 degrees or 0 or less than 360?
 5. turning into points at the corners and lines, then keeping when there's space between lines?
 6. is the focus on cutting out the exterior or the interior
+7. [ray cast](https://www.youtube.com/watch?v=RSXM9bgqxJM)
+    * treemap the locations
+    * find the ones that are more or less than
+    * maybe we list of x values/y values to binary search them
+    
