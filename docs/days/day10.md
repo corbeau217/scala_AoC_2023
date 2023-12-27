@@ -111,4 +111,9 @@ scala attempt at day 10
 17. we gottem
 ## part 2
 ### strategy
-1. ...
+1. would need part1 as hinted at method consisting of the stack of locations
+2. then also just complete the loop instead of stop when both reach, like we thought of for /2 solution
+3. then some sort of [even odd rule](https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule) or rather to deal with the internal/external
+4. rotationing of the points to say if we went 360 degrees or 0 or less than 360?
+5. turning into points at the corners and lines, then keeping when there's space between lines?
+6. is the focus on cutting out the exterior or the interior

@@ -1,8 +1,13 @@
 package day5
 
-import org.bitbucket.inkytonik.kiama.util.ParseTests
+import org.bitbucket.inkytonik.kiama.util._
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
+// import org.junit.runner._
+// import org.scalatestplus.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
+// import org.scalatest._
+// import org.scalatest.
+// import org.scalatest.junit.JUnitRunner
 
 /**
  * Tests that check that the map analyser works correctly.  I.e., it accepts
@@ -13,7 +18,12 @@ class MapAnalysisTests extends ParseTests {
     
     // ======================================================================
 
+    // well apparently we need this now?
+    //  idk what magic they used to get it last time
+    val positions = new Positions
+
     import MapLangTree._
+
 
     val parsers = new MapAnalysis (positions)
     import parsers._

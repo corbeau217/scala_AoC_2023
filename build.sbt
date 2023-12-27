@@ -36,13 +36,16 @@ Test / parallelExecution := false
 
 libraryDependencies ++=
     Seq (
+        "junit" % "junit" % "4.13" % "test",
+        "org.scalacheck" %% "scalacheck" % "1.17.0" % "test",
+        "org.scalatest" %% "scalatest" % "3.2.17" % "test",
+        "org.scalatestplus" %% "scalacheck-1-17" % "3.2.17.0" % "test",
+        "org.scalatestplus" %% "junit-4-13" % "3.2.17.0" % "test",
         // "com.github.nscala-time" %% "nscala-time" % "2.32.0",
         // "org.scalaj" %% "scalaj-time" % "0.7",
         "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.5.1",
-        "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.5.1" % "test" classifier ("tests"),
-        "junit" % "junit" % "4.12" % "test",
-        "org.scalacheck" %% "scalacheck" % "1.15.4" % "test",
-        "org.scalatest" %% "scalatest" % "3.2.17" % "test"
+        // "org.bitbucket.inkytonik.kiama" %% "kiama" % "2.5.1" % "test" classifier ("tests"),
+        "org.bitbucket.inkytonik.kiama" %% "kiama-extras" % "2.5.1" % "test" classifier ("tests")
     )
 
 console / initialCommands := """
