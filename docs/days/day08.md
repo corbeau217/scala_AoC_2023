@@ -67,3 +67,4 @@ scala attempt at day 8
     3. find each time it lands on a Z for a given node
     4. then find how many steps it takes to make them all land on the node with math
     5. then say it
+9. need to find when there's a cycle that lines up with our instructions
