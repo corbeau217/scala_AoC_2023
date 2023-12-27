@@ -35,6 +35,7 @@ scala attempt at day 8
     * there's cycles in the graph
     * use the instructions to say where we're going in the graph
     * loop until we find it
+6. welp, guess we used a treemap, that was kinda funky to use i like it
 ## part 2
 ### strategy
 1. ...
