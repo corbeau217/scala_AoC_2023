@@ -71,3 +71,9 @@ scala attempt at day 8
 10. just get every one of the instructions till we try to add the same instruction at the same index for a node
     1. map all node names to numbers (faster read write to compare them than strings)
     2. pair the node with the instruction index
+11. did the thing in the mapping the loop now we gotta figure out the things
+    1. only one ends with Z
+    2. maybe we list the strings for each just in case?
+12. try ordered set with the current result as first elem, the number of loops as second, then the loop size and offset
+    1. iterate choosing the smallest to increase the loop count (updating the current result for that element)
+    2. when you find a set where every item has the same result, that's when you stop
